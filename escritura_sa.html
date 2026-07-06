@@ -34,6 +34,11 @@
 .h-sl{border-top:1px solid var(--paper-txt);width:155px;margin:0 auto 2px}
 .h-sn2{font-size:7.5pt;font-style:italic;font-family:'Times New Roman',serif;color:var(--paper-txt)}
 .h-st{font-size:6.5pt;color:#6A5A44}
+.shared-val{padding:.48rem .7rem;background:rgba(74,158,219,.06);border:1px solid rgba(74,158,219,.2);color:var(--ui-text);font-size:.9rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.shared-lnk{font-size:.7rem;color:var(--acc-l);text-decoration:none;opacity:.75}
+.shared-lnk:hover{opacity:1}
+.shared-info{font-size:.76rem;color:var(--ui-muted);padding:.45rem .7rem;background:rgba(74,158,219,.05);border:1px solid rgba(74,158,219,.15);margin-bottom:.65rem}
+.shared-info a{color:var(--acc);text-decoration:none;margin-left:.5rem}
 .h-sig-img{display:block;margin:0 auto 1mm;max-height:18mm;max-width:45mm;object-fit:contain}
 .h-sat{position:absolute;bottom:13mm;left:5mm;opacity:.5}
 .sat-seal{width:58px;height:58px;border-radius:50%;border:2px solid var(--stamp);display:flex;align-items:center;justify-content:center;position:relative;font-family:'Courier New',monospace}
@@ -52,7 +57,7 @@
 <!-- FORM -->
 <div id="layout">
   <nav class="sb">
-    <div class="sb-brand">Company<br>Sim</div>
+    <a class="sb-brand" href="index.html" style="text-decoration:none;display:block">Company<br>Sim</a>
     <div class="sb-section">Fases S.A.</div>
     <div class="sb-item act"><span class="sb-dot"></span>Escritura</div>
     <div class="sb-item lock"><span class="sb-dot"></span>Registro RM</div>
@@ -94,17 +99,19 @@ let socios=[
 ];
 let nid=3, adminId=1;
 
+const shared=JSON.parse(localStorage.getItem('companysim')||'null');
+
 // Persists values from each step when the DOM is swapped
 const st={
   empresa:'',actAdd:'',chkAdd:false,chkRep:false,objCustom:'',
-  valNom:1000,capAut:10000,dpto:'Guatemala',dir:'',durAdm:'tres (3) años',
-  notario:'CLAUDIO TOC ENCINOS',tratoNot:'notario',ciudad:'Guatemala',
-  dir:'18 avenida 11-95 zona 15 Vista Hermosa III'
+  valNom:1000,capAut:10000,dpto:'Guatemala',dir:'18 avenida 11-95 zona 15 Vista Hermosa III',
+  durAdm:'tres (3) años',notario:'CLAUDIO TOC ENCINOS',tratoNot:'notario'
 };
+if(shared){st.empresa=shared.nombre||'';st.dpto=shared.dpto||'Guatemala';st.dir=shared.dir||st.dir;}
 
 function saveStep(n){
   if(n===1){
-    st.empresa=document.getElementById('empresa')?.value.trim().toUpperCase()||st.empresa;
+    if(!shared) st.empresa=document.getElementById('empresa')?.value.trim().toUpperCase()||st.empresa;
     st.chkAdd=document.getElementById('chk_add')?.checked||false;
     st.chkRep=document.getElementById('chk_rep')?.checked||false;
     st.actAdd=st.chkAdd?(document.getElementById('act_add')?.value.trim()||''):'';
@@ -117,8 +124,10 @@ function saveStep(n){
     st.valNom=parseInt(document.getElementById('val_nom')?.value)||st.valNom;
     st.capAut=parseInt(document.getElementById('cap_aut')?.value)||st.capAut;
     socios.forEach(s=>{const e=document.getElementById('acc_'+s.id);if(e)s.acc=parseInt(e.value)||1;});
-    st.dpto=document.getElementById('dpto')?.value.trim()||st.dpto;
-    st.dir=document.getElementById('dir')?.value.trim()||st.dir;
+    if(!shared){
+      st.dpto=document.getElementById('dpto')?.value.trim()||st.dpto;
+      st.dir=document.getElementById('dir')?.value.trim()||st.dir;
+    }
     st.durAdm=document.getElementById('dur_adm')?.value||st.durAdm;
   }
   if(n===4){
@@ -139,11 +148,9 @@ function s1html(){return `
 <span class="slbl">Paso 1 de 3 — La Empresa</span>
 <div class="card">
   <div class="ctitle">Identidad de la empresa</div>
-  <div class="f">
-    <label>Nombre de la empresa</label>
-    <input id="empresa" type="text" placeholder="ej. PIXEL STORM" value="${st.empresa}" oninput="this.value=this.value.toUpperCase()">
-    <div class="hint">Se registrará como "[NOMBRE], SOCIEDAD ANÓNIMA"</div>
-  </div>
+  ${shared
+    ?`<div class="f"><label>Empresa</label><div class="shared-val">${st.empresa}, SOCIEDAD ANÓNIMA<a class="shared-lnk" href="index.html">← cambiar</a></div></div>`
+    :`<div class="f"><label>Nombre de la empresa</label><input id="empresa" type="text" placeholder="ej. PIXEL STORM" value="${st.empresa}" oninput="this.value=this.value.toUpperCase()"><div class="hint">Se registrará como "[NOMBRE], SOCIEDAD ANÓNIMA"</div></div>`}
   <div class="f">
     <label>Objeto de la empresa</label>
     <div class="obj-default">
@@ -214,11 +221,12 @@ function s3html(){
   ${rows}
   <div class="capbox" id="capbox">—</div>
 </div>
-<div class="card">
-  <div class="ctitle">Domicilio</div>
+${shared
+  ?`<div class="shared-info">Domicilio: ${st.dpto}&ensp;·&ensp;${st.dir||'(sin dirección)'} <a href="index.html">cambiar</a></div>`
+  :`<div class="card"><div class="ctitle">Domicilio</div>
   <div class="f"><label>Departamento</label><input id="dpto" value="${st.dpto}"></div>
   <div class="f"><label>Dirección de la sede</label><input id="dir" value="${st.dir}" placeholder="ej. 10 calle 15-20, zona 10, Ciudad de Guatemala"></div>
-</div>
+</div>`}
 <div class="card">
   <div class="ctitle">Administrador único y representante legal</div>
   <div class="adm-grp" id="adm-grp"></div>
@@ -359,7 +367,7 @@ function renderStep(){
 function nextStep(){if(!validate()) return; saveStep(step); if(step<3){step++;renderStep();}}
 function prevStep(){saveStep(step); if(step>1){step--;renderStep();}}
 function validate(){
-  if(step===1&&!document.getElementById('empresa')?.value.trim()){alert('Ingresá el nombre de la empresa.');return false;}
+  if(step===1&&!shared&&!document.getElementById('empresa')?.value?.trim()){alert('Ingresá el nombre de la empresa.');return false;}
   if(step===2){for(const s of socios){if(!s.nombre.trim()){alert('Todos los socios necesitan nombre.');return false;}}}
   return true;
 }
