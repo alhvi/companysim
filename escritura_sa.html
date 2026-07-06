@@ -698,11 +698,11 @@ function renderHoja(lines,pi,pt,d,base){
   </div>
   <div class="h-sat"><div class="sat-seal"><div class="sat-inner">SAT<br>SUPERTENDENCIA<br>DE<br>ADMINISTRACIÓN<br>TRIBUTARIA</div></div></div>
   <div class="h-ft">
-    <div class="h-sig">
+    ${pi%2===1?`<div class="h-sig">
       <img class="h-sig-img" src="${SIG_URI}" alt="firma"><div class="h-sl"></div>
       <div class="h-sn2">${d.notario}</div>
       <div class="h-st">${d.tratoNot==='notario'?'Abogado y Notario Público':'Abogada y Notaria Pública'}</div>
-    </div>
+    </div>`:''}
   </div>
 </div>`;
 }
