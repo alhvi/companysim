@@ -106,7 +106,7 @@ const shared=JSON.parse(localStorage.getItem('companysim')||'null');
 const st={
   empresa:'',actAdd:'',chkAdd:false,chkRep:false,objCustom:'',
   valNom:1000,capAut:10000,dpto:'Guatemala',dir:'18 avenida 11-95 zona 15 Vista Hermosa III',
-  durAdm:'tres (3) años',notario:'CLAUDIO TOC ENCINOS',tratoNot:'notario'
+  durAdm:'tres (3) años',notario:'CLAUDE ELIÉ RIVERA',tratoNot:'notario'
 };
 if(shared){st.empresa=shared.nombre||'';st.dpto=shared.dpto||'Guatemala';st.dir=shared.dir||st.dir;}
 
@@ -401,7 +401,7 @@ function collect(){
   return {
     empresa:st.empresa||'[EMPRESA]',
     actAdd:st.actAdd, objCustom:st.objCustom,
-    notario:st.notario||'CLAUDIO TOC ENCINOS',
+    notario:st.notario||'CLAUDE ELIÉ RIVERA',
     tratoNot:st.tratoNot||'notario',
     numEsc:1, ciudad:'Guatemala',
     dia:hoy.getDate(), mes:MESES[hoy.getMonth()], anno:String(hoy.getFullYear()),
