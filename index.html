@@ -1,0 +1,222 @@
+<title>CompanySim — Inicio</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── TIPO CARDS ── */
+.tipo-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin-bottom:1.4rem}
+.tc{display:flex;flex-direction:column;padding:1.25rem 1.3rem;border:2px solid var(--ui-border);cursor:pointer;background:var(--ui-card);transition:border-color .2s,background .2s}
+.tc input[type=radio]{display:none}
+.tc.sel{border-color:var(--acc);background:rgba(74,158,219,.07)}
+.tc-badge{font-size:.62rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);border:1.5px solid rgba(74,158,219,.35);padding:.15rem .52rem;display:inline-block;margin-bottom:.75rem;align-self:flex-start}
+.tc.sel .tc-badge{background:var(--acc);color:#fff;border-color:var(--acc)}
+.tc-name{font-size:.95rem;font-weight:700;color:var(--ui-text);margin-bottom:.18rem}
+.tc-sub{font-size:.76rem;color:var(--ui-muted);margin-bottom:.85rem}
+.tc-list{list-style:none;display:flex;flex-direction:column;gap:.3rem;border-top:1px solid var(--ui-border);padding-top:.65rem;margin-top:auto}
+.tc-list li{font-size:.73rem;color:var(--ui-muted);padding-left:.85rem;position:relative}
+.tc-list li::before{content:'·';position:absolute;left:0;color:var(--acc)}
+
+/* ── DASHBOARD ── */
+.dash-hdr{background:var(--ui-card);border:1px solid var(--ui-border);padding:1rem 1.3rem;margin-bottom:1.1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.dash-co{font-size:1rem;font-weight:700;color:var(--ui-text)}
+.dash-tipo{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-top:.12rem}
+
+/* ── PHASE LIST ── */
+.pl-item{display:flex;align-items:center;gap:.9rem;padding:.85rem 1.2rem;background:var(--ui-card);border:1px solid var(--ui-border);border-left:3px solid transparent;margin-bottom:.45rem}
+.pl-item.done{border-left-color:var(--act)}
+.pl-item.pending{border-left-color:var(--acc)}
+.pl-item.locked{opacity:.4}
+.pl-num{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--ui-border);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--ui-muted);flex-shrink:0}
+.pl-item.done .pl-num{border-color:var(--act);color:var(--act)}
+.pl-item.pending .pl-num{border-color:var(--acc);color:var(--acc)}
+.pl-body{flex:1;min-width:0}
+.pl-name{font-size:.88rem;font-weight:600;color:var(--ui-text)}
+.pl-desc{font-size:.73rem;color:var(--ui-muted);margin-top:.08rem}
+.pl-st{font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.16rem .5rem;flex-shrink:0}
+.st-done{color:var(--act);background:rgba(62,170,110,.12)}
+.st-pending{color:var(--acc);background:rgba(74,158,219,.12)}
+.st-locked{color:var(--ui-muted);background:rgba(42,64,96,.4)}
+.btn-go{padding:.35rem .9rem;border:none;background:var(--acc);color:#fff;font-size:.74rem;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:.04em;transition:background .2s;flex-shrink:0}
+.btn-go:hover{background:var(--acc-d)}
+.btn-go[disabled]{background:var(--ui-border);color:var(--ui-muted);cursor:default;letter-spacing:0}
+.btn-reset{padding:.3rem .75rem;border:1px solid rgba(224,80,80,.4);background:transparent;color:var(--err);font-size:.7rem;cursor:pointer;font-family:inherit;transition:background .2s;flex-shrink:0}
+.btn-reset:hover{background:rgba(224,80,80,.1)}
+</style>
+
+<div id="layout">
+  <nav class="sb">
+    <div class="sb-brand">Company<br>Sim</div>
+    <div class="sb-section">Inicio</div>
+    <div class="sb-item act"><span class="sb-dot"></span>Dashboard</div>
+    <div id="sbp"></div>
+  </nav>
+  <div id="fv">
+
+    <!-- ── SETUP ── -->
+    <div id="sv">
+      <div class="fh">
+        <div class="ey">CC3115 · Producción y Negocios de Videojuegos</div>
+        <h1>Simulación de Constitución de Empresa</h1>
+        <p>Elegí el tipo de empresa y completá los datos básicos para comenzar</p>
+      </div>
+
+      <span class="slbl">Tipo de empresa</span>
+      <div class="tipo-grid">
+        <label class="tc" id="tc-sa" onclick="selTipo('sa')">
+          <input type="radio" name="tipo" value="sa">
+          <span class="tc-badge">S.A.</span>
+          <div class="tc-name">Sociedad Anónima</div>
+          <div class="tc-sub">Empresa con múltiples accionistas</div>
+          <ul class="tc-list">
+            <li>Mínimo 2 accionistas</li>
+            <li>Capital dividido en acciones</li>
+            <li>5 fases de constitución</li>
+          </ul>
+        </label>
+        <label class="tc" id="tc-ind" onclick="selTipo('individual')">
+          <input type="radio" name="tipo" value="individual">
+          <span class="tc-badge">E.I.</span>
+          <div class="tc-name">Empresa Individual</div>
+          <div class="tc-sub">Empresa de una sola persona</div>
+          <ul class="tc-list">
+            <li>Propietario único</li>
+            <li>Sin capital mínimo</li>
+            <li>2 fases de constitución</li>
+          </ul>
+        </label>
+      </div>
+
+      <div id="if" style="display:none">
+        <span class="slbl">Datos básicos</span>
+        <div class="card">
+          <div class="ctitle">Identidad de la empresa</div>
+          <div class="f">
+            <label>Nombre de la empresa</label>
+            <input id="nombre" type="text" placeholder="ej. PIXEL STORM" oninput="this.value=this.value.toUpperCase()">
+            <div class="hint" id="nhint"></div>
+          </div>
+          <div class="r2">
+            <div class="f">
+              <label>Departamento</label>
+              <select id="dpto">
+                <option>Guatemala</option><option>Quetzaltenango</option><option>Escuintla</option>
+                <option>Alta Verapaz</option><option>Huehuetenango</option><option>San Marcos</option>
+                <option>Petén</option><option>Izabal</option><option>Jalapa</option><option>Jutiapa</option>
+                <option>Santa Rosa</option><option>Chiquimula</option><option>Zacapa</option>
+                <option>El Progreso</option><option>Baja Verapaz</option><option>Sacatepéquez</option>
+                <option>Chimaltenango</option><option>Sololá</option><option>Totonicapán</option>
+                <option>Retalhuleu</option><option>Suchitepéquez</option>
+              </select>
+            </div>
+            <div class="f">
+              <label>Dirección</label>
+              <input id="dir" type="text" placeholder="ej. 18 av. 11-95 zona 15">
+            </div>
+          </div>
+        </div>
+        <div class="nav">
+          <button class="btn-g" onclick="crear()">Crear empresa →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── DASHBOARD ── -->
+    <div id="dv" style="display:none">
+      <div class="fh">
+        <div class="ey">CC3115 · Producción y Negocios de Videojuegos</div>
+        <h1>Dashboard de Constitución</h1>
+        <p>Seguí el proceso paso a paso hasta completar la constitución</p>
+      </div>
+      <div class="dash-hdr" id="dh"></div>
+      <div id="fl"></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const KEY='companysim';
+let d=JSON.parse(localStorage.getItem(KEY)||'null');
+let tipo=null;
+
+const SA=[
+  {id:'escritura',  n:'Escritura de Constitución', desc:'Redacción en papel protocolo ante notario',      url:'escritura_sa.html'},
+  {id:'registro_rm',n:'Registro Mercantil',         desc:'Patente de Sociedad y Patente de Empresa',       url:null},
+  {id:'acciones',   n:'Títulos de Acciones',        desc:'Generación de los títulos accionarios',          url:null},
+  {id:'rtu',        n:'RTU / SAT',                  desc:'Registro Tributario Unificado ante la SAT',      url:null},
+  {id:'libros',     n:'Libros Contables',            desc:'Apertura de libros habilitados ante el RM',      url:null},
+];
+const IND=[
+  {id:'patente_ind',n:'Patente Empresa Individual', desc:'Inscripción ante el Registro Mercantil',         url:null},
+  {id:'rtu',        n:'RTU / SAT',                  desc:'Registro Tributario Unificado ante la SAT',      url:null},
+];
+
+function selTipo(t){
+  tipo=t;
+  document.querySelectorAll('.tc').forEach(el=>el.classList.remove('sel'));
+  document.getElementById(t==='sa'?'tc-sa':'tc-ind').classList.add('sel');
+  document.getElementById('if').style.display='block';
+  document.getElementById('nhint').textContent=
+    t==='sa'?'Se registrará como "[NOMBRE], SOCIEDAD ANÓNIMA"':
+             'Se registrará como "[NOMBRE]", empresa individual de comercio';
+}
+
+function crear(){
+  if(!tipo)return;
+  const nombre=document.getElementById('nombre').value.trim();
+  if(!nombre){document.getElementById('nombre').focus();return;}
+  const fases={};
+  const lista=tipo==='sa'?SA:IND;
+  lista.forEach((f,i)=>{fases[f.id]=i===0?'pending':'locked';});
+  d={tipo,nombre,dpto:document.getElementById('dpto').value,dir:document.getElementById('dir').value.trim(),fases};
+  localStorage.setItem(KEY,JSON.stringify(d));
+  showDash();
+}
+
+function reset(){
+  if(!confirm('¿Reiniciar la simulación? Se perderá el progreso guardado.'))return;
+  localStorage.removeItem(KEY);
+  d=null;tipo=null;
+  document.getElementById('dv').style.display='none';
+  document.getElementById('sv').style.display='block';
+  document.querySelectorAll('.tc').forEach(el=>el.classList.remove('sel'));
+  document.getElementById('if').style.display='none';
+  sbp(null);
+}
+
+function showDash(){
+  document.getElementById('sv').style.display='none';
+  document.getElementById('dv').style.display='block';
+  const lista=d.tipo==='sa'?SA:IND;
+  const sfx=d.tipo==='sa'?', SOCIEDAD ANÓNIMA':'';
+  document.getElementById('dh').innerHTML=`
+    <div>
+      <div class="dash-co">${d.nombre}${sfx}</div>
+      <div class="dash-tipo">${d.tipo==='sa'?'Sociedad Anónima':'Empresa Individual'}&ensp;·&ensp;${d.dpto}</div>
+    </div>
+    <button class="btn-reset" onclick="reset()">Reiniciar</button>`;
+  document.getElementById('fl').innerHTML=lista.map((f,i)=>{
+    const st=d.fases[f.id]||'locked';
+    const stl=st==='done'?'Completada':st==='pending'?'Pendiente':'Bloqueada';
+    const canGo=st!=='locked'&&f.url;
+    return `<div class="pl-item ${st}">
+      <div class="pl-num">${i+1}</div>
+      <div class="pl-body"><div class="pl-name">${f.n}</div><div class="pl-desc">${f.desc}</div></div>
+      <span class="pl-st st-${st}">${stl}</span>
+      <button class="btn-go"${canGo?` onclick="location.href='${f.url}'"`:' disabled'}>${st==='done'?'Ver':'Iniciar'}</button>
+    </div>`;
+  }).join('');
+  sbp(lista);
+}
+
+function sbp(lista){
+  const el=document.getElementById('sbp');
+  if(!lista||!d){el.innerHTML='';return;}
+  el.innerHTML=`<div class="sb-section">${d.tipo==='sa'?'Fases S.A.':'Fases E.I.'}</div>`
+    +lista.map(f=>{
+      const st=d.fases[f.id]||'locked';
+      const cls=st==='done'?'done':st==='pending'?'act':'lock';
+      return `<div class="sb-item ${cls}"><span class="sb-dot"></span>${f.n}</div>`;
+    }).join('');
+}
+
+if(d)showDash();
+</script>
