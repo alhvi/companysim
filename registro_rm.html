@@ -221,6 +221,17 @@ const ins=new Date(hoy.getTime()+7*24*3600*1000);
 document.getElementById('ins_dia').value=ins.getDate();
 document.getElementById('ins_mes').value=ins.getMonth();
 document.getElementById('ins_anno').value=ins.getFullYear();
+// Pre-fill from escritura if available
+const esc=shared?.escritura;
+if(esc){
+  if(esc.capSus) document.getElementById('capSus').value=esc.capSus;
+  if(esc.notario) document.getElementById('notario').value=esc.notario;
+  if(esc.numEsc) document.getElementById('numEsc').value=esc.numEsc;
+  if(esc.dia) document.getElementById('esc_dia').value=esc.dia;
+  if(esc.mesIdx!=null) document.getElementById('esc_mes').value=esc.mesIdx;
+  if(esc.anno) document.getElementById('esc_anno').value=esc.anno;
+  if(esc.capSus) document.getElementById('capSus').nextElementSibling.textContent='Calculado desde la escritura generada';
+}
 // Random RM numbers
 document.getElementById('tomo').value=Math.floor(Math.random()*100)+350;
 document.getElementById('folio').value=Math.floor(Math.random()*300)+50;

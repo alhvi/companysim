@@ -632,6 +632,18 @@ function renderHoja(lines,pi,pt,d,base){
 function generate(){
   if(!validate()) return;
   const d=collect();
+  try{
+    const ls=JSON.parse(localStorage.getItem('companysim')||'null');
+    if(ls){
+      const hoy=new Date();
+      ls.escritura={
+        capSus:d.socios.reduce((a,s)=>a+s.acc*d.vn,0),
+        notario:d.notario, numEsc:d.numEsc,
+        dia:hoy.getDate(), mesIdx:hoy.getMonth(), anno:hoy.getFullYear().toString()
+      };
+      localStorage.setItem('companysim',JSON.stringify(ls));
+    }
+  }catch(e){}
   const pages=flow(buildSegs(d));
   const base=5200000+Math.floor(Math.random()*300000);
   document.getElementById('pc').innerHTML=pages.map((ls,i)=>renderHoja(ls,i+1,pages.length,d,base)).join('');
