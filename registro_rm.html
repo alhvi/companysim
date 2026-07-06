@@ -1,0 +1,317 @@
+<title>Registro Mercantil — CC3115</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── Patente tokens ── */
+:root{
+  --pat-bg:#FAFCFF;--pat-txt:#0A1830;--pat-hdr:#0B2154;--pat-border:#1B3A78;
+  --pat-mid:#2A5AA8;--pat-light:#E4ECFA;--pat-line:#B0C4E0;--pat-seal:#1B3A78
+}
+.pat-wrap{
+  width:min(660px,97vw);background:var(--pat-bg);
+  border:2px solid var(--pat-border);
+  outline:4px solid var(--pat-border);outline-offset:4px;
+  font-family:'Times New Roman',Times,serif;color:var(--pat-txt);
+  flex-shrink:0;box-shadow:0 8px 32px rgba(0,0,60,.4),0 2px 8px rgba(0,0,60,.2)
+}
+/* Header */
+.pat-hdr{
+  background:var(--pat-hdr);color:#fff;
+  display:grid;grid-template-columns:72px 1fr;align-items:center;gap:12px;
+  padding:14px 20px 12px
+}
+.pat-escudo{
+  width:56px;height:56px;border-radius:50%;border:2px solid rgba(255,255,255,.5);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  background:repeating-conic-gradient(rgba(255,255,255,.07) 0deg 30deg,transparent 30deg 60deg);
+  position:relative
+}
+.pat-escudo::after{
+  content:'RM';font-size:16px;font-weight:900;font-family:'Times New Roman',serif;
+  color:#fff;letter-spacing:.05em
+}
+.pat-h1{font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;opacity:.75;margin-bottom:3px}
+.pat-h2{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;line-height:1.25}
+/* Title bar */
+.pat-title-bar{
+  background:var(--pat-light);border-top:2px solid var(--pat-border);border-bottom:2px solid var(--pat-border);
+  text-align:center;padding:10px 20px 8px;display:flex;flex-direction:column;align-items:center;gap:3px
+}
+.pat-title{font-size:16px;font-weight:700;letter-spacing:.18em;color:var(--pat-hdr)}
+.pat-title-sub{font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--pat-mid)}
+.pat-num-badge{font-size:10px;font-weight:700;font-family:'Courier New',monospace;color:var(--pat-border);letter-spacing:.12em;border:1px solid var(--pat-border);padding:2px 10px;background:#fff}
+/* Body */
+.pat-body{padding:16px 28px 12px;font-size:10.5pt;line-height:1.65;text-align:justify}
+.pat-certifica{font-weight:700;font-size:11pt}
+.pat-co{
+  text-align:center;font-size:13pt;font-weight:700;letter-spacing:.06em;
+  margin:12px 0;padding:10px 16px;border-top:1px solid var(--pat-line);
+  border-bottom:1px solid var(--pat-line);background:var(--pat-light)
+}
+.pat-sep{border:none;border-top:1px solid var(--pat-line);margin:10px 0}
+.pat-dato{display:grid;grid-template-columns:38% 1fr;gap:2px 8px;font-size:9.5pt;margin:6px 0}
+.pat-lbl{font-weight:700;color:var(--pat-hdr)}
+.pat-val{color:var(--pat-txt)}
+/* Footer */
+.pat-foot{
+  border-top:2px solid var(--pat-border);background:var(--pat-light);
+  padding:10px 28px 14px;display:grid;grid-template-columns:1fr auto;align-items:end;gap:16px
+}
+.pat-extiende{font-size:9pt;color:#2A3A5A;line-height:1.5}
+.pat-sig-area{text-align:center}
+.pat-sig-line{border-top:1px solid var(--pat-txt);width:160px;margin:0 auto 3px}
+.pat-sig-name{font-size:8pt;font-style:italic}
+.pat-sig-title{font-size:7.5pt;color:var(--pat-mid);letter-spacing:.04em}
+/* Seal on body */
+.pat-sello{
+  width:64px;height:64px;border-radius:50%;border:2.5px solid var(--pat-seal);
+  display:flex;align-items:center;justify-content:center;
+  position:absolute;bottom:14px;right:22px;opacity:.45;
+  font-family:'Courier New',monospace;background:repeating-conic-gradient(rgba(27,58,120,.08) 0deg 20deg,transparent 20deg 40deg)
+}
+.pat-sello-inner{font-size:5.5px;font-weight:700;color:var(--pat-seal);text-align:center;line-height:1.5;letter-spacing:.06em}
+
+@media print{
+  body,#layout{background:transparent}
+  #layout{display:none!important}
+  #pv{display:block!important}
+  .pc{background:#fff;padding:0;gap:0;min-height:0}
+  .pat-wrap{box-shadow:none;outline-offset:0}
+  @page{size:letter;margin:1.2cm}
+}
+</style>
+
+<div id="layout">
+  <nav class="sb">
+    <a class="sb-brand" href="index.html" style="text-decoration:none;display:block">Company<br>Sim</a>
+    <div class="sb-section" id="sb-sec">Fases S.A.</div>
+    <div class="sb-item done" id="sb-escritura"><span class="sb-dot"></span>Escritura</div>
+    <div class="sb-item act"><span class="sb-dot"></span>Registro RM</div>
+    <div class="sb-item lock"><span class="sb-dot"></span>Acciones</div>
+    <div class="sb-item lock"><span class="sb-dot"></span>RTU / SAT</div>
+    <div class="sb-item lock"><span class="sb-dot"></span>Libros</div>
+  </nav>
+  <div id="fv">
+    <div class="fh">
+      <div class="ey">CC3115 · Producción y Negocios de Videojuegos</div>
+      <h1>Registro Mercantil — Patente de Sociedad</h1>
+      <p>Ingresá los datos de la escritura para generar la Patente de Sociedad</p>
+    </div>
+    <div id="empresa-banner"></div>
+
+    <span class="slbl">Referencia de la escritura</span>
+    <div class="card">
+      <div class="ctitle">Escritura constitutiva</div>
+      <div class="r2">
+        <div class="f">
+          <label>Número de escritura</label>
+          <input type="number" id="numEsc" value="1" min="1" max="999">
+        </div>
+        <div class="f">
+          <label>Notario autorizante</label>
+          <input type="text" id="notario" value="CLAUDIO TOC ENCINOS" oninput="this.value=this.value.toUpperCase()" style="text-transform:uppercase">
+        </div>
+      </div>
+      <div class="f">
+        <label>Fecha de la escritura</label>
+        <div class="r3">
+          <select id="esc_dia"></select>
+          <select id="esc_mes">
+            <option value="0">Enero</option><option value="1">Febrero</option>
+            <option value="2">Marzo</option><option value="3">Abril</option>
+            <option value="4">Mayo</option><option value="5">Junio</option>
+            <option value="6">Julio</option><option value="7">Agosto</option>
+            <option value="8">Septiembre</option><option value="9">Octubre</option>
+            <option value="10">Noviembre</option><option value="11">Diciembre</option>
+          </select>
+          <select id="esc_anno"></select>
+        </div>
+      </div>
+      <div class="f">
+        <label>Capital suscrito y pagado (Q.)</label>
+        <input type="number" id="capSus" value="5000" min="0" step="100">
+        <div class="hint">Debe coincidir con el capital suscrito en la escritura</div>
+      </div>
+    </div>
+
+    <span class="slbl" style="margin-top:1rem">Datos del registro</span>
+    <div class="card">
+      <div class="ctitle">Registro Mercantil</div>
+      <div class="r3">
+        <div class="f"><label>Tomo</label><input type="number" id="tomo" min="1"></div>
+        <div class="f"><label>Folio</label><input type="number" id="folio" min="1"></div>
+        <div class="f"><label>Número de inscripción</label><input type="number" id="numIns" min="1"></div>
+      </div>
+      <div class="f">
+        <label>Fecha de inscripción</label>
+        <div class="r3">
+          <select id="ins_dia"></select>
+          <select id="ins_mes">
+            <option value="0">Enero</option><option value="1">Febrero</option>
+            <option value="2">Marzo</option><option value="3">Abril</option>
+            <option value="4">Mayo</option><option value="5">Junio</option>
+            <option value="6">Julio</option><option value="7">Agosto</option>
+            <option value="8">Septiembre</option><option value="9">Octubre</option>
+            <option value="10">Noviembre</option><option value="11">Diciembre</option>
+          </select>
+          <select id="ins_anno"></select>
+        </div>
+      </div>
+    </div>
+    <div class="nav">
+      <button class="btn-g" onclick="generate()">Generar Patente de Sociedad →</button>
+    </div>
+  </div>
+</div>
+
+<div id="pv">
+  <div class="ptb">
+    <button class="btn-bk" onclick="goBack()">← Editar</button>
+    <div style="margin-left:.5rem">
+      <div class="ptb-t" id="ptb-t"></div>
+      <div class="ptb-s" id="ptb-s"></div>
+    </div>
+    <button class="btn-pr" onclick="window.print()">Imprimir / PDF</button>
+  </div>
+  <div class="pc" id="pc"></div>
+</div>
+
+<script>
+const KEY='companysim';
+const shared=JSON.parse(localStorage.getItem(KEY)||'null');
+
+const MESES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+const DIAS_ORD={1:'primero',2:'dos',3:'tres',4:'cuatro',5:'cinco',6:'seis',7:'siete',8:'ocho',9:'nueve',10:'diez',11:'once',12:'doce',13:'trece',14:'catorce',15:'quince',16:'dieciséis',17:'diecisiete',18:'dieciocho',19:'diecinueve',20:'veinte',21:'veintiuno',22:'veintidós',23:'veintitrés',24:'veinticuatro',25:'veinticinco',26:'veintiséis',27:'veintisiete',28:'veintiocho',29:'veintinueve',30:'treinta',31:'treinta y uno'};
+const ONES=['','UN','DOS','TRES','CUATRO','CINCO','SEIS','SIETE','OCHO','NUEVE'];
+const TEENS=['DIEZ','ONCE','DOCE','TRECE','CATORCE','QUINCE','DIECISÉIS','DIECISIETE','DIECIOCHO','DIECINUEVE'];
+const TENS=['','DIEZ','VEINTE','TREINTA','CUARENTA','CINCUENTA','SESENTA','SETENTA','OCHENTA','NOVENTA'];
+const HUND=['','CIEN','DOSCIENTOS','TRESCIENTOS','CUATROCIENTOS','QUINIENTOS','SEISCIENTOS','SETECIENTOS','OCHOCIENTOS','NOVECIENTOS'];
+function n2w(n){
+  if(n===0)return 'CERO';let r='';
+  if(n>=1000000){const m=Math.floor(n/1e6);r+=(m===1?'UN MILLÓN':n2w(m)+' MILLONES')+' ';n%=1e6;}
+  if(n>=1000){const k=Math.floor(n/1000);r+=(k===1?'MIL':n2w(k)+' MIL')+' ';n%=1000;}
+  if(n>=100){const h=Math.floor(n/100),rest=n%100;r+=(h===1?(rest?'CIENTO':'CIEN'):HUND[h])+' ';n=rest;}
+  if(n>=20){const t=Math.floor(n/10);r+=TENS[t];n%=10;if(n)r+=' Y '+ONES[n];}
+  else if(n>=10)r+=TEENS[n-10];
+  else if(n>0)r+=ONES[n];
+  return r.trim();
+}
+function fmt(n){return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',')}
+function monto(n){return `${n2w(n)} QUETZALES (Q.${fmt(n)}.00)`}
+function numRom(n){const V=['','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX','XXI','XXII','XXIII','XXIV','XXV','XXVI','XXVII','XXVIII','XXIX','XXX'];return V[n]||n;}
+
+// ── POPULATE DATE SELECTS ──────────────────────────────────────
+function fillDias(selId){
+  const s=document.getElementById(selId);
+  for(let i=1;i<=31;i++){const o=document.createElement('option');o.value=i;o.textContent=i;s.appendChild(o);}
+}
+function fillAnnos(selId,start){
+  const s=document.getElementById(selId);
+  const y=new Date().getFullYear();
+  for(let i=y;i>=y-5;i--){const o=document.createElement('option');o.value=i;o.textContent=i;s.appendChild(o);}
+}
+fillDias('esc_dia');fillDias('ins_dia');
+fillAnnos('esc_anno');fillAnnos('ins_anno');
+// Default dates
+const hoy=new Date();
+document.getElementById('esc_dia').value=hoy.getDate();
+document.getElementById('esc_mes').value=hoy.getMonth();
+document.getElementById('esc_anno').value=hoy.getFullYear();
+// Inscripción: +7 días (simula tiempo de trámite)
+const ins=new Date(hoy.getTime()+7*24*3600*1000);
+document.getElementById('ins_dia').value=ins.getDate();
+document.getElementById('ins_mes').value=ins.getMonth();
+document.getElementById('ins_anno').value=ins.getFullYear();
+// Random RM numbers
+document.getElementById('tomo').value=Math.floor(Math.random()*100)+350;
+document.getElementById('folio').value=Math.floor(Math.random()*300)+50;
+document.getElementById('numIns').value=Math.floor(Math.random()*50000)+150000;
+
+// ── EMPRESA BANNER ─────────────────────────────────────────────
+if(shared){
+  document.getElementById('empresa-banner').innerHTML=`
+    <div style="background:rgba(74,158,219,.06);border:1px solid rgba(74,158,219,.2);padding:.48rem .9rem;display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;font-size:.86rem;color:var(--ui-text)">
+      <strong>${shared.nombre}, SOCIEDAD ANÓNIMA</strong>
+      <a href="index.html" style="font-size:.7rem;color:var(--acc-l);text-decoration:none;opacity:.8">← Dashboard</a>
+    </div>`;
+}
+
+// ── GENERATE ───────────────────────────────────────────────────
+function collect(){
+  const empresa=(shared?.nombre||'[EMPRESA]').toUpperCase();
+  const dpto=shared?.dpto||'Guatemala';
+  const dir=shared?.dir||'';
+  const numEsc=parseInt(document.getElementById('numEsc').value)||1;
+  const notario=document.getElementById('notario').value.trim()||'[NOTARIO]';
+  const esc_d=parseInt(document.getElementById('esc_dia').value);
+  const esc_m=parseInt(document.getElementById('esc_mes').value);
+  const esc_a=document.getElementById('esc_anno').value;
+  const ins_d=parseInt(document.getElementById('ins_dia').value);
+  const ins_m=parseInt(document.getElementById('ins_mes').value);
+  const ins_a=document.getElementById('ins_anno').value;
+  const capSus=parseInt(document.getElementById('capSus').value)||5000;
+  const tomo=document.getElementById('tomo').value;
+  const folio=document.getElementById('folio').value;
+  const numIns=document.getElementById('numIns').value;
+  return {empresa,dpto,dir,numEsc,notario,esc_d,esc_m,esc_a,ins_d,ins_m,ins_a,capSus,tomo,folio,numIns};
+}
+
+function renderPatente(d){
+  const fechaEsc=`${DIAS_ORD[d.esc_d]||d.esc_d} de ${MESES[d.esc_m]} de ${d.esc_a}`;
+  const fechaIns=`${d.ins_d} de ${MESES[d.ins_m]} de ${d.ins_a}`;
+  return `<div class="pat-wrap">
+  <div class="pat-hdr">
+    <div class="pat-escudo"></div>
+    <div>
+      <div class="pat-h1">República de Guatemala</div>
+      <div class="pat-h2">Registro Mercantil de la República</div>
+    </div>
+  </div>
+  <div class="pat-title-bar">
+    <div class="pat-title">PATENTE DE SOCIEDAD</div>
+    <div class="pat-title-sub">Inscripción de Sociedad Mercantil</div>
+    <div class="pat-num-badge">No. ${d.numIns}</div>
+  </div>
+  <div class="pat-body">
+    <p>El <span class="pat-certifica">Registrador Mercantil de la República de Guatemala</span>, en ejercicio de las facultades que le confiere el Código de Comercio de la República de Guatemala, <strong>CERTIFICA:</strong></p>
+    <p style="margin-top:10px">Que en el Registro de Sociedades Mercantiles, <strong>Tomo ${d.tomo}, Folio ${d.folio}</strong>, con el número de inscripción <strong>${d.numIns}</strong>, aparece registrada la sociedad denominada:</p>
+    <div class="pat-co">${d.empresa}, SOCIEDAD ANÓNIMA<br><span style="font-size:9pt;font-weight:400;letter-spacing:0">abreviable como ${d.empresa}, S.A.</span></div>
+    <p>Constituida mediante Escritura Pública número <strong>${numRom(d.numEsc)} (${d.numEsc})</strong>, autorizada en la ciudad de Guatemala, el <strong>${fechaEsc}</strong>, por el Notario <strong>${d.notario}</strong>.</p>
+    <hr class="pat-sep">
+    <div class="pat-dato">
+      <span class="pat-lbl">Capital suscrito y pagado:</span>
+      <span class="pat-val">${monto(d.capSus)}</span>
+      <span class="pat-lbl">Domicilio:</span>
+      <span class="pat-val">Departamento de ${d.dpto}</span>
+      <span class="pat-lbl">Sede social:</span>
+      <span class="pat-val">${d.dir||'(según escritura)'}</span>
+      <span class="pat-lbl">Objeto social:</span>
+      <span class="pat-val">Desarrollo y comercialización de videojuegos y software interactivo; y actividades conexas.</span>
+    </div>
+    <hr class="pat-sep">
+    <p>Se extiende la presente Patente de Sociedad, a solicitud de parte interesada, para los efectos legales consiguientes.</p>
+  </div>
+  <div class="pat-foot">
+    <div class="pat-extiende">Extendida en la ciudad de Guatemala,<br>el <strong>${fechaIns}</strong>.</div>
+    <div class="pat-sig-area">
+      <div class="pat-sig-line"></div>
+      <div class="pat-sig-name">Registrador Mercantil</div>
+      <div class="pat-sig-title">REGISTRO MERCANTIL DE LA REPÚBLICA<br>GUATEMALA, C.A.</div>
+    </div>
+  </div>
+</div>`;
+}
+
+function generate(){
+  const d=collect();
+  document.getElementById('pc').innerHTML=renderPatente(d);
+  document.getElementById('ptb-t').textContent=`${d.empresa}, S.A.`;
+  document.getElementById('ptb-s').textContent=`Patente de Sociedad · No. ${d.numIns}`;
+  document.getElementById('layout').style.display='none';
+  document.getElementById('pv').style.display='block';
+  window.scrollTo(0,0);
+}
+function goBack(){
+  document.getElementById('pv').style.display='none';
+  document.getElementById('layout').style.display='flex';
+}
+</script>
