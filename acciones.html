@@ -1,0 +1,253 @@
+<title>Títulos de Acciones — CC3115</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── Título de Acción certificate ── */
+.ta-cert{
+  width:min(560px,97vw);
+  background:#F5F0E3;
+  border:3px double #1A3A5C;
+  outline:1.5px solid #C4A840;outline-offset:5px;
+  font-family:'Times New Roman',Times,serif;color:#0A1020;
+  flex-shrink:0;
+  box-shadow:0 6px 24px rgba(0,0,0,.45);
+  background-image:
+    repeating-linear-gradient(45deg,transparent,transparent 24px,rgba(26,58,92,.012) 24px,rgba(26,58,92,.012) 25px),
+    repeating-linear-gradient(-45deg,transparent,transparent 24px,rgba(26,58,92,.012) 24px,rgba(26,58,92,.012) 25px)
+}
+.ta-top{
+  background:#1A3A5C;color:#fff;text-align:center;
+  padding:10px 16px 8px;border-bottom:2px solid #C4A840
+}
+.ta-company{font-size:13.5px;font-weight:700;letter-spacing:.07em}
+.ta-ref{font-size:8px;opacity:.7;margin-top:3px;letter-spacing:.04em;font-family:Arial,sans-serif}
+.ta-title-row{
+  text-align:center;padding:10px 16px 8px;
+  border-bottom:1.5px solid #1A3A5C;position:relative;
+  background:linear-gradient(to bottom,rgba(196,168,64,.06),transparent)
+}
+.ta-title{font-size:20px;font-weight:900;letter-spacing:.14em;color:#1A3A5C}
+.ta-serie{font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:#5A7090;margin-top:3px;font-family:Arial,sans-serif}
+.ta-num-badge{
+  position:absolute;top:10px;right:14px;
+  font-size:8.5px;font-weight:700;font-family:'Courier New',monospace;
+  border:1.5px solid #C4A840;padding:2px 8px;
+  color:#6A5010;background:rgba(196,168,64,.08)
+}
+.ta-body{
+  padding:13px 22px 10px;font-size:10.5pt;
+  line-height:1.65;text-align:justify;
+  border-bottom:1px solid rgba(26,58,92,.18)
+}
+.ta-pct{
+  font-size:9px;color:#3A5A7A;margin-top:7px;
+  padding:3px 10px;background:rgba(26,58,92,.05);
+  border-left:2.5px solid #1A3A5C;display:inline-block;
+  font-family:Arial,sans-serif
+}
+.ta-foot{padding:8px 22px 13px;display:flex;justify-content:space-between;align-items:flex-end}
+.ta-foot-date{font-size:9px;font-style:italic;color:#4A6A8A;font-family:Arial,sans-serif}
+.ta-sig{text-align:center}
+.ta-sig-line{border-top:1px solid #0A1020;width:170px;margin:20px auto 3px}
+.ta-sig-name{font-size:9px;font-weight:700;font-family:Arial,sans-serif;letter-spacing:.03em}
+.ta-sig-role{font-size:7.5px;color:#4A6A8A;font-family:Arial,sans-serif;letter-spacing:.04em}
+
+@media print{
+  body,#layout{background:transparent}
+  #layout{display:none!important}
+  #pv{display:block!important}
+  .pc{background:#fff;padding:.5cm;gap:.8cm;min-height:0}
+  .ta-cert{box-shadow:none;outline:1px solid #C4A840}
+  @page{size:letter;margin:.8cm}
+}
+</style>
+
+<div id="layout">
+  <nav class="sb">
+    <a class="sb-brand" href="index.html" style="text-decoration:none;display:block">Company<br>Sim</a>
+    <div class="sb-section">Fases S.A.</div>
+    <div class="sb-item done"><span class="sb-dot"></span>Escritura</div>
+    <div class="sb-item done"><span class="sb-dot"></span>Registro RM</div>
+    <div class="sb-item act"><span class="sb-dot"></span>Acciones</div>
+    <div class="sb-item lock"><span class="sb-dot"></span>RTU / SAT</div>
+    <div class="sb-item lock"><span class="sb-dot"></span>Libros</div>
+  </nav>
+  <div id="fv">
+    <div class="fh">
+      <div class="ey">CC3115 · Producción y Negocios de Videojuegos</div>
+      <h1>Títulos de Acciones</h1>
+      <p>Generación de los títulos accionarios de la sociedad — un certificado por cada accionista</p>
+    </div>
+    <div id="empresa-banner"></div>
+    <div id="socio-section"></div>
+    <div class="nav">
+      <button class="btn-g" onclick="generate()">Generar Títulos de Acciones →</button>
+    </div>
+  </div>
+</div>
+
+<div id="pv">
+  <div class="ptb">
+    <button class="btn-bk" onclick="goBack()">← Editar</button>
+    <div style="margin-left:.5rem">
+      <div class="ptb-t" id="ptb-t"></div>
+      <div class="ptb-s" id="ptb-s"></div>
+    </div>
+    <button class="btn-pr" onclick="window.print()">Imprimir / PDF</button>
+    <a class="btn-pr" href="rtu.html" style="text-decoration:none;background:var(--act)">Continuar proceso →</a>
+  </div>
+  <div class="pc" id="pc"></div>
+</div>
+
+<script>
+const KEY='companysim';
+const shared=JSON.parse(localStorage.getItem(KEY)||'null');
+const esc=shared?.escritura;
+
+const MESES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+
+/* number-to-words (Quetzales) */
+const ONES=['','UN','DOS','TRES','CUATRO','CINCO','SEIS','SIETE','OCHO','NUEVE'];
+const TEENS=['DIEZ','ONCE','DOCE','TRECE','CATORCE','QUINCE','DIECISÉIS','DIECISIETE','DIECIOCHO','DIECINUEVE'];
+const TENS=['','DIEZ','VEINTE','TREINTA','CUARENTA','CINCUENTA','SESENTA','SETENTA','OCHENTA','NOVENTA'];
+const HUND=['','CIEN','DOSCIENTOS','TRESCIENTOS','CUATROCIENTOS','QUINIENTOS','SEISCIENTOS','SETECIENTOS','OCHOCIENTOS','NOVECIENTOS'];
+function n2w(n){
+  if(n===0)return 'CERO';let r='';
+  if(n>=1e6){const m=Math.floor(n/1e6);r+=(m===1?'UN MILLÓN':n2w(m)+' MILLONES')+' ';n%=1e6;}
+  if(n>=1000){const k=Math.floor(n/1000);r+=(k===1?'MIL':n2w(k)+' MIL')+' ';n%=1000;}
+  if(n>=100){const h=Math.floor(n/100),rest=n%100;r+=(h===1?(rest?'CIENTO':'CIEN'):HUND[h])+' ';n=rest;}
+  if(n>=20){const t=Math.floor(n/10);r+=TENS[t];n%=10;if(n)r+=' Y '+ONES[n];}
+  else if(n>=10)r+=TEENS[n-10];
+  else if(n>0)r+=ONES[n];
+  return r.trim();
+}
+function fmt(n){return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',')}
+function monto(n){return `${n2w(n)} QUETZALES (Q.${fmt(n)}.00)`}
+
+// Default socios if no localStorage data
+let socios=esc?.socios?.length?esc.socios:[
+  {nombre:'',acc:3,cui:'',trato:'señor'},
+  {nombre:'',acc:2,cui:'',trato:'señorita'}
+];
+
+/* ── EMPRESA BANNER ── */
+if(shared){
+  document.getElementById('empresa-banner').innerHTML=`
+    <div style="background:rgba(74,158,219,.06);border:1px solid rgba(74,158,219,.2);padding:.48rem .9rem;display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;font-size:.86rem;color:var(--ui-text)">
+      <strong>${shared.nombre}, SOCIEDAD ANÓNIMA</strong>
+      <a href="index.html" style="font-size:.7rem;color:var(--acc-l);text-decoration:none;opacity:.8">← Dashboard</a>
+    </div>`;
+}
+
+/* ── SOCIO SECTION ── */
+function renderSocioSection(){
+  const hasData=esc?.socios?.length>0&&esc.socios.some(s=>s.nombre);
+  if(hasData){
+    document.getElementById('socio-section').innerHTML=`
+      <span class="slbl">Accionistas (desde la escritura)</span>
+      <div class="card">
+        <div class="ctitle">Accionistas registrados</div>
+        ${socios.map((s,i)=>`
+          <div style="display:flex;align-items:center;gap:1rem;padding:.45rem 0;border-bottom:1px solid var(--ui-border)">
+            <div style="flex:1;font-size:.88rem;color:var(--ui-text);font-weight:600">${s.nombre||'(sin nombre)'}</div>
+            <div style="font-size:.8rem;color:var(--ui-muted)">${s.acc} acción${s.acc!==1?'es':''}</div>
+          </div>`).join('')}
+        <div class="hint" style="margin-top:.6rem">Si los datos no son correctos, regresá a la escritura y regenerala para actualizar el localStorage.</div>
+      </div>`;
+  }else{
+    document.getElementById('socio-section').innerHTML=`
+      <span class="slbl">Accionistas</span>
+      <div class="card">
+        <div class="ctitle">Ingresá los datos de los accionistas</div>
+        <div id="socios-inputs">
+          ${socios.map((s,i)=>`
+            <div class="sc">
+              <div class="sc-h"><span class="sc-t">Accionista ${i+1}</span></div>
+              <div class="r2">
+                <div class="f"><label>Nombre completo</label>
+                  <input type="text" placeholder="NOMBRE COMPLETO" style="text-transform:uppercase"
+                    oninput="socios[${i}].nombre=this.value.toUpperCase();this.value=this.value.toUpperCase()" value="${s.nombre}">
+                </div>
+                <div class="f"><label>Número de acciones</label>
+                  <input type="number" min="1" value="${s.acc}" oninput="socios[${i}].acc=parseInt(this.value)||1">
+                </div>
+              </div>
+              <div class="r2">
+                <div class="f"><label>CUI (opcional)</label>
+                  <input type="text" placeholder="1234 56789 0101" oninput="socios[${i}].cui=this.value" value="${s.cui}">
+                </div>
+                <div class="f"><label>Tratamiento</label>
+                  <select onchange="socios[${i}].trato=this.value">
+                    <option value="señor" ${s.trato==='señor'?'selected':''}>Señor</option>
+                    <option value="señorita" ${s.trato==='señorita'?'selected':''}>Señorita</option>
+                    <option value="señora" ${s.trato==='señora'?'selected':''}>Señora</option>
+                  </select>
+                </div>
+              </div>
+            </div>`).join('')}
+        </div>
+      </div>`;
+  }
+}
+renderSocioSection();
+
+/* ── GENERATE ── */
+function generate(){
+  const empresa=(shared?.nombre||'[EMPRESA]').toUpperCase();
+  const valNom=esc?.valNom||1000;
+  const notario=esc?.notario||'CLAUDE ELIÉ RIVERA';
+  const numEsc=esc?.numEsc||1;
+  const admin=esc?.admin||{nombre:socios[0]?.nombre||'[ADMINISTRADOR]',trato:'señor'};
+  const hoy=new Date();
+  const fechaHoy=`${hoy.getDate()} de ${MESES[hoy.getMonth()]} de ${hoy.getFullYear()}`;
+  const escFecha=esc?`${esc.dia} de ${MESES[esc.mesIdx||0]} de ${esc.anno}`:fechaHoy;
+  const totalAcc=socios.reduce((a,s)=>a+(parseInt(s.acc)||1),0);
+
+  const certs=socios.map((s,i)=>{
+    const nom=(s.nombre||`ACCIONISTA ${i+1}`).toUpperCase();
+    const acc=parseInt(s.acc)||1;
+    const total=acc*valNom;
+    const pct=Math.round(acc/totalAcc*100);
+    const pronU=s.trato==='señor'?'el señor':s.trato==='señora'?'la señora':'la señorita';
+    const certNum=String(i+1).padStart(3,'0');
+    const genO=s.trato==='señor'?'o':'a';
+
+    return `<div class="ta-cert">
+  <div class="ta-top">
+    <div class="ta-company">${empresa}, SOCIEDAD ANÓNIMA</div>
+    <div class="ta-ref">Escritura Pública No. ${numEsc} · Guatemala, ${escFecha} · Notario: ${notario}</div>
+  </div>
+  <div class="ta-title-row">
+    <div class="ta-num-badge">No. ${certNum}</div>
+    <div class="ta-title">TÍTULO DE ACCIÓN</div>
+    <div class="ta-serie">Serie A · Acción Común Nominativa</div>
+  </div>
+  <div class="ta-body">
+    <p>La sociedad <strong>${empresa}, SOCIEDAD ANÓNIMA</strong>, certifica que ${pronU} <strong>${nom}</strong>${s.cui?`, titular del Documento Personal de Identificación –CUI– número <strong>${s.cui}</strong>,`:''}
+    es propietari${genO} de <strong>${n2w(acc)} (${acc})</strong> acción${acc!==1?'es':''} común${acc!==1?'es':''} nominativa${acc!==1?'s':''}
+    de la Serie A, con un valor nominal de <strong>${monto(valNom)}</strong> cada una,
+    para un valor total de <strong>${monto(total)}</strong>.</p>
+    <span class="ta-pct">Participación: ${pct}% del capital social suscrito</span>
+  </div>
+  <div class="ta-foot">
+    <div class="ta-foot-date">Guatemala, ${fechaHoy}</div>
+    <div class="ta-sig">
+      <div class="ta-sig-line"></div>
+      <div class="ta-sig-name">${admin.nombre}</div>
+      <div class="ta-sig-role">Administrador Único y Representante Legal</div>
+    </div>
+  </div>
+</div>`;
+  }).join('');
+
+  document.getElementById('pc').innerHTML=certs;
+  document.getElementById('ptb-t').textContent=`${empresa}, S.A.`;
+  document.getElementById('ptb-s').textContent=`${socios.length} Título${socios.length!==1?'s':''}`;
+  document.getElementById('layout').style.display='none';
+  document.getElementById('pv').style.display='block';
+  window.scrollTo(0,0);
+}
+function goBack(){
+  document.getElementById('pv').style.display='none';
+  document.getElementById('layout').style.display='flex';
+}
+</script>

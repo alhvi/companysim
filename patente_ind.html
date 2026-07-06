@@ -1,0 +1,301 @@
+<title>Patente Empresa Individual — CC3115</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── Reuse pce styles from registro_rm but with empresa palette ── */
+.pce-doc{
+  width:min(760px,97vw);
+  background:#F8F7F2;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='65'%3E%3Ctext x='130' y='36' text-anchor='middle' font-family='Arial' font-size='8.5' fill='rgba(0%2C0%2C0%2C0.025)' transform='rotate(-28%2C130%2C36)'%3EREPUBLICA DE GUATEMALA%3C/text%3E%3C/svg%3E"),
+    repeating-linear-gradient(32deg,transparent,transparent 18px,rgba(0,0,0,.018) 18px,rgba(0,0,0,.018) 19px),
+    repeating-linear-gradient(-32deg,transparent,transparent 18px,rgba(0,0,0,.018) 18px,rgba(0,0,0,.018) 19px);
+  border:1.5px solid #888;
+  font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#111;
+  box-shadow:0 8px 32px rgba(0,0,0,.45),0 2px 6px rgba(0,0,0,.2);
+  flex-shrink:0;position:relative
+}
+.pce-hdr{display:grid;grid-template-columns:105px 1fr 115px;align-items:start;padding:8px 10px 6px;gap:6px;border-bottom:2px solid #333}
+.pce-stamps{position:relative;width:100px;height:92px;flex-shrink:0}
+.pce-stamp{position:absolute;width:62px;height:72px;border:2px solid #444;overflow:hidden;background:radial-gradient(ellipse 55% 65% at 50% 48%,rgba(0,0,0,.07) 0%,transparent 70%),repeating-linear-gradient(45deg,transparent,transparent 5px,rgba(0,0,0,.025) 5px,rgba(0,0,0,.025) 6px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.pce-stamp::before{content:'';position:absolute;width:46px;height:46px;border:1.5px solid rgba(0,0,0,.28);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%)}
+.pce-stamp-val{font-size:14px;font-weight:900;color:rgba(0,0,0,.55);font-family:'Courier New';position:relative;z-index:1;letter-spacing:.04em}
+.pce-stamp-txt{font-size:4.5px;font-weight:700;color:rgba(0,0,0,.4);text-align:center;font-family:'Courier New';letter-spacing:.06em;position:relative;z-index:1;line-height:1.6}
+.pce-stamp.s1{top:0;left:0;transform:rotate(-4deg)}
+.pce-stamp.s2{top:10px;left:36px;transform:rotate(3deg)}
+.pce-title-blk{text-align:center;padding-top:2px}
+.pce-t1{font-size:20px;font-weight:900;line-height:1.1;margin-bottom:3px}
+.pce-t2{font-size:9.5px;font-weight:700;letter-spacing:.06em}
+.pce-t3{font-size:9.5px;letter-spacing:.04em;margin-bottom:4px}
+.pce-t4{font-size:13px;font-style:italic;margin-top:2px}
+.pce-num-blk{text-align:right;padding-top:3px}
+.pce-no{font-size:13px;font-weight:900;letter-spacing:.02em;white-space:nowrap}
+.pce-no span{font-size:18px}
+.pce-tit{font-size:9.5px;margin-top:2px}
+.pce-co{text-align:center;font-size:12.5px;font-weight:700;letter-spacing:.04em;padding:5px 12px;border-bottom:1.5px solid #555;border-top:.5px solid #aaa;background:rgba(0,0,0,.015)}
+.pce-regrow{padding:5px 12px;font-size:10.5px;border-bottom:1px solid #aaa;display:flex;flex-wrap:wrap;align-items:baseline;gap:3px}
+.pce-u{border-bottom:1.5px solid #333;padding:0 4px;font-weight:700;display:inline-block;min-width:30px;text-align:center}
+.pce-body{padding:2px 12px 0}
+.pce-frow{display:flex;align-items:baseline;flex-wrap:wrap;gap:3px;padding:3px 0;border-bottom:.5px solid rgba(0,0,0,.14);min-height:21px}
+.pce-2col{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.pce-lbl{font-size:10px;white-space:nowrap;flex-shrink:0}
+.pce-val{border-bottom:1.5px solid #333;font-weight:700;font-size:10.5px;padding:0 4px;flex:1;min-width:80px}
+.pce-obj-val{border-bottom:1.5px solid #333;font-weight:700;font-size:10px;padding:0 4px;flex:1;line-height:1.55;text-decoration:underline;text-underline-offset:2px}
+.pce-blank{border-bottom:.5px solid rgba(0,0,0,.12);min-height:20px}
+.pce-foot-date{padding:6px 12px 2px;font-size:10.5px;border-top:.5px solid rgba(0,0,0,.15);display:flex;align-items:baseline;flex-wrap:wrap;gap:4px}
+.pce-foot{display:grid;grid-template-columns:1fr 70px 1fr;align-items:end;padding:4px 12px 6px;gap:8px;border-top:1px solid #aaa}
+.pce-hecho{font-size:9.5px;font-weight:700}
+.pce-sig-ln{border-top:1px solid #333;margin:20px 0 2px;width:100%}
+.pce-sig-nm{font-size:9px;font-weight:700}
+.pce-boleta{font-size:9px;margin-top:3px}
+.pce-qr-box{width:62px;height:62px;align-self:center;justify-self:center;background:repeating-conic-gradient(#222 0deg 90deg,#eee 90deg 180deg) 0 0/6px 6px;border:1.5px solid #333}
+.pce-rsig{font-size:9px;text-align:center}
+.pce-rsig-ttl{font-weight:700;font-size:9.5px;margin-top:2px}
+.pce-rsig-nm{font-size:8.5px;font-style:italic}
+.pce-rsig-role{font-size:8px}
+.pce-rm-seal{width:38px;height:38px;border-radius:50%;border:1.5px solid #1B3A78;display:inline-flex;align-items:center;justify-content:center;font-size:5px;font-weight:700;color:#1B3A78;font-family:'Courier New';text-align:center;line-height:1.4;letter-spacing:.04em;background:repeating-conic-gradient(rgba(27,58,120,.07) 0deg 20deg,transparent 20deg 40deg);vertical-align:middle;margin-right:3px}
+.pce-barcode{position:absolute;bottom:28px;right:10px;width:90px;height:22px;background:repeating-linear-gradient(90deg,#111,#111 2px,#fff 2px,#fff 5px,#111 5px,#111 6px,#fff 6px,#fff 9px,#111 9px,#111 11px,#fff 11px,#fff 14px);border:1px solid #555}
+.pce-nota{padding:4px 12px 5px;font-size:9px;font-weight:700;border-top:1px solid #aaa;text-align:center}
+
+@media print{
+  body,#layout{background:transparent}
+  #layout{display:none!important}
+  #pv{display:block!important}
+  .pc{background:#fff;padding:0;gap:0;min-height:0}
+  .pce-doc{box-shadow:none;width:100%}
+  @page{size:letter;margin:1cm}
+}
+</style>
+
+<div id="layout">
+  <nav class="sb">
+    <a class="sb-brand" href="index.html" style="text-decoration:none;display:block">Company<br>Sim</a>
+    <div class="sb-section">Fases E.I.</div>
+    <div class="sb-item act"><span class="sb-dot"></span>Patente Ind.</div>
+    <div class="sb-item lock"><span class="sb-dot"></span>RTU / SAT</div>
+  </nav>
+  <div id="fv">
+    <div class="fh">
+      <div class="ey">CC3115 · Producción y Negocios de Videojuegos</div>
+      <h1>Patente de Comercio de Empresa</h1>
+      <p>Inscripción de la Empresa Individual ante el Registro Mercantil de la República</p>
+    </div>
+    <div id="empresa-banner"></div>
+
+    <span class="slbl">Datos del propietario</span>
+    <div class="card">
+      <div class="ctitle">Persona propietaria de la empresa</div>
+      <div class="r2">
+        <div class="f">
+          <label>Nombre completo del propietario</label>
+          <input type="text" id="propietario" placeholder="NOMBRE COMPLETO" oninput="this.value=this.value.toUpperCase()">
+        </div>
+        <div class="f">
+          <label>CUI del propietario</label>
+          <input type="text" id="cui" placeholder="1234 56789 0101">
+        </div>
+      </div>
+      <div class="r2">
+        <div class="f">
+          <label>Profesión u oficio</label>
+          <input type="text" id="profesion" placeholder="ej. INGENIERO EN SISTEMAS" oninput="this.value=this.value.toUpperCase()">
+        </div>
+        <div class="f">
+          <label>Municipio de nacimiento</label>
+          <input type="text" id="municipio" placeholder="ej. GUATEMALA" oninput="this.value=this.value.toUpperCase()">
+        </div>
+      </div>
+    </div>
+
+    <span class="slbl" style="margin-top:.5rem">Datos del Registro Mercantil</span>
+    <div class="card">
+      <div class="ctitle">Inscripción en el Registro</div>
+      <div class="r3">
+        <div class="f"><label>Número de Registro</label><input type="number" id="numReg" min="1"></div>
+        <div class="f"><label>Folio</label><input type="number" id="folio" min="1"></div>
+        <div class="f"><label>Libro</label><input type="number" id="libro" min="1"></div>
+      </div>
+      <div class="f">
+        <label>Fecha de inscripción</label>
+        <div class="r3">
+          <select id="ins_dia"></select>
+          <select id="ins_mes">
+            <option value="0">Enero</option><option value="1">Febrero</option><option value="2">Marzo</option>
+            <option value="3">Abril</option><option value="4">Mayo</option><option value="5">Junio</option>
+            <option value="6">Julio</option><option value="7">Agosto</option><option value="8">Septiembre</option>
+            <option value="9">Octubre</option><option value="10">Noviembre</option><option value="11">Diciembre</option>
+          </select>
+          <select id="ins_anno"></select>
+        </div>
+      </div>
+    </div>
+    <div class="nav">
+      <button class="btn-g" onclick="generate()">Generar Patente de Empresa →</button>
+    </div>
+  </div>
+</div>
+
+<div id="pv">
+  <div class="ptb">
+    <button class="btn-bk" onclick="goBack()">← Editar</button>
+    <div style="margin-left:.5rem">
+      <div class="ptb-t" id="ptb-t"></div>
+      <div class="ptb-s" id="ptb-s"></div>
+    </div>
+    <button class="btn-pr" onclick="window.print()">Imprimir / PDF</button>
+    <a class="btn-pr" href="rtu.html" style="text-decoration:none;background:var(--act)">Continuar proceso →</a>
+  </div>
+  <div class="pc" id="pc"></div>
+</div>
+
+<script>
+const KEY='companysim';
+const shared=JSON.parse(localStorage.getItem(KEY)||'null');
+const MESES_UP=['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE'];
+const MESES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+
+function rnd(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
+
+/* ── DATE SELECTS ── */
+function fillDias(id){const s=document.getElementById(id);for(let i=1;i<=31;i++){const o=document.createElement('option');o.value=i;o.textContent=i;s.appendChild(o);}}
+function fillAnnos(id){const s=document.getElementById(id);const y=new Date().getFullYear();for(let i=y;i>=y-5;i--){const o=document.createElement('option');o.value=i;o.textContent=i;s.appendChild(o);}}
+fillDias('ins_dia');fillAnnos('ins_anno');
+const hoy=new Date();
+document.getElementById('ins_dia').value=hoy.getDate();
+document.getElementById('ins_mes').value=hoy.getMonth();
+document.getElementById('ins_anno').value=hoy.getFullYear();
+
+/* Número de Registro para Empresa: range similar to Selva's empresa (712898) */
+document.getElementById('numReg').value=rnd(680000,750000);
+document.getElementById('folio').value=rnd(100,200);
+document.getElementById('libro').value=rnd(600,700);
+
+/* ── EMPRESA BANNER ── */
+if(shared){
+  document.getElementById('empresa-banner').innerHTML=`
+    <div style="background:rgba(74,158,219,.06);border:1px solid rgba(74,158,219,.2);padding:.48rem .9rem;display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;font-size:.86rem;color:var(--ui-text)">
+      <strong>${shared.nombre}</strong>
+      <a href="index.html" style="font-size:.7rem;color:var(--acc-l);text-decoration:none;opacity:.8">← Dashboard</a>
+    </div>`;
+}
+
+/* ── GENERATE ── */
+function generate(){
+  const empresa=(shared?.nombre||'[EMPRESA]').toUpperCase();
+  const dpto=shared?.dpto||'Guatemala';
+  const dir=(shared?.dir||'(dirección del establecimiento)').toUpperCase();
+  const propietario=document.getElementById('propietario').value.trim().toUpperCase()||'[NOMBRE DEL PROPIETARIO]';
+  const cui=document.getElementById('cui').value.trim()||'* * * * * * * * * * * *';
+  const profesion=document.getElementById('profesion').value.trim().toUpperCase()||'COMERCIANTE';
+  const municipio=document.getElementById('municipio').value.trim().toUpperCase()||dpto.toUpperCase();
+  const ins_d=parseInt(document.getElementById('ins_dia').value);
+  const ins_m=parseInt(document.getElementById('ins_mes').value);
+  const ins_a=document.getElementById('ins_anno').value;
+  const numReg=document.getElementById('numReg').value;
+  const folio=document.getElementById('folio').value;
+  const libro=document.getElementById('libro').value;
+  // Patente number for empresa: different range than sociedad (300000-400000)
+  const numPat=rnd(300000,400000);
+  const titular=`E-${rnd(400000,500000)}`;
+  const numExp=rnd(70000,90000);
+  const OBJETO=`DESARROLLO Y COMERCIALIZACIÓN DE VIDEOJUEGOS, SOFTWARE INTERACTIVO Y APLICACIONES DIGITALES; PRESTACIÓN DE SERVICIOS DE DESARROLLO Y DISEÑO DE VIDEOJUEGOS; Y OTRAS ACTIVIDADES RELACIONADAS CON LA INDUSTRIA CREATIVA DIGITAL QUE CONSTAN EN EL EXPEDIENTE RESPECTIVO.`;
+
+  document.getElementById('pc').innerHTML=`<div class="pce-doc">
+  <div class="pce-hdr">
+    <div class="pce-stamps">
+      <div class="pce-stamp s1"><div class="pce-stamp-val">100</div><div class="pce-stamp-txt">REPUBLICA\nDE\nGUATEMALA</div></div>
+      <div class="pce-stamp s2"><div class="pce-stamp-val">100</div><div class="pce-stamp-txt">REPUBLICA\nDE\nGUATEMALA</div></div>
+    </div>
+    <div class="pce-title-blk">
+      <div class="pce-t1">Patente de Comercio de Empresa</div>
+      <div class="pce-t2">REGISTRO MERCANTIL DE LA REPUBLICA</div>
+      <div class="pce-t3">GUATEMALA, C. A.</div>
+      <div class="pce-t4">La Empresa Mercantil</div>
+    </div>
+    <div class="pce-num-blk">
+      <div class="pce-no">No.&nbsp;<span>${numPat}</span>&nbsp;-02/${ins_a}</div>
+      <div class="pce-tit">Titular: ${titular}</div>
+    </div>
+  </div>
+  <div class="pce-co">${empresa}</div>
+  <div class="pce-regrow">
+    Fue inscrita bajo el número de Registro
+    <span class="pce-u">${numReg}</span>
+    &nbsp;Folio&nbsp;<span class="pce-u">${folio}</span>
+    &nbsp;Libro&nbsp;<span class="pce-u">${libro}</span>
+    &nbsp;de Empresas Mercantiles
+  </div>
+  <div class="pce-body">
+    <div class="pce-2col">
+      <div class="pce-frow"><span class="pce-lbl">Número de Expediente</span><span class="pce-val">${numExp} - ${ins_a}</span></div>
+      <div class="pce-frow"><span class="pce-lbl">Categoría</span><span class="pce-val">ÚNICA</span></div>
+    </div>
+    <div class="pce-frow"><span class="pce-lbl">Dirección Comercial</span><span class="pce-val">${dir}, ${dpto.toUpperCase()}</span></div>
+    <div class="pce-frow" style="align-items:flex-start;min-height:56px">
+      <span class="pce-lbl" style="margin-top:1px">Objeto</span>
+      <span class="pce-obj-val">${OBJETO}</span>
+    </div>
+    <div class="pce-frow">
+      <span class="pce-lbl">Fecha de inscripción</span>
+      <span style="flex:1"></span>
+      <span style="display:flex;align-items:flex-end;gap:0">
+        <span style="display:flex;flex-direction:column;align-items:center;margin-right:5px"><span class="pce-u" style="min-width:24px">${String(ins_d).padStart(2,'0')}</span><span style="font-size:7.5px;color:#555;margin-top:1px">Día</span></span>
+        <span style="padding-bottom:4px;padding-right:4px">/</span>
+        <span style="display:flex;flex-direction:column;align-items:center;margin-right:5px"><span class="pce-u" style="min-width:70px">${MESES_UP[ins_m]}</span><span style="font-size:7.5px;color:#555;margin-top:1px">Mes</span></span>
+        <span style="padding-bottom:4px;padding-right:4px">/</span>
+        <span style="display:flex;flex-direction:column;align-items:center"><span class="pce-u" style="min-width:40px">${ins_a}</span><span style="font-size:7.5px;color:#555;margin-top:1px">Año</span></span>
+      </span>
+    </div>
+    <div class="pce-frow"><span class="pce-lbl">Nombre Propietario(s)</span><span class="pce-val">${propietario}</span></div>
+    <div class="pce-2col">
+      <div class="pce-frow"><span class="pce-lbl">Nacionalidad</span><span class="pce-val">GUATEMALTECA</span></div>
+      <div class="pce-frow"><span class="pce-lbl">Documento Personal de Identificación</span><span class="pce-val" style="min-width:40px">${cui}</span></div>
+    </div>
+    <div class="pce-frow"><span class="pce-lbl">Extendida en</span><span class="pce-val" style="min-width:60px">${profesion}</span>&nbsp;&nbsp;<span class="pce-lbl">Municipio</span>&nbsp;<span class="pce-u">${municipio}</span>&nbsp;<span class="pce-lbl">Departamento</span></div>
+    <div class="pce-frow"><span class="pce-lbl">Dirección de Propietario</span><span class="pce-val">${dir}, ${dpto.toUpperCase()}</span></div>
+    <div class="pce-2col">
+      <div class="pce-frow"><span class="pce-lbl">Clase de Establecimiento</span><span class="pce-val">EMPRESA INDIVIDUAL DE COMERCIO</span></div>
+      <div class="pce-frow"><span class="pce-lbl">Representante</span><span class="pce-val">PROPIETARIO</span></div>
+    </div>
+    <div class="pce-blank"></div>
+  </div>
+  <div class="pce-foot-date">
+    Fecha de emisión de esta Patente: Guatemala
+    <span class="pce-u">${String(ins_d).padStart(2,'0')}</span> de
+    <span class="pce-u" style="min-width:80px">${MESES_UP[ins_m]}</span> de
+    <span class="pce-u">${ins_a}.</span>
+  </div>
+  <div class="pce-foot">
+    <div class="pce-hecho">
+      HECHO POR:
+      <div class="pce-sig-ln"></div>
+      <div class="pce-sig-nm">REGISTRADOR AUXILIAR</div>
+      <div class="pce-boleta">Pago realizado según Boleta No.: <span class="pce-u">${numPat} - E/B</span></div>
+    </div>
+    <div class="pce-qr-box"></div>
+    <div class="pce-rsig">
+      <div class="pce-sig-ln"></div>
+      <div class="pce-rsig-ttl">Registrador Mercantil General de la República</div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:4px;margin-top:3px">
+        <div class="pce-rm-seal">REGISTRO\nMERCANTIL</div>
+        <div>
+          <div class="pce-rsig-nm">Lic. César Augusto Sierra Mérida</div>
+          <div class="pce-rsig-role">Registrador Mercantil - Auxiliar</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pce-barcode"></div>
+  <div class="pce-nota">NOTA: Esta patente deberá ser colocada en lugar visible.</div>
+</div>`;
+
+  document.getElementById('ptb-t').textContent=`${empresa}`;
+  document.getElementById('ptb-s').textContent=`Patente de Empresa · No. ${numPat}`;
+  document.getElementById('layout').style.display='none';
+  document.getElementById('pv').style.display='block';
+  window.scrollTo(0,0);
+}
+function goBack(){
+  document.getElementById('pv').style.display='none';
+  document.getElementById('layout').style.display='flex';
+}
+</script>

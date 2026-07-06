@@ -1,0 +1,326 @@
+<title>RTU / SAT — CC3115</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── SAT Document ── */
+.sat-doc{
+  width:min(620px,97vw);
+  background:#FFFFFF;
+  border:1px solid #BBB;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:10.5px;color:#111;
+  flex-shrink:0;
+  box-shadow:0 8px 32px rgba(0,0,0,.4)
+}
+/* SAT Header */
+.sat-hdr{
+  background:#003DA6;color:#fff;
+  display:grid;grid-template-columns:70px 1fr 70px;
+  align-items:center;padding:8px 14px;gap:10px
+}
+.sat-logo-box{
+  width:56px;height:56px;border:2px solid rgba(255,255,255,.35);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px
+}
+.sat-logo-sat{font-size:20px;font-weight:900;letter-spacing:.06em}
+.sat-logo-sub{font-size:5.5px;font-weight:700;letter-spacing:.08em;text-align:center;line-height:1.5}
+.sat-title-blk{text-align:center}
+.sat-h1{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.sat-h2{font-size:8px;letter-spacing:.04em;opacity:.8;margin-top:2px}
+.sat-stripe{height:5px;background:linear-gradient(90deg,#FFD100 0%,#FFD100 50%,#003DA6 50%,#003DA6 100%)}
+/* NIT block */
+.sat-nit-row{
+  background:#F4F8FF;border-bottom:2px solid #003DA6;
+  padding:12px 16px;display:flex;align-items:center;justify-content:space-between
+}
+.sat-nit-lbl{font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#003DA6}
+.sat-nit-val{font-size:28px;font-weight:900;color:#003DA6;font-family:'Courier New',monospace;letter-spacing:.1em}
+.sat-nit-status{font-size:8px;font-weight:700;color:#1A7A40;background:rgba(26,122,64,.1);border:1px solid rgba(26,122,64,.3);padding:3px 10px}
+/* Body */
+.sat-body{padding:8px 16px}
+.sat-section{border-bottom:1px solid #E0E0E0;padding:7px 0}
+.sat-section:last-child{border-bottom:none}
+.sat-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:2px}
+.sat-f{padding:3px 0}
+.sat-lbl{font-size:7.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#555;display:block;margin-bottom:2px}
+.sat-val{font-size:10px;font-weight:700;color:#111;border-bottom:1px solid #CCC;padding:1px 0 2px;display:block}
+.sat-regime-box{
+  background:#FFF9E6;border:1.5px solid #FFD100;
+  padding:7px 10px;margin:6px 0;
+  display:flex;align-items:center;gap:10px
+}
+.sat-regime-ico{font-size:18px}
+.sat-regime-name{font-size:11px;font-weight:700;color:#003DA6}
+.sat-regime-desc{font-size:8px;color:#555;margin-top:1px}
+/* Footer */
+.sat-foot{
+  background:#003DA6;color:rgba(255,255,255,.7);
+  padding:6px 16px;display:flex;justify-content:space-between;align-items:center;
+  font-size:8px
+}
+.sat-qr-box{
+  width:48px;height:48px;
+  background:repeating-conic-gradient(#fff 0deg 90deg,#003DA6 90deg 180deg) 0 0/5px 5px;
+  border:1px solid rgba(255,255,255,.4)
+}
+.sat-nota{font-size:8px;color:#555;padding:5px 16px;background:#FFFBF0;border-top:1px solid #EEE;text-align:center}
+
+@media print{
+  body,#layout{background:transparent}
+  #layout{display:none!important}
+  #pv{display:block!important}
+  .pc{background:#fff;padding:0;gap:0;min-height:0}
+  .sat-doc{box-shadow:none}
+  @page{size:letter;margin:1.5cm}
+}
+</style>
+
+<div id="layout">
+  <nav class="sb" id="sb">
+    <a class="sb-brand" href="index.html" style="text-decoration:none;display:block">Company<br>Sim</a>
+  </nav>
+  <div id="fv">
+    <div class="fh">
+      <div class="ey">CC3115 · Producción y Negocios de Videojuegos</div>
+      <h1>RTU / SAT — Registro Tributario Unificado</h1>
+      <p>Inscripción ante la Superintendencia de Administración Tributaria para obtener el NIT</p>
+    </div>
+    <div id="empresa-banner"></div>
+
+    <span class="slbl">Datos tributarios</span>
+    <div class="card">
+      <div class="ctitle">Régimen tributario</div>
+      <div class="f">
+        <label>Régimen de ISR</label>
+        <select id="regimen">
+          <option value="ras">Régimen Sobre las Utilidades de Actividades Lucrativas (Opcional Simplificado)</option>
+          <option value="rgt">Régimen General (Trimestral sobre utilidades)</option>
+          <option value="peq">Régimen del Pequeño Contribuyente (E.I. únicamente)</option>
+        </select>
+        <div class="hint" id="reg-hint"></div>
+      </div>
+      <div class="f">
+        <label>Fecha de inicio de actividades</label>
+        <div class="r3">
+          <select id="ini_dia"></select>
+          <select id="ini_mes">
+            <option value="0">Enero</option><option value="1">Febrero</option><option value="2">Marzo</option>
+            <option value="3">Abril</option><option value="4">Mayo</option><option value="5">Junio</option>
+            <option value="6">Julio</option><option value="7">Agosto</option><option value="8">Septiembre</option>
+            <option value="9">Octubre</option><option value="10">Noviembre</option><option value="11">Diciembre</option>
+          </select>
+          <select id="ini_anno"></select>
+        </div>
+      </div>
+    </div>
+    <div class="nav">
+      <button class="btn-g" onclick="generate()">Generar Inscripción RTU →</button>
+    </div>
+  </div>
+</div>
+
+<div id="pv">
+  <div class="ptb">
+    <button class="btn-bk" onclick="goBack()">← Editar</button>
+    <div style="margin-left:.5rem">
+      <div class="ptb-t" id="ptb-t"></div>
+      <div class="ptb-s" id="ptb-s"></div>
+    </div>
+    <button class="btn-pr" onclick="window.print()">Imprimir / PDF</button>
+    <a id="btn-next" class="btn-pr" style="text-decoration:none;background:var(--act)">Continuar proceso →</a>
+  </div>
+  <div class="pc" id="pc"></div>
+</div>
+
+<script>
+const KEY='companysim';
+const shared=JSON.parse(localStorage.getItem(KEY)||'null');
+const tipo=shared?.tipo||'sa';
+
+const MESES_UP=['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE'];
+const MESES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+
+/* ── SIDEBAR ── */
+const SB=document.getElementById('sb');
+if(tipo==='sa'){
+  SB.innerHTML+=`<div class="sb-section">Fases S.A.</div>
+    <div class="sb-item done"><span class="sb-dot"></span>Escritura</div>
+    <div class="sb-item done"><span class="sb-dot"></span>Registro RM</div>
+    <div class="sb-item done"><span class="sb-dot"></span>Acciones</div>
+    <div class="sb-item act"><span class="sb-dot"></span>RTU / SAT</div>
+    <div class="sb-item lock"><span class="sb-dot"></span>Libros</div>`;
+  document.getElementById('btn-next').href='libros.html';
+}else{
+  SB.innerHTML+=`<div class="sb-section">Fases E.I.</div>
+    <div class="sb-item done"><span class="sb-dot"></span>Patente Ind.</div>
+    <div class="sb-item act"><span class="sb-dot"></span>RTU / SAT</div>`;
+  document.getElementById('btn-next').href='index.html';
+  document.getElementById('btn-next').textContent='Ver Dashboard ✓';
+  // hide Pequeño Contribuyente hint for SA
+}
+
+/* Régimen hints */
+const hints={
+  ras:'Pago trimestral del 5% sobre ingresos brutos, o 25% sobre utilidades del período.',
+  rgt:'Pago trimestral sobre utilidades del período. Más complejo, adecuado para empresas más grandes.',
+  peq:'Solo para personas individuales. Pago mensual del 5% sobre ingresos.'
+};
+document.getElementById('regimen').addEventListener('change',()=>{
+  document.getElementById('reg-hint').textContent=hints[document.getElementById('regimen').value]||'';
+});
+document.getElementById('reg-hint').textContent=hints['ras'];
+
+/* ── DATE SELECTS ── */
+function fillDias(id){const s=document.getElementById(id);for(let i=1;i<=31;i++){const o=document.createElement('option');o.value=i;o.textContent=i;s.appendChild(o);}}
+function fillAnnos(id){const s=document.getElementById(id);const y=new Date().getFullYear();for(let i=y;i>=y-5;i--){const o=document.createElement('option');o.value=i;o.textContent=i;s.appendChild(o);}}
+fillDias('ini_dia');fillAnnos('ini_anno');
+const hoy=new Date();
+document.getElementById('ini_dia').value=hoy.getDate();
+document.getElementById('ini_mes').value=hoy.getMonth();
+document.getElementById('ini_anno').value=hoy.getFullYear();
+
+/* ── EMPRESA BANNER ── */
+const sfx=tipo==='sa'?', SOCIEDAD ANÓNIMA':'';
+if(shared){
+  document.getElementById('empresa-banner').innerHTML=`
+    <div style="background:rgba(74,158,219,.06);border:1px solid rgba(74,158,219,.2);padding:.48rem .9rem;display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;font-size:.86rem;color:var(--ui-text)">
+      <strong>${shared.nombre}${sfx}</strong>
+      <a href="index.html" style="font-size:.7rem;color:var(--acc-l);text-decoration:none;opacity:.8">← Dashboard</a>
+    </div>`;
+}
+
+/* ── NIT generator ── */
+function genNit(){
+  const base=Math.floor(Math.random()*9000000)+1000000;
+  const digits=base.toString().split('').map(Number);
+  const weights=[2,3,4,5,6,7,2];
+  const sum=digits.reduce((a,d,i)=>a+d*weights[i],0);
+  const mod=sum%11;
+  const check=mod===0?'0':mod===1?'K':String(11-mod);
+  return `${base}-${check}`;
+}
+
+/* ── REGIME LABELS ── */
+const REGIME_LABELS={
+  ras:'Régimen Sobre las Utilidades (Opcional Simplificado)',
+  rgt:'Régimen General Trimestral',
+  peq:'Régimen del Pequeño Contribuyente'
+};
+const REGIME_DESC={
+  ras:'5% sobre ingresos brutos o 25% sobre utilidades · Pago trimestral',
+  rgt:'25% sobre utilidades del período · Pago trimestral',
+  peq:'5% sobre ingresos brutos · Pago mensual'
+};
+const REGIME_ICONS={ras:'📊',rgt:'📋',peq:'🧾'};
+
+/* ── GENERATE ── */
+function generate(){
+  const empresa=(shared?.nombre||'[EMPRESA]').toUpperCase();
+  const dpto=shared?.dpto||'Guatemala';
+  const dir=(shared?.dir||'[DIRECCIÓN]').toUpperCase();
+  const regimen=document.getElementById('regimen').value;
+  const ini_d=parseInt(document.getElementById('ini_dia').value);
+  const ini_m=parseInt(document.getElementById('ini_mes').value);
+  const ini_a=document.getElementById('ini_anno').value;
+  const nit=genNit();
+  const now=new Date();
+  const fechaDoc=`${now.getDate()} de ${MESES[now.getMonth()]} de ${now.getFullYear()}`;
+  const sfxDoc=tipo==='sa'?', SOCIEDAD ANÓNIMA':'';
+  const acteco=tipo==='sa'?'DESARROLLO Y COMERCIALIZACIÓN DE VIDEOJUEGOS Y SOFTWARE':'COMERCIO Y SERVICIOS';
+
+  document.getElementById('pc').innerHTML=`<div class="sat-doc">
+  <div class="sat-stripe" style="height:4px;background:#FFD100"></div>
+  <div class="sat-hdr">
+    <div class="sat-logo-box">
+      <div class="sat-logo-sat">SAT</div>
+      <div class="sat-logo-sub">SUPERINTENDENCIA<br>DE ADMINISTRACIÓN<br>TRIBUTARIA</div>
+    </div>
+    <div class="sat-title-blk">
+      <div class="sat-h1">Acuse de Recibo — Inscripción Tributaria</div>
+      <div class="sat-h2">Registro Tributario Unificado (RTU) · República de Guatemala</div>
+    </div>
+    <div class="sat-qr-box"></div>
+  </div>
+  <div class="sat-stripe"></div>
+  <div class="sat-nit-row">
+    <div>
+      <div class="sat-nit-lbl">Número de Identificación Tributaria (NIT)</div>
+      <div class="sat-nit-val">${nit}</div>
+    </div>
+    <div class="sat-nit-status">ACTIVO</div>
+  </div>
+  <div class="sat-body">
+    <div class="sat-section">
+      <div class="sat-row">
+        <div class="sat-f">
+          <span class="sat-lbl">Razón Social / Nombre</span>
+          <span class="sat-val">${empresa}${sfxDoc}</span>
+        </div>
+        <div class="sat-f">
+          <span class="sat-lbl">Tipo de Contribuyente</span>
+          <span class="sat-val">${tipo==='sa'?'PERSONA JURÍDICA (S.A.)':'PERSONA INDIVIDUAL'}</span>
+        </div>
+      </div>
+      <div class="sat-row">
+        <div class="sat-f">
+          <span class="sat-lbl">Domicilio Fiscal</span>
+          <span class="sat-val">${dir}</span>
+        </div>
+        <div class="sat-f">
+          <span class="sat-lbl">Departamento</span>
+          <span class="sat-val">${dpto.toUpperCase()}</span>
+        </div>
+      </div>
+    </div>
+    <div class="sat-section">
+      <div class="sat-row">
+        <div class="sat-f">
+          <span class="sat-lbl">Actividad Económica Principal</span>
+          <span class="sat-val">${acteco}</span>
+        </div>
+        <div class="sat-f">
+          <span class="sat-lbl">Inicio de Actividades</span>
+          <span class="sat-val">${String(ini_d).padStart(2,'0')} / ${MESES_UP[ini_m]} / ${ini_a}</span>
+        </div>
+      </div>
+    </div>
+    <div class="sat-section">
+      <div class="sat-lbl" style="margin-bottom:5px">Régimen Tributario Registrado</div>
+      <div class="sat-regime-box">
+        <div class="sat-regime-ico">${REGIME_ICONS[regimen]}</div>
+        <div>
+          <div class="sat-regime-name">${REGIME_LABELS[regimen]}</div>
+          <div class="sat-regime-desc">${REGIME_DESC[regimen]}</div>
+        </div>
+      </div>
+    </div>
+    <div class="sat-section">
+      <div class="sat-row">
+        <div class="sat-f">
+          <span class="sat-lbl">Fecha de Inscripción</span>
+          <span class="sat-val">${fechaDoc.toUpperCase()}</span>
+        </div>
+        <div class="sat-f">
+          <span class="sat-lbl">Obligación de Declaración</span>
+          <span class="sat-val">${regimen==='peq'?'MENSUAL':'TRIMESTRAL'}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sat-foot">
+    <span>Documento emitido por la Superintendencia de Administración Tributaria — Guatemala, C. A.</span>
+    <span>Folio: ${Math.floor(Math.random()*900000)+100000}</span>
+  </div>
+  <div class="sat-nota">Este documento certifica la inscripción en el RTU. Deberá presentarse ante la Administración Tributaria cuando sea requerido.</div>
+</div>`;
+
+  document.getElementById('ptb-t').textContent=`${empresa}`;
+  document.getElementById('ptb-s').textContent=`NIT: ${nit}`;
+  document.getElementById('layout').style.display='none';
+  document.getElementById('pv').style.display='block';
+  window.scrollTo(0,0);
+}
+function goBack(){
+  document.getElementById('pv').style.display='none';
+  document.getElementById('layout').style.display='flex';
+}
+</script>

@@ -639,7 +639,10 @@ function generate(){
       ls.escritura={
         capSus:d.socios.reduce((a,s)=>a+s.acc*d.vn,0),
         notario:d.notario, numEsc:d.numEsc,
-        dia:hoy.getDate(), mesIdx:hoy.getMonth(), anno:hoy.getFullYear().toString()
+        dia:hoy.getDate(), mesIdx:hoy.getMonth(), anno:hoy.getFullYear().toString(),
+        socios:d.socios.map(s=>({nombre:s.nombre,acc:s.acc,cui:s.cui||'',trato:s.trato||'señor'})),
+        valNom:d.vn, capAut:d.ca,
+        admin:{nombre:d.admin.nombre,trato:d.admin.trato}
       };
       localStorage.setItem('companysim',JSON.stringify(ls));
     }
