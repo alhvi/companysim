@@ -1,90 +1,147 @@
 <title>Registro Mercantil — CC3115</title>
 <link rel="stylesheet" href="style.css">
 <style>
-/* ── Patente tokens ── */
-:root{
-  --pat-bg:#FAFCFF;--pat-txt:#0A1830;--pat-hdr:#0B2154;--pat-border:#1B3A78;
-  --pat-mid:#2A5AA8;--pat-light:#E4ECFA;--pat-line:#B0C4E0;--pat-seal:#1B3A78
+/* ── Patente de Comercio de Sociedad ── */
+.pce-doc{
+  width:min(760px,97vw);
+  background:#F8F7F2;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='65'%3E%3Ctext x='130' y='36' text-anchor='middle' font-family='Arial' font-size='8.5' fill='rgba(0%2C0%2C0%2C0.025)' transform='rotate(-28%2C130%2C36)'%3EREPUBLICA DE GUATEMALA%3C/text%3E%3C/svg%3E"),
+    repeating-linear-gradient(32deg,transparent,transparent 18px,rgba(0,0,0,.018) 18px,rgba(0,0,0,.018) 19px),
+    repeating-linear-gradient(-32deg,transparent,transparent 18px,rgba(0,0,0,.018) 18px,rgba(0,0,0,.018) 19px);
+  border:1.5px solid #888;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:11px;color:#111;
+  box-shadow:0 8px 32px rgba(0,0,0,.45),0 2px 6px rgba(0,0,0,.2);
+  flex-shrink:0;position:relative
 }
-.pat-wrap{
-  width:min(660px,97vw);background:var(--pat-bg);
-  border:2px solid var(--pat-border);
-  outline:4px solid var(--pat-border);outline-offset:4px;
-  font-family:'Times New Roman',Times,serif;color:var(--pat-txt);
-  flex-shrink:0;box-shadow:0 8px 32px rgba(0,0,60,.4),0 2px 8px rgba(0,0,60,.2)
+/* ── HEADER ── */
+.pce-hdr{
+  display:grid;grid-template-columns:105px 1fr 115px;
+  align-items:start;padding:8px 10px 6px;gap:6px;
+  border-bottom:2px solid #333
 }
-/* Header */
-.pat-hdr{
-  background:var(--pat-hdr);color:#fff;
-  display:grid;grid-template-columns:72px 1fr;align-items:center;gap:12px;
-  padding:14px 20px 12px
+/* Stamps */
+.pce-stamps{position:relative;width:100px;height:92px;flex-shrink:0}
+.pce-stamp{
+  position:absolute;width:62px;height:72px;border:2px solid #444;overflow:hidden;
+  background:
+    radial-gradient(ellipse 55% 65% at 50% 48%,rgba(0,0,0,.07) 0%,transparent 70%),
+    repeating-linear-gradient(45deg,transparent,transparent 5px,rgba(0,0,0,.025) 5px,rgba(0,0,0,.025) 6px);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px
 }
-.pat-escudo{
-  width:56px;height:56px;border-radius:50%;border:2px solid rgba(255,255,255,.5);
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;
-  background:repeating-conic-gradient(rgba(255,255,255,.07) 0deg 30deg,transparent 30deg 60deg);
-  position:relative
+.pce-stamp::before{
+  content:'';position:absolute;width:46px;height:46px;
+  border:1.5px solid rgba(0,0,0,.28);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%)
 }
-.pat-escudo::after{
-  content:'RM';font-size:16px;font-weight:900;font-family:'Times New Roman',serif;
-  color:#fff;letter-spacing:.05em
+.pce-stamp-val{font-size:14px;font-weight:900;color:rgba(0,0,0,.55);font-family:'Courier New';position:relative;z-index:1;letter-spacing:.04em}
+.pce-stamp-txt{font-size:4.5px;font-weight:700;color:rgba(0,0,0,.4);text-align:center;font-family:'Courier New';letter-spacing:.06em;position:relative;z-index:1;line-height:1.6}
+.pce-stamp.s1{top:0;left:0;transform:rotate(-4deg)}
+.pce-stamp.s2{top:10px;left:36px;transform:rotate(3deg)}
+/* Title block */
+.pce-title-blk{text-align:center;padding-top:2px}
+.pce-t1{font-size:20px;font-weight:900;line-height:1.1;margin-bottom:3px}
+.pce-t2{font-size:9.5px;font-weight:700;letter-spacing:.06em}
+.pce-t3{font-size:9.5px;letter-spacing:.04em;margin-bottom:4px}
+.pce-t4{font-size:13px;font-style:italic;margin-top:2px}
+/* Number block */
+.pce-num-blk{text-align:right;padding-top:3px}
+.pce-no{font-size:13px;font-weight:900;letter-spacing:.02em;white-space:nowrap}
+.pce-no span{font-size:18px}
+.pce-tit{font-size:9.5px;margin-top:2px}
+/* ── COMPANY ROW ── */
+.pce-co{
+  text-align:center;font-size:12.5px;font-weight:700;letter-spacing:.04em;
+  padding:5px 12px;border-bottom:1.5px solid #555;border-top:.5px solid #aaa;
+  background:rgba(0,0,0,.015)
 }
-.pat-h1{font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;opacity:.75;margin-bottom:3px}
-.pat-h2{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;line-height:1.25}
-/* Title bar */
-.pat-title-bar{
-  background:var(--pat-light);border-top:2px solid var(--pat-border);border-bottom:2px solid var(--pat-border);
-  text-align:center;padding:10px 20px 8px;display:flex;flex-direction:column;align-items:center;gap:3px
+/* ── REG ROW ── */
+.pce-regrow{
+  padding:5px 12px;font-size:10.5px;border-bottom:1px solid #aaa;
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:3px
 }
-.pat-title{font-size:16px;font-weight:700;letter-spacing:.18em;color:var(--pat-hdr)}
-.pat-title-sub{font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--pat-mid)}
-.pat-num-badge{font-size:10px;font-weight:700;font-family:'Courier New',monospace;color:var(--pat-border);letter-spacing:.12em;border:1px solid var(--pat-border);padding:2px 10px;background:#fff}
-/* Body */
-.pat-body{padding:16px 28px 12px;font-size:10.5pt;line-height:1.65;text-align:justify}
-.pat-certifica{font-weight:700;font-size:11pt}
-.pat-co{
-  text-align:center;font-size:13pt;font-weight:700;letter-spacing:.06em;
-  margin:12px 0;padding:10px 16px;border-top:1px solid var(--pat-line);
-  border-bottom:1px solid var(--pat-line);background:var(--pat-light)
+.pce-u{
+  border-bottom:1.5px solid #333;padding:0 4px;font-weight:700;
+  display:inline-block;min-width:30px;text-align:center
 }
-.pat-sep{border:none;border-top:1px solid var(--pat-line);margin:10px 0}
-.pat-dato{display:grid;grid-template-columns:38% 1fr;gap:2px 8px;font-size:9.5pt;margin:6px 0}
-.pat-lbl{font-weight:700;color:var(--pat-hdr)}
-.pat-val{color:var(--pat-txt)}
-/* Footer */
-.pat-foot{
-  border-top:2px solid var(--pat-border);background:var(--pat-light);
-  padding:10px 28px 14px;display:grid;grid-template-columns:1fr auto;align-items:end;gap:16px
+/* ── BODY ── */
+.pce-body{padding:2px 12px 0}
+.pce-frow{
+  display:flex;align-items:baseline;flex-wrap:wrap;gap:3px;
+  padding:3px 0;border-bottom:.5px solid rgba(0,0,0,.14);min-height:21px
 }
-.pat-extiende{font-size:9pt;color:#2A3A5A;line-height:1.5}
-.pat-sig-area{text-align:center}
-.pat-sig-line{border-top:1px solid var(--pat-txt);width:160px;margin:0 auto 3px}
-.pat-sig-name{font-size:8pt;font-style:italic}
-.pat-sig-title{font-size:7.5pt;color:var(--pat-mid);letter-spacing:.04em}
-/* Seal on body */
-.pat-sello{
-  width:64px;height:64px;border-radius:50%;border:2.5px solid var(--pat-seal);
-  display:flex;align-items:center;justify-content:center;
-  position:absolute;bottom:14px;right:22px;opacity:.45;
-  font-family:'Courier New',monospace;background:repeating-conic-gradient(rgba(27,58,120,.08) 0deg 20deg,transparent 20deg 40deg)
+.pce-2col{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.pce-lbl{font-size:10px;white-space:nowrap;flex-shrink:0}
+.pce-val{
+  border-bottom:1.5px solid #333;font-weight:700;font-size:10.5px;
+  padding:0 4px;flex:1;min-width:80px
 }
-.pat-sello-inner{font-size:5.5px;font-weight:700;color:var(--pat-seal);text-align:center;line-height:1.5;letter-spacing:.06em}
+.pce-val.w50{flex:none;min-width:120px}
+/* Date rows */
+.pce-drow{display:flex;align-items:flex-end;gap:0;padding:3px 0 0;border-bottom:.5px solid rgba(0,0,0,.14);flex-wrap:nowrap}
+.pce-dlbl-wrap{display:flex;flex-direction:column;align-items:center;margin-right:6px}
+.pce-dv{border-bottom:1.5px solid #333;font-weight:700;font-size:10.5px;padding:0 8px;min-width:28px;text-align:center;display:block;text-align:center}
+.pce-dsub{font-size:7.5px;text-align:center;margin-top:1px;color:#555}
+.pce-dslash{font-size:11px;padding:0 3px 2px;align-self:flex-end}
+/* Objeto */
+.pce-obj-val{
+  border-bottom:1.5px solid #333;font-weight:700;font-size:10px;
+  padding:0 4px;flex:1;line-height:1.55;text-decoration:underline;text-underline-offset:2px
+}
+.pce-blank{border-bottom:.5px solid rgba(0,0,0,.12);min-height:20px}
+/* ── FOOT ── */
+.pce-foot-date{padding:6px 12px 2px;font-size:10.5px;border-top:.5px solid rgba(0,0,0,.15);display:flex;align-items:baseline;flex-wrap:wrap;gap:4px}
+.pce-foot{
+  display:grid;grid-template-columns:1fr 70px 1fr;
+  align-items:end;padding:4px 12px 6px;gap:8px;border-top:1px solid #aaa
+}
+.pce-hecho{font-size:9.5px;font-weight:700}
+.pce-sig-ln{border-top:1px solid #333;margin:20px 0 2px;width:100%}
+.pce-sig-nm{font-size:9px;font-weight:700}
+.pce-boleta{font-size:9px;margin-top:3px}
+/* QR */
+.pce-qr-box{
+  width:62px;height:62px;align-self:center;justify-self:center;
+  background:repeating-conic-gradient(#222 0deg 90deg,#eee 90deg 180deg) 0 0/6px 6px;
+  border:1.5px solid #333
+}
+/* Right sig */
+.pce-rsig{font-size:9px;text-align:center}
+.pce-rsig-ttl{font-weight:700;font-size:9.5px;margin-top:2px}
+.pce-rsig-nm{font-size:8.5px;font-style:italic}
+.pce-rsig-role{font-size:8px}
+.pce-rm-seal{
+  width:38px;height:38px;border-radius:50%;border:1.5px solid #1B3A78;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:5px;font-weight:700;color:#1B3A78;font-family:'Courier New';
+  text-align:center;line-height:1.4;letter-spacing:.04em;
+  background:repeating-conic-gradient(rgba(27,58,120,.07) 0deg 20deg,transparent 20deg 40deg);
+  vertical-align:middle;margin-right:3px
+}
+/* Barcode + nota */
+.pce-barcode{
+  position:absolute;bottom:28px;right:10px;
+  width:90px;height:22px;
+  background:repeating-linear-gradient(90deg,#111,#111 2px,#fff 2px,#fff 5px,#111 5px,#111 6px,#fff 6px,#fff 9px,#111 9px,#111 11px,#fff 11px,#fff 14px);
+  border:1px solid #555
+}
+.pce-nota{padding:4px 12px 5px;font-size:9px;font-weight:700;border-top:1px solid #aaa;text-align:center}
 
 @media print{
   body,#layout{background:transparent}
   #layout{display:none!important}
   #pv{display:block!important}
   .pc{background:#fff;padding:0;gap:0;min-height:0}
-  .pat-wrap{box-shadow:none;outline-offset:0}
-  @page{size:letter;margin:1.2cm}
+  .pce-doc{box-shadow:none;width:100%}
+  @page{size:letter;margin:1cm}
 }
 </style>
 
 <div id="layout">
   <nav class="sb">
     <a class="sb-brand" href="index.html" style="text-decoration:none;display:block">Company<br>Sim</a>
-    <div class="sb-section" id="sb-sec">Fases S.A.</div>
-    <div class="sb-item done" id="sb-escritura"><span class="sb-dot"></span>Escritura</div>
+    <div class="sb-section">Fases S.A.</div>
+    <div class="sb-item done"><span class="sb-dot"></span>Escritura</div>
     <div class="sb-item act"><span class="sb-dot"></span>Registro RM</div>
     <div class="sb-item lock"><span class="sb-dot"></span>Acciones</div>
     <div class="sb-item lock"><span class="sb-dot"></span>RTU / SAT</div>
@@ -93,8 +150,8 @@
   <div id="fv">
     <div class="fh">
       <div class="ey">CC3115 · Producción y Negocios de Videojuegos</div>
-      <h1>Registro Mercantil — Patente de Sociedad</h1>
-      <p>Ingresá los datos de la escritura para generar la Patente de Sociedad</p>
+      <h1>Registro Mercantil — Patente de Comercio de Sociedad</h1>
+      <p>Ingresá los datos de la escritura para generar la Patente de Comercio de Sociedad</p>
     </div>
     <div id="empresa-banner"></div>
 
@@ -104,7 +161,7 @@
       <div class="r2">
         <div class="f">
           <label>Número de escritura</label>
-          <input type="number" id="numEsc" value="1" min="1" max="999">
+          <input type="number" id="numEsc" min="1" max="999">
         </div>
         <div class="f">
           <label>Notario autorizante</label>
@@ -126,23 +183,18 @@
           <select id="esc_anno"></select>
         </div>
       </div>
-      <div class="f">
-        <label>Capital suscrito y pagado (Q.)</label>
-        <input type="number" id="capSus" value="5000" min="0" step="100">
-        <div class="hint">Debe coincidir con el capital suscrito en la escritura</div>
-      </div>
     </div>
 
-    <span class="slbl" style="margin-top:1rem">Datos del registro</span>
+    <span class="slbl" style="margin-top:1rem">Datos del Registro Mercantil</span>
     <div class="card">
-      <div class="ctitle">Registro Mercantil</div>
+      <div class="ctitle">Inscripción en el Registro</div>
       <div class="r3">
-        <div class="f"><label>Tomo</label><input type="number" id="tomo" min="1"></div>
-        <div class="f"><label>Folio</label><input type="number" id="folio" min="1"></div>
-        <div class="f"><label>Número de inscripción</label><input type="number" id="numIns" min="1"></div>
+        <div class="f"><label>Número de Registro</label><input type="number" id="numReg" min="1"></div>
+        <div class="f"><label>Folio</label><input type="number" id="folio" value="123" min="1"></div>
+        <div class="f"><label>Libro</label><input type="number" id="libro" value="222" min="1"></div>
       </div>
       <div class="f">
-        <label>Fecha de inscripción</label>
+        <label>Fecha de inscripción provisional</label>
         <div class="r3">
           <select id="ins_dia"></select>
           <select id="ins_mes">
@@ -155,10 +207,11 @@
           </select>
           <select id="ins_anno"></select>
         </div>
+        <div class="hint">La inscripción definitiva se genera automáticamente 21 días después</div>
       </div>
     </div>
     <div class="nav">
-      <button class="btn-g" onclick="generate()">Generar Patente de Sociedad →</button>
+      <button class="btn-g" onclick="generate()">Generar Patente de Comercio de Sociedad →</button>
     </div>
   </div>
 </div>
@@ -171,6 +224,7 @@
       <div class="ptb-s" id="ptb-s"></div>
     </div>
     <button class="btn-pr" onclick="window.print()">Imprimir / PDF</button>
+    <a class="btn-pr" href="acciones.html" style="text-decoration:none;background:var(--act)">Continuar proceso →</a>
   </div>
   <div class="pc" id="pc"></div>
 </div>
@@ -179,63 +233,38 @@
 const KEY='companysim';
 const shared=JSON.parse(localStorage.getItem(KEY)||'null');
 
+const MESES_UP=['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE'];
 const MESES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-const DIAS_ORD={1:'primero',2:'dos',3:'tres',4:'cuatro',5:'cinco',6:'seis',7:'siete',8:'ocho',9:'nueve',10:'diez',11:'once',12:'doce',13:'trece',14:'catorce',15:'quince',16:'dieciséis',17:'diecisiete',18:'dieciocho',19:'diecinueve',20:'veinte',21:'veintiuno',22:'veintidós',23:'veintitrés',24:'veinticuatro',25:'veinticinco',26:'veintiséis',27:'veintisiete',28:'veintiocho',29:'veintinueve',30:'treinta',31:'treinta y uno'};
-const ONES=['','UN','DOS','TRES','CUATRO','CINCO','SEIS','SIETE','OCHO','NUEVE'];
-const TEENS=['DIEZ','ONCE','DOCE','TRECE','CATORCE','QUINCE','DIECISÉIS','DIECISIETE','DIECIOCHO','DIECINUEVE'];
-const TENS=['','DIEZ','VEINTE','TREINTA','CUARENTA','CINCUENTA','SESENTA','SETENTA','OCHENTA','NOVENTA'];
-const HUND=['','CIEN','DOSCIENTOS','TRESCIENTOS','CUATROCIENTOS','QUINIENTOS','SEISCIENTOS','SETECIENTOS','OCHOCIENTOS','NOVECIENTOS'];
-function n2w(n){
-  if(n===0)return 'CERO';let r='';
-  if(n>=1000000){const m=Math.floor(n/1e6);r+=(m===1?'UN MILLÓN':n2w(m)+' MILLONES')+' ';n%=1e6;}
-  if(n>=1000){const k=Math.floor(n/1000);r+=(k===1?'MIL':n2w(k)+' MIL')+' ';n%=1000;}
-  if(n>=100){const h=Math.floor(n/100),rest=n%100;r+=(h===1?(rest?'CIENTO':'CIEN'):HUND[h])+' ';n=rest;}
-  if(n>=20){const t=Math.floor(n/10);r+=TENS[t];n%=10;if(n)r+=' Y '+ONES[n];}
-  else if(n>=10)r+=TEENS[n-10];
-  else if(n>0)r+=ONES[n];
-  return r.trim();
-}
-function fmt(n){return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',')}
-function monto(n){return `${n2w(n)} QUETZALES (Q.${fmt(n)}.00)`}
-function numRom(n){const V=['','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX','XXI','XXII','XXIII','XXIV','XXV','XXVI','XXVII','XXVIII','XXIX','XXX'];return V[n]||n;}
 
-// ── POPULATE DATE SELECTS ──────────────────────────────────────
-function fillDias(selId){
-  const s=document.getElementById(selId);
-  for(let i=1;i<=31;i++){const o=document.createElement('option');o.value=i;o.textContent=i;s.appendChild(o);}
-}
-function fillAnnos(selId,start){
-  const s=document.getElementById(selId);
-  const y=new Date().getFullYear();
-  for(let i=y;i>=y-5;i--){const o=document.createElement('option');o.value=i;o.textContent=i;s.appendChild(o);}
-}
+// ── DATE SELECTS ───────────────────────────────────────────────
+function fillDias(id){const s=document.getElementById(id);for(let i=1;i<=31;i++){const o=document.createElement('option');o.value=i;o.textContent=i;s.appendChild(o);}}
+function fillAnnos(id){const s=document.getElementById(id);const y=new Date().getFullYear();for(let i=y;i>=y-5;i--){const o=document.createElement('option');o.value=i;o.textContent=i;s.appendChild(o);}}
 fillDias('esc_dia');fillDias('ins_dia');
 fillAnnos('esc_anno');fillAnnos('ins_anno');
-// Default dates
 const hoy=new Date();
 document.getElementById('esc_dia').value=hoy.getDate();
 document.getElementById('esc_mes').value=hoy.getMonth();
 document.getElementById('esc_anno').value=hoy.getFullYear();
-// Inscripción: +7 días (simula tiempo de trámite)
-const ins=new Date(hoy.getTime()+7*24*3600*1000);
+const ins=new Date(hoy.getTime()+10*24*3600*1000);
 document.getElementById('ins_dia').value=ins.getDate();
 document.getElementById('ins_mes').value=ins.getMonth();
 document.getElementById('ins_anno').value=ins.getFullYear();
-// Pre-fill from escritura if available
+
+// ── DEFAULTS ──────────────────────────────────────────────────
+// Escritura: random 150-450 (similar range to real protocols)
+document.getElementById('numEsc').value=Math.floor(Math.random()*300)+150;
+// Número de Registro: random in Selva's range ~120000-160000
+document.getElementById('numReg').value=Math.floor(Math.random()*40000)+120000;
+
+// ── PRE-FILL FROM ESCRITURA ────────────────────────────────────
 const esc=shared?.escritura;
 if(esc){
-  if(esc.capSus) document.getElementById('capSus').value=esc.capSus;
-  if(esc.notario) document.getElementById('notario').value=esc.notario;
   if(esc.numEsc) document.getElementById('numEsc').value=esc.numEsc;
+  if(esc.notario) document.getElementById('notario').value=esc.notario;
   if(esc.dia) document.getElementById('esc_dia').value=esc.dia;
   if(esc.mesIdx!=null) document.getElementById('esc_mes').value=esc.mesIdx;
   if(esc.anno) document.getElementById('esc_anno').value=esc.anno;
-  if(esc.capSus) document.getElementById('capSus').nextElementSibling.textContent='Calculado desde la escritura generada';
 }
-// Random RM numbers
-document.getElementById('tomo').value=Math.floor(Math.random()*100)+350;
-document.getElementById('folio').value=Math.floor(Math.random()*300)+50;
-document.getElementById('numIns').value=Math.floor(Math.random()*50000)+150000;
 
 // ── EMPRESA BANNER ─────────────────────────────────────────────
 if(shared){
@@ -246,69 +275,132 @@ if(shared){
     </div>`;
 }
 
-// ── GENERATE ───────────────────────────────────────────────────
+// ── COLLECT ────────────────────────────────────────────────────
+function rnd(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
+
 function collect(){
   const empresa=(shared?.nombre||'[EMPRESA]').toUpperCase();
   const dpto=shared?.dpto||'Guatemala';
-  const dir=shared?.dir||'';
-  const numEsc=parseInt(document.getElementById('numEsc').value)||1;
-  const notario=document.getElementById('notario').value.trim()||'[NOTARIO]';
+  const dir=(shared?.dir||'(dirección de la sociedad)').toUpperCase();
+  const numEsc=parseInt(document.getElementById('numEsc').value)||200;
+  const notario=document.getElementById('notario').value.trim().toUpperCase()||'[NOTARIO]';
   const esc_d=parseInt(document.getElementById('esc_dia').value);
   const esc_m=parseInt(document.getElementById('esc_mes').value);
   const esc_a=document.getElementById('esc_anno').value;
   const ins_d=parseInt(document.getElementById('ins_dia').value);
   const ins_m=parseInt(document.getElementById('ins_mes').value);
   const ins_a=document.getElementById('ins_anno').value;
-  const capSus=parseInt(document.getElementById('capSus').value)||5000;
-  const tomo=document.getElementById('tomo').value;
+  const numReg=document.getElementById('numReg').value;
   const folio=document.getElementById('folio').value;
-  const numIns=document.getElementById('numIns').value;
-  return {empresa,dpto,dir,numEsc,notario,esc_d,esc_m,esc_a,ins_d,ins_m,ins_a,capSus,tomo,folio,numIns};
+  const libro=document.getElementById('libro').value;
+  // Definitiva: provisional + 21 days
+  const provDate=new Date(parseInt(ins_a),ins_m,ins_d);
+  const defDate=new Date(provDate.getTime()+21*24*3600*1000);
+  const def_d=defDate.getDate(), def_m=defDate.getMonth(), def_a=String(defDate.getFullYear());
+  // Auto-generated numbers (derived from numReg for consistency)
+  const numPat=Math.floor(numReg*0.56)+rnd(-500,500);      // ~71892 range
+  const numExp=Math.floor(numReg*0.58)+rnd(-200,200);      // ~74485 range
+  const titular=Math.floor(numReg*0.90)+rnd(-1000,1000);   // ~114854 range
+  const anno_short=ins_a.slice(2);
+  return {empresa,dpto,dir,numEsc,notario,esc_d,esc_m,esc_a,ins_d,ins_m,ins_a,def_d,def_m,def_a,numReg,folio,libro,numPat,numExp,titular,anno_short};
 }
 
+// ── RENDER ─────────────────────────────────────────────────────
 function renderPatente(d){
-  const fechaEsc=`${DIAS_ORD[d.esc_d]||d.esc_d} de ${MESES[d.esc_m]} de ${d.esc_a}`;
-  const fechaIns=`${d.ins_d} de ${MESES[d.ins_m]} de ${d.ins_a}`;
-  return `<div class="pat-wrap">
-  <div class="pat-hdr">
-    <div class="pat-escudo"></div>
-    <div>
-      <div class="pat-h1">República de Guatemala</div>
-      <div class="pat-h2">Registro Mercantil de la República</div>
+  const OBJETO=`DESARROLLO Y COMERCIALIZACIÓN DE VIDEOJUEGOS, SOFTWARE INTERACTIVO Y APLICACIONES DIGITALES; EXPORTACIÓN, IMPORTACIÓN, COMERCIALIZACIÓN Y LICENCIAMIENTO DE VIDEOJUEGOS Y SOFTWARE; PRESTACIÓN DE SERVICIOS DE DESARROLLO, DISEÑO, ARTE Y PRODUCCIÓN DE VIDEOJUEGOS; PRESTACIÓN Y CONTRATACIÓN DE SERVICIOS DE CONSULTORÍA Y CAPACITACIÓN EN DESARROLLO DE VIDEOJUEGOS E INDUSTRIAS CREATIVAS; Y OTROS QUE CONSTAN EN LA ESCRITURA SOCIAL.`;
+
+  const uRow=(lbl,val,valCls='')=>`<div class="pce-frow"><span class="pce-lbl">${lbl}</span><span class="pce-val ${valCls}">${val}</span></div>`;
+  const dRow=(lbl,d,m,a)=>`
+    <div class="pce-drow">
+      <span class="pce-lbl" style="margin-right:6px">${lbl}</span>
+      <span style="flex:1"></span>
+      <div class="pce-dlbl-wrap"><span class="pce-dv">${String(d).padStart(2,'0')}</span><span class="pce-dsub">Día</span></div>
+      <span class="pce-dslash">/</span>
+      <div class="pce-dlbl-wrap"><span class="pce-dv" style="min-width:70px">${MESES_UP[m]}</span><span class="pce-dsub">Mes</span></div>
+      <span class="pce-dslash">/</span>
+      <div class="pce-dlbl-wrap"><span class="pce-dv" style="min-width:42px">${a}</span><span class="pce-dsub">Año</span></div>
+    </div>`;
+
+  return `<div class="pce-doc">
+  <!-- HEADER -->
+  <div class="pce-hdr">
+    <div class="pce-stamps">
+      <div class="pce-stamp s1">
+        <div class="pce-stamp-val">100</div>
+        <div class="pce-stamp-txt">REPUBLICA\nDE\nGUATEMALA</div>
+      </div>
+      <div class="pce-stamp s2">
+        <div class="pce-stamp-val">100</div>
+        <div class="pce-stamp-txt">REPUBLICA\nDE\nGUATEMALA</div>
+      </div>
+    </div>
+    <div class="pce-title-blk">
+      <div class="pce-t1">Patente de Comercio de Sociedad</div>
+      <div class="pce-t2">REGISTRO MERCANTIL DE LA REPUBLICA</div>
+      <div class="pce-t3">GUATEMALA, C. A.</div>
+      <div class="pce-t4">La Sociedad</div>
+    </div>
+    <div class="pce-num-blk">
+      <div class="pce-no">No.&nbsp;<span>${d.numPat}</span>&nbsp;-01/${d.ins_a}</div>
+      <div class="pce-tit">Titular: S-${d.titular}</div>
     </div>
   </div>
-  <div class="pat-title-bar">
-    <div class="pat-title">PATENTE DE SOCIEDAD</div>
-    <div class="pat-title-sub">Inscripción de Sociedad Mercantil</div>
-    <div class="pat-num-badge">No. ${d.numIns}</div>
+  <!-- COMPANY NAME -->
+  <div class="pce-co">${d.empresa}, SOCIEDAD ANONIMA</div>
+  <!-- REGISTRATION ROW -->
+  <div class="pce-regrow">
+    Fue inscrita bajo el número de Registro
+    <span class="pce-u">${d.numReg}</span>
+    &nbsp;Folio&nbsp;<span class="pce-u">${d.folio}</span>
+    &nbsp;Libro&nbsp;<span class="pce-u">${d.libro}</span>
+    &nbsp;de Sociedades
   </div>
-  <div class="pat-body">
-    <p>El <span class="pat-certifica">Registrador Mercantil de la República de Guatemala</span>, en ejercicio de las facultades que le confiere el Código de Comercio de la República de Guatemala, <strong>CERTIFICA:</strong></p>
-    <p style="margin-top:10px">Que en el Registro de Sociedades Mercantiles, <strong>Tomo ${d.tomo}, Folio ${d.folio}</strong>, con el número de inscripción <strong>${d.numIns}</strong>, aparece registrada la sociedad denominada:</p>
-    <div class="pat-co">${d.empresa}, SOCIEDAD ANÓNIMA<br><span style="font-size:9pt;font-weight:400;letter-spacing:0">abreviable como ${d.empresa}, S.A.</span></div>
-    <p>Constituida mediante Escritura Pública número <strong>${numRom(d.numEsc)} (${d.numEsc})</strong>, autorizada en la ciudad de Guatemala, el <strong>${fechaEsc}</strong>, por el Notario <strong>${d.notario}</strong>.</p>
-    <hr class="pat-sep">
-    <div class="pat-dato">
-      <span class="pat-lbl">Capital suscrito y pagado:</span>
-      <span class="pat-val">${monto(d.capSus)}</span>
-      <span class="pat-lbl">Domicilio:</span>
-      <span class="pat-val">Departamento de ${d.dpto}</span>
-      <span class="pat-lbl">Sede social:</span>
-      <span class="pat-val">${d.dir||'(según escritura)'}</span>
-      <span class="pat-lbl">Objeto social:</span>
-      <span class="pat-val">Desarrollo y comercialización de videojuegos y software interactivo; y actividades conexas.</span>
+  <!-- BODY -->
+  <div class="pce-body">
+    <div class="pce-2col">
+      <div class="pce-frow"><span class="pce-lbl">Expediente</span><span class="pce-val">${d.numExp} - ${d.ins_a}</span></div>
+      <div class="pce-frow"><span class="pce-lbl">Nacionalidad</span><span class="pce-val">GUATEMALTECA</span></div>
     </div>
-    <hr class="pat-sep">
-    <p>Se extiende la presente Patente de Sociedad, a solicitud de parte interesada, para los efectos legales consiguientes.</p>
+    ${dRow('Inscripción Provisional',d.ins_d,d.ins_m,d.ins_a)}
+    ${dRow('Inscripción Definitiva',d.def_d,d.def_m,d.def_a)}
+    ${uRow('Dirección de la Entidad',d.dir)}
+    <div class="pce-frow" style="align-items:flex-start;min-height:72px">
+      <span class="pce-lbl" style="margin-top:1px">Objeto</span>
+      <span class="pce-obj-val">${OBJETO}</span>
+    </div>
+    <div class="pce-blank"></div>
+    <div class="pce-blank"></div>
   </div>
-  <div class="pat-foot">
-    <div class="pat-extiende">Extendida en la ciudad de Guatemala,<br>el <strong>${fechaIns}</strong>.</div>
-    <div class="pat-sig-area">
-      <div class="pat-sig-line"></div>
-      <div class="pat-sig-name">Registrador Mercantil</div>
-      <div class="pat-sig-title">REGISTRO MERCANTIL DE LA REPÚBLICA<br>GUATEMALA, C.A.</div>
+  <!-- FOOT DATE -->
+  <div class="pce-foot-date">
+    Fecha de emisión de esta Patente: Guatemala
+    <span class="pce-u">${String(d.def_d).padStart(2,'0')}</span> de
+    <span class="pce-u" style="min-width:80px">${MESES_UP[d.def_m]}</span> de
+    <span class="pce-u">${d.def_a}.</span>
+  </div>
+  <!-- SIGNATURES -->
+  <div class="pce-foot">
+    <div class="pce-hecho">
+      HECHO POR:
+      <div class="pce-sig-ln"></div>
+      <div class="pce-sig-nm">MIRIAM ALVARADO</div>
+      <div class="pce-boleta">Pago realizado según Boleta No.: <span class="pce-u">${d.numPat} - S/B</span></div>
+    </div>
+    <div class="pce-qr-box"></div>
+    <div class="pce-rsig">
+      <div class="pce-sig-ln"></div>
+      <div class="pce-rsig-ttl">Registrador Mercantil General de la República</div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:4px;margin-top:3px">
+        <div class="pce-rm-seal">REGISTRO\nMERCANTIL</div>
+        <div>
+          <div class="pce-rsig-nm">Lic. César Augusto Sierra Mérida</div>
+          <div class="pce-rsig-role">Registrador Mercantil - Auxiliar</div>
+        </div>
+      </div>
     </div>
   </div>
+  <div class="pce-barcode"></div>
+  <div class="pce-nota">NOTA: Esta patente deberá ser colocada en lugar visible.</div>
 </div>`;
 }
 
@@ -316,7 +408,7 @@ function generate(){
   const d=collect();
   document.getElementById('pc').innerHTML=renderPatente(d);
   document.getElementById('ptb-t').textContent=`${d.empresa}, S.A.`;
-  document.getElementById('ptb-s').textContent=`Patente de Sociedad · No. ${d.numIns}`;
+  document.getElementById('ptb-s').textContent=`Patente de Sociedad · No. ${d.numPat}`;
   document.getElementById('layout').style.display='none';
   document.getElementById('pv').style.display='block';
   window.scrollTo(0,0);
