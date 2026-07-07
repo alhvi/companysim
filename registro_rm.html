@@ -155,60 +155,15 @@
     </div>
     <div id="empresa-banner"></div>
 
-    <span class="slbl">Referencia de la escritura</span>
     <div class="card">
-      <div class="ctitle">Escritura constitutiva</div>
-      <div class="r2">
-        <div class="f">
-          <label>Número de escritura</label>
-          <input type="number" id="numEsc" min="1" max="999">
-        </div>
-        <div class="f">
-          <label>Notario autorizante</label>
-          <input type="text" id="notario" value="CLAUDE ELIÉ RIVERA" oninput="this.value=this.value.toUpperCase()" style="text-transform:uppercase">
-        </div>
-      </div>
-      <div class="f">
-        <label>Fecha de la escritura</label>
-        <div class="r3">
-          <select id="esc_dia"></select>
-          <select id="esc_mes">
-            <option value="0">Enero</option><option value="1">Febrero</option>
-            <option value="2">Marzo</option><option value="3">Abril</option>
-            <option value="4">Mayo</option><option value="5">Junio</option>
-            <option value="6">Julio</option><option value="7">Agosto</option>
-            <option value="8">Septiembre</option><option value="9">Octubre</option>
-            <option value="10">Noviembre</option><option value="11">Diciembre</option>
-          </select>
-          <select id="esc_anno"></select>
-        </div>
-      </div>
-    </div>
-
-    <span class="slbl" style="margin-top:1rem">Datos del Registro Mercantil</span>
-    <div class="card">
-      <div class="ctitle">Inscripción en el Registro</div>
-      <div class="r3">
-        <div class="f"><label>Número de Registro</label><input type="number" id="numReg" min="1"></div>
-        <div class="f"><label>Folio</label><input type="number" id="folio" value="123" min="1"></div>
-        <div class="f"><label>Libro</label><input type="number" id="libro" value="222" min="1"></div>
-      </div>
-      <div class="f">
-        <label>Fecha de inscripción provisional</label>
-        <div class="r3">
-          <select id="ins_dia"></select>
-          <select id="ins_mes">
-            <option value="0">Enero</option><option value="1">Febrero</option>
-            <option value="2">Marzo</option><option value="3">Abril</option>
-            <option value="4">Mayo</option><option value="5">Junio</option>
-            <option value="6">Julio</option><option value="7">Agosto</option>
-            <option value="8">Septiembre</option><option value="9">Octubre</option>
-            <option value="10">Noviembre</option><option value="11">Diciembre</option>
-          </select>
-          <select id="ins_anno"></select>
-        </div>
-        <div class="hint">La inscripción definitiva se genera automáticamente 21 días después</div>
-      </div>
+      <div class="ctitle">¿En qué consiste este paso?</div>
+      <p style="font-size:.85rem;color:var(--ui-muted);line-height:1.65;margin:.4rem 0 0">
+        La escritura de constitución se presenta ante el <strong style="color:var(--ui-text)">Registro Mercantil de la República</strong>.
+        El registrador verifica que cumpla con los requisitos legales del Código de Comercio,
+        asigna número de registro, folio y libro, y emite la
+        <strong style="color:var(--ui-text)">Patente de Comercio de Sociedad</strong>.
+        Este proceso toma aproximadamente 15 días hábiles.
+      </p>
     </div>
     <div class="nav">
       <button class="btn-g" onclick="generate()">Generar Patente de Comercio de Sociedad →</button>
@@ -236,35 +191,8 @@ const shared=JSON.parse(localStorage.getItem(KEY)||'null');
 const MESES_UP=['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE'];
 const MESES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
 
-// ── DATE SELECTS ───────────────────────────────────────────────
-function fillDias(id){const s=document.getElementById(id);for(let i=1;i<=31;i++){const o=document.createElement('option');o.value=i;o.textContent=i;s.appendChild(o);}}
-function fillAnnos(id){const s=document.getElementById(id);const y=new Date().getFullYear();for(let i=y;i>=y-5;i--){const o=document.createElement('option');o.value=i;o.textContent=i;s.appendChild(o);}}
-fillDias('esc_dia');fillDias('ins_dia');
-fillAnnos('esc_anno');fillAnnos('ins_anno');
 const hoy=new Date();
-document.getElementById('esc_dia').value=hoy.getDate();
-document.getElementById('esc_mes').value=hoy.getMonth();
-document.getElementById('esc_anno').value=hoy.getFullYear();
-const ins=new Date(hoy.getTime()+10*24*3600*1000);
-document.getElementById('ins_dia').value=ins.getDate();
-document.getElementById('ins_mes').value=ins.getMonth();
-document.getElementById('ins_anno').value=ins.getFullYear();
-
-// ── DEFAULTS ──────────────────────────────────────────────────
-// Escritura: random 150-450 (similar range to real protocols)
-document.getElementById('numEsc').value=Math.floor(Math.random()*300)+150;
-// Número de Registro: random in Selva's range ~120000-160000
-document.getElementById('numReg').value=Math.floor(Math.random()*40000)+120000;
-
-// ── PRE-FILL FROM ESCRITURA ────────────────────────────────────
 const esc=shared?.escritura;
-if(esc){
-  if(esc.numEsc) document.getElementById('numEsc').value=esc.numEsc;
-  if(esc.notario) document.getElementById('notario').value=esc.notario;
-  if(esc.dia) document.getElementById('esc_dia').value=esc.dia;
-  if(esc.mesIdx!=null) document.getElementById('esc_mes').value=esc.mesIdx;
-  if(esc.anno) document.getElementById('esc_anno').value=esc.anno;
-}
 
 // ── EMPRESA BANNER ─────────────────────────────────────────────
 if(shared){
@@ -282,17 +210,16 @@ function collect(){
   const empresa=(shared?.nombre||'[EMPRESA]').toUpperCase();
   const dpto=shared?.dpto||'Guatemala';
   const dir=(shared?.dir||'(dirección de la sociedad)').toUpperCase();
-  const numEsc=parseInt(document.getElementById('numEsc').value)||200;
-  const notario=document.getElementById('notario').value.trim().toUpperCase()||'[NOTARIO]';
-  const esc_d=parseInt(document.getElementById('esc_dia').value);
-  const esc_m=parseInt(document.getElementById('esc_mes').value);
-  const esc_a=document.getElementById('esc_anno').value;
-  const ins_d=parseInt(document.getElementById('ins_dia').value);
-  const ins_m=parseInt(document.getElementById('ins_mes').value);
-  const ins_a=document.getElementById('ins_anno').value;
-  const numReg=document.getElementById('numReg').value;
-  const folio=document.getElementById('folio').value;
-  const libro=document.getElementById('libro').value;
+  const numEsc=esc?.numEsc||rnd(150,450);
+  const notario=(esc?.notario||'CLAUDE ELIÉ RIVERA').toUpperCase();
+  const esc_d=esc?.dia||hoy.getDate();
+  const esc_m=esc?.mesIdx!=null?esc.mesIdx:hoy.getMonth();
+  const esc_a=esc?.anno||String(hoy.getFullYear());
+  const insDate=new Date(hoy.getTime()+10*24*3600*1000);
+  const ins_d=insDate.getDate(), ins_m=insDate.getMonth(), ins_a=String(insDate.getFullYear());
+  const numReg=rnd(120000,160000);
+  const folio=123;
+  const libro=222;
   // Definitiva: provisional + 21 days
   const provDate=new Date(parseInt(ins_a),ins_m,ins_d);
   const defDate=new Date(provDate.getTime()+21*24*3600*1000);

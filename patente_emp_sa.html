@@ -83,27 +83,14 @@
     </div>
     <div id="empresa-banner"></div>
 
-    <span class="slbl">Datos del Registro Mercantil</span>
     <div class="card">
-      <div class="ctitle">Inscripción del establecimiento</div>
-      <div class="r3">
-        <div class="f"><label>Número de Registro</label><input type="number" id="numReg" min="1"></div>
-        <div class="f"><label>Folio</label><input type="number" id="folio" min="1"></div>
-        <div class="f"><label>Libro</label><input type="number" id="libro" min="1"></div>
-      </div>
-      <div class="f">
-        <label>Fecha de inscripción</label>
-        <div class="r3">
-          <select id="ins_dia"></select>
-          <select id="ins_mes">
-            <option value="0">Enero</option><option value="1">Febrero</option><option value="2">Marzo</option>
-            <option value="3">Abril</option><option value="4">Mayo</option><option value="5">Junio</option>
-            <option value="6">Julio</option><option value="7">Agosto</option><option value="8">Septiembre</option>
-            <option value="9">Octubre</option><option value="10">Noviembre</option><option value="11">Diciembre</option>
-          </select>
-          <select id="ins_anno"></select>
-        </div>
-      </div>
+      <div class="ctitle">¿En qué consiste este paso?</div>
+      <p style="font-size:.85rem;color:var(--ui-muted);line-height:1.65;margin:.4rem 0 0">
+        Además de inscribir la sociedad, el Registro Mercantil inscribe el
+        <strong style="color:var(--ui-text)">establecimiento mercantil</strong> —la empresa como entidad operativa—
+        y emite la <strong style="color:var(--ui-text)">Patente de Comercio de Empresa</strong>.
+        Este documento debe estar colocado en lugar visible dentro del local comercial.
+      </p>
     </div>
     <div class="nav">
       <button class="btn-g" onclick="generate()">Generar Patente de Empresa →</button>
@@ -133,19 +120,7 @@ const MESES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','
 
 function rnd(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
 
-/* ── DATE SELECTS ── */
-function fillDias(id){const s=document.getElementById(id);for(let i=1;i<=31;i++){const o=document.createElement('option');o.value=i;o.textContent=i;s.appendChild(o);}}
-function fillAnnos(id){const s=document.getElementById(id);const y=new Date().getFullYear();for(let i=y;i>=y-5;i--){const o=document.createElement('option');o.value=i;o.textContent=i;s.appendChild(o);}}
-fillDias('ins_dia');fillAnnos('ins_anno');
 const hoy=new Date();
-document.getElementById('ins_dia').value=hoy.getDate();
-document.getElementById('ins_mes').value=hoy.getMonth();
-document.getElementById('ins_anno').value=hoy.getFullYear();
-
-/* Números en rango similar a Selva empresa (712898, folio 119, libro 675) */
-document.getElementById('numReg').value=rnd(680000,750000);
-document.getElementById('folio').value=rnd(100,150);
-document.getElementById('libro').value=rnd(600,700);
 
 /* ── EMPRESA BANNER ── */
 if(shared){
@@ -162,12 +137,10 @@ function generate(){
   const dpto=shared?.dpto||'Guatemala';
   const dir=(shared?.dir||'(dirección del establecimiento)').toUpperCase();
   const adminNombre=(esc?.admin?.nombre||'[ADMINISTRADOR ÚNICO]').toUpperCase();
-  const ins_d=parseInt(document.getElementById('ins_dia').value);
-  const ins_m=parseInt(document.getElementById('ins_mes').value);
-  const ins_a=document.getElementById('ins_anno').value;
-  const numReg=document.getElementById('numReg').value;
-  const folio=document.getElementById('folio').value;
-  const libro=document.getElementById('libro').value;
+  const ins_d=hoy.getDate(), ins_m=hoy.getMonth(), ins_a=String(hoy.getFullYear());
+  const numReg=rnd(680000,750000);
+  const folio=rnd(100,150);
+  const libro=rnd(600,700);
   const numPat=rnd(300000,400000);
   const titular=`E-${rnd(400000,500000)}`;
   const numExp=rnd(70000,90000);
