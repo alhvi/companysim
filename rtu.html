@@ -92,9 +92,9 @@
       <div class="f">
         <label>Régimen de ISR</label>
         <select id="regimen">
-          <option value="ras">Régimen Sobre las Utilidades de Actividades Lucrativas (Opcional Simplificado)</option>
-          <option value="rgt">Régimen General (Trimestral sobre utilidades)</option>
-          <option value="peq">Régimen del Pequeño Contribuyente (E.I. únicamente)</option>
+          <option value="ios">Régimen Opcional Simplificado Sobre Ingresos de Actividades Lucrativas</option>
+          <option value="rut">Régimen Sobre las Utilidades de Actividades Lucrativas</option>
+          <option value="peq">Régimen del Pequeño Contribuyente (solo E.I. con ingresos bajos)</option>
         </select>
         <div class="hint" id="reg-hint"></div>
       </div>
@@ -160,14 +160,14 @@ if(tipo==='sa'){
 
 /* Régimen hints */
 const hints={
-  ras:'Pago trimestral del 5% sobre ingresos brutos, o 25% sobre utilidades del período.',
-  rgt:'Pago trimestral sobre utilidades del período. Más complejo, adecuado para empresas más grandes.',
-  peq:'Solo para personas individuales. Pago mensual del 5% sobre ingresos.'
+  ios:'Pago mensual. Tasa del 5% sobre ingresos hasta Q30,000/mes; 7% sobre el excedente. El más usado por S.A. y personas individuales activas.',
+  rut:'Pagos trimestrales a cuenta + declaración anual. Tasa del 25% sobre utilidades netas (ingresos menos gastos deducibles). Requiere contabilidad completa.',
+  peq:'Solo para personas individuales. 5% sobre ingresos brutos, pago mensual. Aplica solo si los ingresos anuales no superan Q150,000.'
 };
 document.getElementById('regimen').addEventListener('change',()=>{
   document.getElementById('reg-hint').textContent=hints[document.getElementById('regimen').value]||'';
 });
-document.getElementById('reg-hint').textContent=hints['ras'];
+document.getElementById('reg-hint').textContent=hints['ios'];
 
 /* ── DATE SELECTS ── */
 function fillDias(id){const s=document.getElementById(id);for(let i=1;i<=31;i++){const o=document.createElement('option');o.value=i;o.textContent=i;s.appendChild(o);}}
@@ -201,16 +201,16 @@ function genNit(){
 
 /* ── REGIME LABELS ── */
 const REGIME_LABELS={
-  ras:'Régimen Sobre las Utilidades (Opcional Simplificado)',
-  rgt:'Régimen General Trimestral',
+  ios:'Régimen Opcional Simplificado Sobre Ingresos de Actividades Lucrativas',
+  rut:'Régimen Sobre las Utilidades de Actividades Lucrativas',
   peq:'Régimen del Pequeño Contribuyente'
 };
 const REGIME_DESC={
-  ras:'5% sobre ingresos brutos o 25% sobre utilidades · Pago trimestral',
-  rgt:'25% sobre utilidades del período · Pago trimestral',
-  peq:'5% sobre ingresos brutos · Pago mensual'
+  ios:'5% hasta Q30,000/mes · 7% sobre el excedente · Pago mensual',
+  rut:'25% sobre utilidades netas · Pagos trimestrales a cuenta + declaración anual',
+  peq:'5% sobre ingresos brutos · Pago mensual · Solo personas individuales'
 };
-const REGIME_ICONS={ras:'📊',rgt:'📋',peq:'🧾'};
+const REGIME_ICONS={ios:'📊',rut:'📋',peq:'🧾'};
 
 /* ── GENERATE ── */
 function generate(){
@@ -301,7 +301,7 @@ function generate(){
         </div>
         <div class="sat-f">
           <span class="sat-lbl">Obligación de Declaración</span>
-          <span class="sat-val">${regimen==='peq'?'MENSUAL':'TRIMESTRAL'}</span>
+          <span class="sat-val">${regimen==='rut'?'TRIMESTRAL':'MENSUAL'}</span>
         </div>
       </div>
     </div>
