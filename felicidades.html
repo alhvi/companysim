@@ -1,0 +1,139 @@
+<title>¡Empresa Constituida! — CC3115</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.fel-hero{
+  text-align:center;padding:2.5rem 1.5rem 2rem;
+  background:linear-gradient(135deg,rgba(62,170,110,.12) 0%,rgba(74,158,219,.10) 100%);
+  border:1px solid rgba(62,170,110,.25);margin-bottom:1.25rem
+}
+.fel-icon{font-size:3rem;line-height:1;margin-bottom:.75rem}
+.fel-title{font-size:1.6rem;font-weight:800;color:var(--ui-text);margin-bottom:.35rem}
+.fel-empresa{font-size:1.05rem;font-weight:700;color:var(--acc);letter-spacing:.04em;margin-bottom:.6rem}
+.fel-sub{font-size:.88rem;color:var(--ui-muted);line-height:1.6;max-width:480px;margin:0 auto}
+
+.fel-steps{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.25rem}
+.fel-step{
+  display:flex;align-items:flex-start;gap:.8rem;
+  background:var(--ui-surface);border:1px solid var(--ui-border);
+  padding:.65rem .9rem
+}
+.fel-check{
+  width:1.25rem;height:1.25rem;border-radius:50%;
+  background:rgba(62,170,110,.18);border:1.5px solid #3EAA6E;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:.05rem
+}
+.fel-check::after{content:'✓';font-size:.65rem;font-weight:900;color:#3EAA6E}
+.fel-step-name{font-size:.88rem;font-weight:700;color:var(--ui-text)}
+.fel-step-desc{font-size:.78rem;color:var(--ui-muted);margin-top:.1rem;line-height:1.4}
+
+.fel-nota{
+  background:rgba(74,158,219,.06);border:1px solid rgba(74,158,219,.2);
+  padding:.85rem 1rem;font-size:.82rem;color:var(--ui-muted);line-height:1.65;margin-bottom:1.25rem
+}
+.fel-nota strong{color:var(--ui-text)}
+
+.fel-actions{display:flex;gap:.6rem;flex-wrap:wrap}
+</style>
+
+<div id="layout">
+  <nav class="sb">
+    <a class="sb-brand" href="index.html" style="text-decoration:none;display:block">Company<br>Sim</a>
+    <div class="sb-section">Fases S.A.</div>
+    <div class="sb-item done"><span class="sb-dot"></span>Escritura</div>
+    <div class="sb-item done"><span class="sb-dot"></span>Registro RM</div>
+    <div class="sb-item done"><span class="sb-dot"></span>Acciones</div>
+    <div class="sb-item done"><span class="sb-dot"></span>RTU / SAT</div>
+    <div class="sb-item done"><span class="sb-dot"></span>Libros</div>
+  </nav>
+  <div id="fv">
+    <div class="fh">
+      <div class="ey">CC3115 · Producción y Negocios de Videojuegos</div>
+      <h1>Proceso completado</h1>
+      <p>Resumen de la constitución simulada de tu Sociedad Anónima</p>
+    </div>
+
+    <div class="fel-hero">
+      <div class="fel-icon">🎉</div>
+      <div class="fel-title">¡Felicidades!</div>
+      <div class="fel-empresa" id="empresa-name">tu empresa</div>
+      <div class="fel-sub">
+        Completaste exitosamente la simulación del proceso de constitución
+        de una Sociedad Anónima en Guatemala. Estos son todos los documentos
+        que generaste:
+      </div>
+    </div>
+
+    <span class="slbl">Documentos generados</span>
+    <div class="fel-steps">
+      <div class="fel-step">
+        <div class="fel-check"></div>
+        <div>
+          <div class="fel-step-name">Escritura Pública de Constitución</div>
+          <div class="fel-step-desc">Documento fundacional ante notario — papel protocolo con datos de socios, capital y objeto social</div>
+        </div>
+      </div>
+      <div class="fel-step">
+        <div class="fel-check"></div>
+        <div>
+          <div class="fel-step-name">Patente de Comercio de Sociedad</div>
+          <div class="fel-step-desc">Inscripción de la persona jurídica ante el Registro Mercantil de la República</div>
+        </div>
+      </div>
+      <div class="fel-step">
+        <div class="fel-check"></div>
+        <div>
+          <div class="fel-step-name">Patente de Comercio de Empresa</div>
+          <div class="fel-step-desc">Inscripción del establecimiento comercial ante el Registro Mercantil</div>
+        </div>
+      </div>
+      <div class="fel-step">
+        <div class="fel-check"></div>
+        <div>
+          <div class="fel-step-name">Nombramiento de Representante Legal</div>
+          <div class="fel-step-desc">Inscripción del Administrador Único ante el Registro Mercantil — vigencia 3 años</div>
+        </div>
+      </div>
+      <div class="fel-step">
+        <div class="fel-check"></div>
+        <div>
+          <div class="fel-step-name">Títulos de Acciones</div>
+          <div class="fel-step-desc">Certificados de propiedad accionaria emitidos a cada socio</div>
+        </div>
+      </div>
+      <div class="fel-step">
+        <div class="fel-check"></div>
+        <div>
+          <div class="fel-step-name">Constancia de RTU / SAT</div>
+          <div class="fel-step-desc">Inscripción tributaria con NIT propio, afiliación a IVA e ISR</div>
+        </div>
+      </div>
+      <div class="fel-step">
+        <div class="fel-check"></div>
+        <div>
+          <div class="fel-step-name">Autorización de Libros Contables</div>
+          <div class="fel-step-desc">Habilitación de libros ante la SAT y el Registro Mercantil</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fel-nota">
+      <strong>Nota sobre el proceso real:</strong> En la práctica, este proceso toma entre 2 y 6 semanas,
+      involucra honorarios notariales, timbres fiscales, aranceles del RM y la SAT, y requiere
+      gestiones presenciales o digitales ante cada institución. La simulación refleja los documentos
+      reales pero omite costos y tiempos de espera.
+    </div>
+
+    <div class="fel-actions">
+      <a class="btn-g" href="index.html" style="text-decoration:none">← Ver Dashboard</a>
+      <button class="btn-g" style="background:var(--ui-surface);color:var(--ui-muted);border:1px solid var(--ui-border)" onclick="if(confirm('¿Borrar todos los datos y empezar de nuevo?')){localStorage.removeItem('companysim');window.location='index.html'}">Reiniciar simulación</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const shared=JSON.parse(localStorage.getItem('companysim')||'null');
+if(shared?.nombre){
+  document.getElementById('empresa-name').textContent=shared.nombre.toUpperCase()+', SOCIEDAD ANÓNIMA';
+}
+</script>
