@@ -130,7 +130,7 @@
         </div>
         <div class="f">
           <label>Nombre</label>
-          <input type="text" id="nomRep" readonly style="background:rgba(0,0,0,.04);color:var(--ui-muted);cursor:default">
+          <input type="text" id="nomRep" oninput="this.value=this.value.toUpperCase()">
         </div>
       </div>
     </div>
@@ -198,13 +198,17 @@ if(tipo==='sa'){
   document.querySelector('.opt-peq')?.remove();
 }
 
-/* ── E.I.: nombre representante = propietario ── */
+/* ── Nombre representante ── */
+const nomRepEl=document.getElementById('nomRep');
 if(tipo==='ind'){
   const propNombre=(shared?.propietario||'').toUpperCase();
-  if(propNombre) document.getElementById('nomRep').value=propNombre;
+  nomRepEl.value=propNombre;
+  nomRepEl.placeholder='NOMBRE COMPLETO DEL PROPIETARIO';
 }else{
   const adminNombrePre=(esc?.admin?.nombre||'').toUpperCase();
-  if(adminNombrePre) document.getElementById('nomRep').value=adminNombrePre;
+  nomRepEl.value=adminNombrePre;
+  nomRepEl.readOnly=true;
+  nomRepEl.style.cssText='background:rgba(0,0,0,.04);color:var(--ui-muted);cursor:default';
 }
 
 /* ── Toggle contador según régimen (solo E.I.) ── */
