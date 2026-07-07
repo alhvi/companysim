@@ -108,10 +108,6 @@
       </div>
       <div class="r2">
         <div class="f">
-          <label>Profesión u oficio</label>
-          <input type="text" id="profesion" placeholder="ej. INGENIERO EN SISTEMAS" oninput="this.value=this.value.toUpperCase()">
-        </div>
-        <div class="f">
           <label>Municipio de nacimiento</label>
           <input type="text" id="municipio" placeholder="ej. GUATEMALA" oninput="this.value=this.value.toUpperCase()">
         </div>
@@ -227,7 +223,6 @@ function generate(){
       <div class="pce-frow"><span class="pce-lbl">Nacionalidad</span><span class="pce-val">GUATEMALTECA</span></div>
       <div class="pce-frow"><span class="pce-lbl">Documento Personal de Identificación</span><span class="pce-val" style="min-width:40px">${cui}</span></div>
     </div>
-    <div class="pce-frow"><span class="pce-lbl">Profesión u Oficio</span><span class="pce-val">${profesion}</span></div>
     <div class="pce-frow"><span class="pce-lbl">Extendida en</span><span class="pce-val" style="min-width:60px">GUATEMALA</span>&nbsp;&nbsp;<span class="pce-lbl">Municipio</span>&nbsp;<span class="pce-u">${municipio}</span>&nbsp;<span class="pce-lbl">Departamento</span></div>
     <div class="pce-frow"><span class="pce-lbl">Dirección de Propietario</span><span class="pce-val">${dir}, ${dpto.toUpperCase()}</span></div>
     <div class="pce-2col">
