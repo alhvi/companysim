@@ -112,9 +112,15 @@
     <span class="slbl" style="margin-top:.75rem">Representante legal y contador</span>
     <div class="card">
       <div class="ctitle">Representante legal</div>
-      <div class="f">
-        <label>NIT del representante legal</label>
-        <input type="text" id="nitRep" placeholder="ej. 12345678-9">
+      <div class="r2">
+        <div class="f">
+          <label>NIT del representante legal</label>
+          <input type="text" id="nitRep" placeholder="ej. 12345678-9">
+        </div>
+        <div class="f">
+          <label>Nombre</label>
+          <input type="text" id="nomRep" readonly style="background:rgba(0,0,0,.04);color:var(--ui-muted);cursor:default">
+        </div>
       </div>
     </div>
     <div class="card">
@@ -122,7 +128,7 @@
       <div class="r2">
         <div class="f">
           <label>NIT del contador o contadora</label>
-          <input type="text" id="nitCont" placeholder="ej. 98765432-1">
+          <input type="text" id="nitCont" value="4294597-4">
         </div>
         <div class="f">
           <label>Nombre del contador o contadora</label>
@@ -188,6 +194,10 @@ document.getElementById('regimen').addEventListener('change',()=>{
 document.getElementById('reg-hint').textContent=hints['ios'];
 
 const hoy=new Date();
+
+/* ── NOMBRE REPRESENTANTE ── */
+const adminNombrePre=(esc?.admin?.nombre||'').toUpperCase();
+if(adminNombrePre) document.getElementById('nomRep').value=adminNombrePre;
 
 /* ── EMPRESA BANNER ── */
 const sfxBanner=tipo==='sa'?', SOCIEDAD ANÓNIMA':'';
