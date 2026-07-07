@@ -108,6 +108,28 @@
         <div class="hint" id="reg-hint"></div>
       </div>
     </div>
+
+    <span class="slbl" style="margin-top:.75rem">Representante legal y contador</span>
+    <div class="card">
+      <div class="ctitle">Representante legal</div>
+      <div class="f">
+        <label>NIT del representante legal</label>
+        <input type="text" id="nitRep" placeholder="ej. 12345678-9">
+      </div>
+    </div>
+    <div class="card">
+      <div class="ctitle">Contador / Perito Contador</div>
+      <div class="r2">
+        <div class="f">
+          <label>NIT del contador o contadora</label>
+          <input type="text" id="nitCont" placeholder="ej. 98765432-1">
+        </div>
+        <div class="f">
+          <label>Nombre del contador o contadora</label>
+          <input type="text" id="nomCont" value="KARLA MARINA GÓMEZ OCHOA" oninput="this.value=this.value.toUpperCase()">
+        </div>
+      </div>
+    </div>
     <div class="nav">
       <button class="btn-g" onclick="generate()">Generar Constancia RTU →</button>
     </div>
@@ -208,7 +230,9 @@ function generate(){
   const fechaHoy=fmtDate(hoy);
   const fechaHoyLong=fmtDateLong(hoy);
   const nitNotario=Math.floor(Math.random()*90000000)+10000000;
-  const nitContador=Math.floor(Math.random()*90000000)+10000000;
+  const nitRepInput=document.getElementById('nitRep').value.trim()||genNit();
+  const nitContador=document.getElementById('nitCont').value.trim()||genNit();
+  const nomContador=document.getElementById('nomCont').value.trim().toUpperCase()||'KARLA MARINA GÓMEZ OCHOA';
   // Representante legal valid for 3 years
   const venc=new Date(hoy.getTime());venc.setFullYear(venc.getFullYear()+3);
 
@@ -325,8 +349,8 @@ function generate(){
   <div class="rtu-sec">
     <div class="rtu-sec-hdr">Datos del Contador</div>
     <div class="rtu-grid">
-      <div class="rtu-field"><span class="rtu-lbl">NIT del perito contador o CPA</span><span class="rtu-val">${nitContador}-${Math.floor(Math.random()*9)}</span></div>
-      <div class="rtu-field"><span class="rtu-lbl">Nombre del perito contador o CPA</span><span class="rtu-val">[NOMBRE DEL CONTADOR]</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">NIT del perito contador o CPA</span><span class="rtu-val">${nitContador}</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Nombre del perito contador o CPA</span><span class="rtu-val">${nomContador}</span></div>
       <div class="rtu-field"><span class="rtu-lbl">Fecha de nombramiento</span><span class="rtu-val">${fechaHoy}</span></div>
       <div class="rtu-field"><span class="rtu-lbl">Tipo de prestación de servicio</span><span class="rtu-val">DEPENDIENTE</span></div>
       <div class="rtu-field"><span class="rtu-lbl">Estado</span><span class="rtu-val">ACTIVO</span></div>
@@ -337,6 +361,7 @@ function generate(){
   <div class="rtu-sec">
     <div class="rtu-sec-hdr">Datos del Representante</div>
     <div class="rtu-grid">
+      <div class="rtu-field"><span class="rtu-lbl">NIT del representante</span><span class="rtu-val">${nitRepInput}</span></div>
       <div class="rtu-field"><span class="rtu-lbl">Nombre del representante</span><span class="rtu-val">${adminNombre}</span></div>
       <div class="rtu-field"><span class="rtu-lbl">Tipo de Representante</span><span class="rtu-val">${tipo==='sa'?'ADMINISTRADOR ÚNICO Y REPRESENTANTE LEGAL':'PROPIETARIO'}</span></div>
       <div class="rtu-field"><span class="rtu-lbl">Fecha de nombramiento como representante legal</span><span class="rtu-val">${fechaHoy}</span></div>
