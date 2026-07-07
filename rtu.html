@@ -1,76 +1,85 @@
 <title>RTU / SAT — CC3115</title>
 <link rel="stylesheet" href="style.css">
 <style>
-/* ── SAT Document ── */
-.sat-doc{
-  width:min(620px,97vw);
-  background:#FFFFFF;
-  border:1px solid #BBB;
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:10.5px;color:#111;
-  flex-shrink:0;
-  box-shadow:0 8px 32px rgba(0,0,0,.4)
+/* ── RTU Constancia document ── */
+.rtu-doc{
+  width:min(720px,97vw);background:#fff;
+  border:1px solid #aaa;
+  font-family:Arial,Helvetica,sans-serif;font-size:9px;color:#111;
+  flex-shrink:0;box-shadow:0 8px 32px rgba(0,0,0,.4)
 }
-/* SAT Header */
-.sat-hdr{
+/* Header */
+.rtu-hdr{
   background:#003DA6;color:#fff;
-  display:grid;grid-template-columns:70px 1fr 70px;
-  align-items:center;padding:8px 14px;gap:10px
+  display:grid;grid-template-columns:68px 1fr auto;
+  align-items:center;padding:7px 12px;gap:10px;border-bottom:4px solid #FFD100
 }
-.sat-logo-box{
-  width:56px;height:56px;border:2px solid rgba(255,255,255,.35);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px
+.rtu-logo{
+  width:54px;height:54px;border:1.5px solid rgba(255,255,255,.35);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0
 }
-.sat-logo-sat{font-size:20px;font-weight:900;letter-spacing:.06em}
-.sat-logo-sub{font-size:5.5px;font-weight:700;letter-spacing:.08em;text-align:center;line-height:1.5}
-.sat-title-blk{text-align:center}
-.sat-h1{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
-.sat-h2{font-size:8px;letter-spacing:.04em;opacity:.8;margin-top:2px}
-.sat-stripe{height:5px;background:linear-gradient(90deg,#FFD100 0%,#FFD100 50%,#003DA6 50%,#003DA6 100%)}
-/* NIT block */
-.sat-nit-row{
-  background:#F4F8FF;border-bottom:2px solid #003DA6;
-  padding:12px 16px;display:flex;align-items:center;justify-content:space-between
+.rtu-logo-sat{font-size:19px;font-weight:900;letter-spacing:.06em;line-height:1}
+.rtu-logo-sub{font-size:4.5px;font-weight:700;letter-spacing:.07em;text-align:center;line-height:1.6;opacity:.8}
+.rtu-hdr-title{text-align:center}
+.rtu-hdr-t1{font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;line-height:1.3}
+.rtu-hdr-t2{font-size:7.5px;opacity:.75;margin-top:2px;letter-spacing:.03em}
+.rtu-hdr-date{text-align:right;font-size:7.5px;opacity:.7;white-space:nowrap}
+/* NIT banner */
+.rtu-nit-banner{
+  background:#F0F5FF;border-bottom:1px solid #C0CDE8;
+  padding:6px 12px;display:flex;align-items:center;justify-content:space-between
 }
-.sat-nit-lbl{font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#003DA6}
-.sat-nit-val{font-size:28px;font-weight:900;color:#003DA6;font-family:'Courier New',monospace;letter-spacing:.1em}
-.sat-nit-status{font-size:8px;font-weight:700;color:#1A7A40;background:rgba(26,122,64,.1);border:1px solid rgba(26,122,64,.3);padding:3px 10px}
-/* Body */
-.sat-body{padding:8px 16px}
-.sat-section{border-bottom:1px solid #E0E0E0;padding:7px 0}
-.sat-section:last-child{border-bottom:none}
-.sat-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:2px}
-.sat-f{padding:3px 0}
-.sat-lbl{font-size:7.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#555;display:block;margin-bottom:2px}
-.sat-val{font-size:10px;font-weight:700;color:#111;border-bottom:1px solid #CCC;padding:1px 0 2px;display:block}
-.sat-regime-box{
-  background:#FFF9E6;border:1.5px solid #FFD100;
-  padding:7px 10px;margin:6px 0;
-  display:flex;align-items:center;gap:10px
+.rtu-nit-lbl{font-size:7.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#003DA6;margin-bottom:1px}
+.rtu-nit-val{font-size:22px;font-weight:900;color:#003DA6;font-family:'Courier New',monospace;letter-spacing:.08em}
+.rtu-activo{font-size:7.5px;font-weight:700;color:#1A7A40;background:rgba(26,122,64,.1);border:1px solid rgba(26,122,64,.3);padding:3px 10px;align-self:center}
+/* Sections */
+.rtu-sec{border-bottom:1px solid #D0D8E8}
+.rtu-sec:last-child{border-bottom:none}
+.rtu-sec-hdr{background:#003DA6;color:#fff;font-size:7.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px}
+.rtu-sub-hdr{background:#E8F0FF;color:#003DA6;font-size:7.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 10px;border-top:1px solid #C0CDE8;border-bottom:1px solid #C0CDE8}
+.rtu-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.rtu-grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0}
+.rtu-field{padding:4px 10px;border-right:1px solid #E8EEF8;border-bottom:.5px solid #E8EEF8}
+.rtu-field:nth-child(2n){border-right:none}
+.rtu-field.w1{grid-column:span 1}
+.rtu-field.w2{grid-column:span 2;border-right:none}
+.rtu-lbl{font-size:7px;color:#555;display:block;margin-bottom:1px}
+.rtu-val{font-size:9px;font-weight:700;color:#111;display:block}
+/* Obligations table */
+.rtu-tbl-wrap{padding:4px 10px 6px}
+.rtu-tbl{width:100%;border-collapse:collapse;font-size:8px}
+.rtu-tbl th{background:#003DA6;color:#fff;padding:3px 6px;font-size:7.5px;font-weight:700;letter-spacing:.05em;border:1px solid #003DA6;text-align:left}
+.rtu-tbl td{padding:3px 6px;border:1px solid #D0D8E8}
+.rtu-tbl tr:nth-child(even) td{background:#F5F8FF}
+.rtu-tbl .tc{text-align:center;font-family:'Courier New';font-weight:700}
+/* Features */
+.rtu-feat-tbl{width:100%;border-collapse:collapse;font-size:8px;margin:4px 10px;width:calc(100% - 20px)}
+.rtu-feat-tbl th{background:#003DA6;color:#fff;padding:3px 6px;font-size:7.5px;font-weight:700;border:1px solid #003DA6;text-align:left}
+.rtu-feat-tbl td{padding:3px 6px;border:1px solid #D0D8E8}
+/* Nota */
+.rtu-nota{background:#FFFBF0;border-top:2px solid #FFD100;padding:6px 12px;font-size:7.5px;color:#333;line-height:1.55}
+.rtu-nota strong{font-size:8px;display:block;margin-bottom:3px}
+.rtu-nota li{margin-left:12px;margin-bottom:1px}
+/* Carné */
+.rtu-carne{
+  display:flex;align-items:stretch;border-top:2px solid #003DA6;
+  font-family:Arial,sans-serif
 }
-.sat-regime-ico{font-size:18px}
-.sat-regime-name{font-size:11px;font-weight:700;color:#003DA6}
-.sat-regime-desc{font-size:8px;color:#555;margin-top:1px}
-/* Footer */
-.sat-foot{
-  background:#003DA6;color:rgba(255,255,255,.7);
-  padding:6px 16px;display:flex;justify-content:space-between;align-items:center;
-  font-size:8px
-}
-.sat-qr-box{
-  width:48px;height:48px;
-  background:repeating-conic-gradient(#fff 0deg 90deg,#003DA6 90deg 180deg) 0 0/5px 5px;
-  border:1px solid rgba(255,255,255,.4)
-}
-.sat-nota{font-size:8px;color:#555;padding:5px 16px;background:#FFFBF0;border-top:1px solid #EEE;text-align:center}
+.rtu-carne-body{flex:1;background:#003DA6;color:#fff;padding:8px 14px;display:flex;flex-direction:column;justify-content:center}
+.rtu-carne-t{font-size:7px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.7;margin-bottom:3px}
+.rtu-carne-nit{font-size:26px;font-weight:900;font-family:'Courier New',monospace;letter-spacing:.06em;line-height:1}
+.rtu-carne-name{font-size:9px;font-weight:700;margin-top:5px;line-height:1.3}
+.rtu-carne-side{background:#FFD100;width:40px;display:flex;align-items:center;justify-content:center}
+.rtu-carne-sat{font-size:14px;font-weight:900;color:#003DA6;writing-mode:vertical-rl;text-orientation:mixed;letter-spacing:.08em}
+.rtu-print-date{background:#F5F5F5;border-top:1px solid #ddd;padding:3px 12px;font-size:7px;color:#888;text-align:right}
 
 @media print{
   body,#layout{background:transparent}
   #layout{display:none!important}
   #pv{display:block!important}
   .pc{background:#fff;padding:0;gap:0;min-height:0}
-  .sat-doc{box-shadow:none}
-  @page{size:letter;margin:1.5cm}
+  .rtu-doc{box-shadow:none;width:100%}
+  @page{size:letter;margin:.8cm}
 }
 </style>
 
@@ -100,7 +109,7 @@
       </div>
     </div>
     <div class="nav">
-      <button class="btn-g" onclick="generate()">Generar Inscripción RTU →</button>
+      <button class="btn-g" onclick="generate()">Generar Constancia RTU →</button>
     </div>
   </div>
 </div>
@@ -122,6 +131,7 @@
 const KEY='companysim';
 const shared=JSON.parse(localStorage.getItem(KEY)||'null');
 const tipo=shared?.tipo||'sa';
+const esc=shared?.escritura;
 
 const MESES_UP=['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE'];
 const MESES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
@@ -142,7 +152,6 @@ if(tipo==='sa'){
     <div class="sb-item act"><span class="sb-dot"></span>RTU / SAT</div>`;
   document.getElementById('btn-next').href='index.html';
   document.getElementById('btn-next').textContent='Ver Dashboard ✓';
-  // hide Pequeño Contribuyente hint for SA
 }
 
 /* Régimen hints */
@@ -159,141 +168,273 @@ document.getElementById('reg-hint').textContent=hints['ios'];
 const hoy=new Date();
 
 /* ── EMPRESA BANNER ── */
-const sfx=tipo==='sa'?', SOCIEDAD ANÓNIMA':'';
+const sfxBanner=tipo==='sa'?', SOCIEDAD ANÓNIMA':'';
 if(shared){
   document.getElementById('empresa-banner').innerHTML=`
     <div style="background:rgba(74,158,219,.06);border:1px solid rgba(74,158,219,.2);padding:.48rem .9rem;display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;font-size:.86rem;color:var(--ui-text)">
-      <strong>${shared.nombre}${sfx}</strong>
+      <strong>${shared.nombre}${sfxBanner}</strong>
       <a href="index.html" style="font-size:.7rem;color:var(--acc-l);text-decoration:none;opacity:.8">← Dashboard</a>
     </div>`;
 }
 
-/* ── NIT generator ── */
+/* ── NIT generator (modulo-11 check digit) ── */
 function genNit(){
-  const base=Math.floor(Math.random()*9000000)+1000000;
+  const base=Math.floor(Math.random()*89000000)+10000000;
   const digits=base.toString().split('').map(Number);
-  const weights=[2,3,4,5,6,7,2];
+  const weights=[2,3,4,5,6,7,2,3];
   const sum=digits.reduce((a,d,i)=>a+d*weights[i],0);
   const mod=sum%11;
   const check=mod===0?'0':mod===1?'K':String(11-mod);
   return `${base}-${check}`;
 }
 
-/* ── REGIME LABELS ── */
-const REGIME_LABELS={
-  ios:'Régimen Opcional Simplificado Sobre Ingresos de Actividades Lucrativas',
-  rut:'Régimen Sobre las Utilidades de Actividades Lucrativas',
-  peq:'Régimen del Pequeño Contribuyente'
-};
-const REGIME_DESC={
-  ios:'5% hasta Q30,000/mes · 7% sobre el excedente · Pago mensual',
-  rut:'25% sobre utilidades netas · Pagos trimestrales a cuenta + declaración anual',
-  peq:'5% sobre ingresos brutos · Pago mensual · Solo personas individuales'
-};
-const REGIME_ICONS={ios:'📊',rut:'📋',peq:'🧾'};
+function fmtDate(d){return`${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`}
+function fmtDateLong(d){return`${d.getDate()} de ${MESES[d.getMonth()]} de ${d.getFullYear()}`}
 
 /* ── GENERATE ── */
 function generate(){
   const empresa=(shared?.nombre||'[EMPRESA]').toUpperCase();
   const dpto=shared?.dpto||'Guatemala';
-  const dir=(shared?.dir||'[DIRECCIÓN]').toUpperCase();
+  const dir=(shared?.dir||'DIRECCIÓN DE LA EMPRESA').toUpperCase();
   const regimen=document.getElementById('regimen').value;
-  const ini_d=hoy.getDate();
-  const ini_m=hoy.getMonth();
-  const ini_a=String(hoy.getFullYear());
   const nit=genNit();
-  const now=new Date();
-  const fechaDoc=`${now.getDate()} de ${MESES[now.getMonth()]} de ${now.getFullYear()}`;
   const sfxDoc=tipo==='sa'?', SOCIEDAD ANÓNIMA':'';
-  const acteco=tipo==='sa'?'DESARROLLO Y COMERCIALIZACIÓN DE VIDEOJUEGOS Y SOFTWARE':'COMERCIO Y SERVICIOS';
+  const tipoPersoneria=tipo==='sa'?'SOCIEDAD ANÓNIMA':'PERSONA INDIVIDUAL';
+  const tipoContrib=tipo==='sa'?'PERSONA JURÍDICA SERVICIOS':'PERSONA INDIVIDUAL';
+  const notario=(esc?.notario||'CLAUDE ELIÉ RIVERA').toUpperCase();
+  const numEsc=esc?.numEsc||'—';
+  const fechaEsc=esc?`${String(esc.dia).padStart(2,'0')}/${String((esc.mesIdx||0)+1).padStart(2,'0')}/${esc.anno}`:'—';
+  const adminNombre=(esc?.admin?.nombre||'[ADMINISTRADOR ÚNICO]').toUpperCase();
+  const fechaHoy=fmtDate(hoy);
+  const fechaHoyLong=fmtDateLong(hoy);
+  const nitNotario=Math.floor(Math.random()*90000000)+10000000;
+  const nitContador=Math.floor(Math.random()*90000000)+10000000;
+  // Representante legal valid for 3 years
+  const venc=new Date(hoy.getTime());venc.setFullYear(venc.getFullYear()+3);
 
-  document.getElementById('pc').innerHTML=`<div class="sat-doc">
-  <div class="sat-stripe" style="height:4px;background:#FFD100"></div>
-  <div class="sat-hdr">
-    <div class="sat-logo-box">
-      <div class="sat-logo-sat">SAT</div>
-      <div class="sat-logo-sub">SUPERINTENDENCIA<br>DE ADMINISTRACIÓN<br>TRIBUTARIA</div>
+  // ISR obligations table
+  const ISR_OBL={
+    ios:[
+      ['1','MENSUAL','DECLARACIÓN JURADA Y PAGO MENSUAL','131 - ISR. RÉGIMEN OPCIONAL SIMPLIFICADO. DECLARACIÓN JURADA Y PAGO MENSUAL.'],
+      ['2','ANUAL','DECLARACIÓN JURADA Y PAGO ANUAL','141 - ISR. REGÍMENES SOBRE UTILIDADES Y OPCIONAL SIMPLIFICADO. DECLARACIÓN JURADA Y PAGO ANUAL.'],
+      ['3','MENSUAL','DECLARACIÓN JURADA Y PAGO MENSUAL (RETENCIONES)','133 - ISR. RETENCIONES EFECTUADAS A RESIDENTES Y NO RESIDENTES.'],
+    ],
+    rut:[
+      ['1','TRIMESTRAL','DECLARACIÓN JURADA Y PAGO TRIMESTRAL','211 - ISR. RÉGIMEN SOBRE UTILIDADES. DECLARACIÓN JURADA Y PAGO TRIMESTRAL.'],
+      ['2','ANUAL','DECLARACIÓN JURADA Y PAGO ANUAL','215 - ISR. RÉGIMEN SOBRE UTILIDADES. DECLARACIÓN JURADA Y PAGO ANUAL.'],
+      ['3','MENSUAL','DECLARACIÓN JURADA Y PAGO MENSUAL (RETENCIONES)','133 - ISR. RETENCIONES EFECTUADAS A RESIDENTES Y NO RESIDENTES.'],
+    ],
+    peq:[
+      ['1','MENSUAL','DECLARACIÓN Y PAGO MENSUAL','2046 - ISR. RÉGIMEN DEL PEQUEÑO CONTRIBUYENTE. DECLARACIÓN Y PAGO MENSUAL.'],
+    ],
+  };
+  const REGIME_FULL={
+    ios:'RÉGIMEN OPCIONAL SIMPLIFICADO SOBRE INGRESOS DE ACTIVIDADES LUCRATIVAS',
+    rut:'RÉGIMEN SOBRE LAS UTILIDADES DE ACTIVIDADES LUCRATIVAS',
+    peq:'RÉGIMEN DEL PEQUEÑO CONTRIBUYENTE',
+  };
+  const oblRows=ISR_OBL[regimen].map(([n,f,nm,cod])=>
+    `<tr><td class="tc">${n}</td><td class="tc">${f}</td><td>${nm}</td><td style="font-size:7.5px;color:#333">${cod}</td></tr>`).join('');
+
+  document.getElementById('pc').innerHTML=`<div class="rtu-doc">
+
+  <!-- HEADER -->
+  <div class="rtu-hdr">
+    <div class="rtu-logo">
+      <div class="rtu-logo-sat">SAT</div>
+      <div class="rtu-logo-sub">SUPERINTENDENCIA<br>DE ADMINISTRACIÓN<br>TRIBUTARIA</div>
     </div>
-    <div class="sat-title-blk">
-      <div class="sat-h1">Acuse de Recibo — Inscripción Tributaria</div>
-      <div class="sat-h2">Registro Tributario Unificado (RTU) · República de Guatemala</div>
+    <div class="rtu-hdr-title">
+      <div class="rtu-hdr-t1">Constancia de Inscripción y Actualización de Datos al<br>Registro Tributario Unificado</div>
+      <div class="rtu-hdr-t2">República de Guatemala</div>
     </div>
-    <div class="sat-qr-box"></div>
+    <div class="rtu-hdr-date">Fecha de impresión:<br>${fechaHoyLong}</div>
   </div>
-  <div class="sat-stripe"></div>
-  <div class="sat-nit-row">
+
+  <!-- NIT BANNER -->
+  <div class="rtu-nit-banner">
     <div>
-      <div class="sat-nit-lbl">Número de Identificación Tributaria (NIT)</div>
-      <div class="sat-nit-val">${nit}</div>
+      <div class="rtu-nit-lbl">Número de Identificación Tributaria (NIT)</div>
+      <div class="rtu-nit-val">${nit}</div>
     </div>
-    <div class="sat-nit-status">ACTIVO</div>
+    <div class="rtu-activo">ACTIVO</div>
   </div>
-  <div class="sat-body">
-    <div class="sat-section">
-      <div class="sat-row">
-        <div class="sat-f">
-          <span class="sat-lbl">Razón Social / Nombre</span>
-          <span class="sat-val">${empresa}${sfxDoc}</span>
-        </div>
-        <div class="sat-f">
-          <span class="sat-lbl">Tipo de Contribuyente</span>
-          <span class="sat-val">${tipo==='sa'?'PERSONA JURÍDICA (S.A.)':'PERSONA INDIVIDUAL'}</span>
-        </div>
-      </div>
-      <div class="sat-row">
-        <div class="sat-f">
-          <span class="sat-lbl">Domicilio Fiscal</span>
-          <span class="sat-val">${dir}</span>
-        </div>
-        <div class="sat-f">
-          <span class="sat-lbl">Departamento</span>
-          <span class="sat-val">${dpto.toUpperCase()}</span>
-        </div>
-      </div>
+
+  <!-- IDENTIFICACIÓN -->
+  <div class="rtu-sec">
+    <div class="rtu-sec-hdr">Identificación</div>
+    <div class="rtu-grid">
+      <div class="rtu-field w2"><span class="rtu-lbl">Razón o denominación social</span><span class="rtu-val">${empresa}${sfxDoc}</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Tipo de personería</span><span class="rtu-val">${tipoPersoneria}</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Sector económico</span><span class="rtu-val">TECNOLOGÍA</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Número de documento de constitución</span><span class="rtu-val">${numEsc}</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Fecha de constitución</span><span class="rtu-val">${fechaEsc}</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Tipo documento de constitución</span><span class="rtu-val">${tipo==='sa'?'TESTIMONIO ESCRITURA DE CONSTITUCIÓN':'ACTA DE APERTURA'}</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Fecha de inscripción en el registro que corresponde</span><span class="rtu-val">${fechaHoy}</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Participación en Cámara Empresarial</span><span class="rtu-val">NO</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Participación en Gremial</span><span class="rtu-val">NO</span></div>
     </div>
-    <div class="sat-section">
-      <div class="sat-row">
-        <div class="sat-f">
-          <span class="sat-lbl">Actividad Económica Principal</span>
-          <span class="sat-val">${acteco}</span>
-        </div>
-        <div class="sat-f">
-          <span class="sat-lbl">Inicio de Actividades</span>
-          <span class="sat-val">${String(ini_d).padStart(2,'0')} / ${MESES_UP[ini_m]} / ${ini_a}</span>
-        </div>
-      </div>
+  </div>
+
+  <!-- ACTIVIDAD ECONÓMICA -->
+  <div class="rtu-sec">
+    <div class="rtu-sec-hdr">Actividad Económica</div>
+    <div class="rtu-grid">
+      <div class="rtu-field"><span class="rtu-lbl">Código</span><span class="rtu-val">6209.40</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Clasificación</span><span class="rtu-val">PRINCIPAL</span></div>
+      <div class="rtu-field w2"><span class="rtu-lbl">Actividad económica</span><span class="rtu-val">OTRAS ACTIVIDADES DE TECNOLOGÍA DE LA INFORMACIÓN Y DE SERVICIOS INFORMÁTICOS</span></div>
     </div>
-    <div class="sat-section">
-      <div class="sat-lbl" style="margin-bottom:5px">Régimen Tributario Registrado</div>
-      <div class="sat-regime-box">
-        <div class="sat-regime-ico">${REGIME_ICONS[regimen]}</div>
+  </div>
+
+  <!-- DATOS DEL NOTARIO (SA only) -->
+  ${tipo==='sa'?`
+  <div class="rtu-sec">
+    <div class="rtu-sec-hdr">Datos del Notario</div>
+    <div class="rtu-grid">
+      <div class="rtu-field"><span class="rtu-lbl">NIT del notario</span><span class="rtu-val">${nitNotario}-${Math.floor(Math.random()*9)}</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Nombre del notario</span><span class="rtu-val">${notario}</span></div>
+    </div>
+  </div>`:''}
+
+  <!-- UBICACIÓN -->
+  <div class="rtu-sec">
+    <div class="rtu-sec-hdr">Ubicación</div>
+    <div class="rtu-grid">
+      <div class="rtu-field w2"><span class="rtu-lbl">Dirección</span><span class="rtu-val">${dir}, ${dpto.toUpperCase()}, GUATEMALA</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Tipo de Dirección</span><span class="rtu-val">DOMICILIO FISCAL</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Departamento</span><span class="rtu-val">${dpto.toUpperCase()}</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Municipio</span><span class="rtu-val">${dpto.toUpperCase()}</span></div>
+    </div>
+  </div>
+
+  <!-- ESTABLECIMIENTOS -->
+  <div class="rtu-sec">
+    <div class="rtu-sec-hdr">Establecimientos</div>
+    <div class="rtu-grid">
+      <div class="rtu-field"><span class="rtu-lbl">Nombre Comercial</span><span class="rtu-val">${empresa}</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Número de secuencia de establecimiento</span><span class="rtu-val">1</span></div>
+      <div class="rtu-field w2"><span class="rtu-lbl">Actividad económica por establecimiento</span><span class="rtu-val">OTRAS ACTIVIDADES DE TECNOLOGÍA DE LA INFORMACIÓN Y DE SERVICIOS INFORMÁTICOS</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Fecha Inicio de Operaciones</span><span class="rtu-val">${fechaHoy}</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Clasificación por establecimiento</span><span class="rtu-val">AFECTO</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Tipo de establecimiento</span><span class="rtu-val">COMERCIO</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Estado</span><span class="rtu-val">ACTIVO</span></div>
+    </div>
+  </div>
+
+  <!-- DATOS DEL CONTADOR -->
+  <div class="rtu-sec">
+    <div class="rtu-sec-hdr">Datos del Contador</div>
+    <div class="rtu-grid">
+      <div class="rtu-field"><span class="rtu-lbl">NIT del perito contador o CPA</span><span class="rtu-val">${nitContador}-${Math.floor(Math.random()*9)}</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Nombre del perito contador o CPA</span><span class="rtu-val">[NOMBRE DEL CONTADOR]</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Fecha de nombramiento</span><span class="rtu-val">${fechaHoy}</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Tipo de prestación de servicio</span><span class="rtu-val">DEPENDIENTE</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Estado</span><span class="rtu-val">ACTIVO</span></div>
+    </div>
+  </div>
+
+  <!-- DATOS DEL REPRESENTANTE -->
+  <div class="rtu-sec">
+    <div class="rtu-sec-hdr">Datos del Representante</div>
+    <div class="rtu-grid">
+      <div class="rtu-field"><span class="rtu-lbl">Nombre del representante</span><span class="rtu-val">${adminNombre}</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Tipo de Representante</span><span class="rtu-val">${tipo==='sa'?'ADMINISTRADOR ÚNICO Y REPRESENTANTE LEGAL':'PROPIETARIO'}</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Fecha de nombramiento como representante legal</span><span class="rtu-val">${fechaHoy}</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Fecha de inscripción en el registro</span><span class="rtu-val">${fechaHoy}</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Cantidad de años/meses</span><span class="rtu-val">3 AÑOS</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Fecha de vencimiento de la Representación</span><span class="rtu-val">${fmtDate(venc)}</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Estado</span><span class="rtu-val">ACTIVO</span></div>
+    </div>
+  </div>
+
+  <!-- AFILIACIONES: IVA -->
+  <div class="rtu-sec">
+    <div class="rtu-sec-hdr">Afiliaciones</div>
+    <div class="rtu-sub-hdr">Impuesto al Valor Agregado (IVA)</div>
+    <div class="rtu-grid">
+      <div class="rtu-field"><span class="rtu-lbl">Código de Impuesto</span><span class="rtu-val">11</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Nombre de Impuesto</span><span class="rtu-val">IMPUESTO AL VALOR AGREGADO</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Tipo de contribuyente</span><span class="rtu-val">${tipoContrib}</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Clasificación del establecimiento</span><span class="rtu-val">AFECTO</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Régimen</span><span class="rtu-val">GENERAL</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Período impositivo</span><span class="rtu-val">MENSUAL</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Forma de cálculo del IVA</span><span class="rtu-val">12% DIFERENCIA CRÉDITOS / DÉBITOS</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Estimado de ingresos anuales</span><span class="rtu-val">Q.2,000,000.00</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Estatus de la afiliación</span><span class="rtu-val">ACTIVO</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Fecha desde</span><span class="rtu-val">${fechaHoy}</span></div>
+    </div>
+    <div class="rtu-tbl-wrap">
+      <table class="rtu-tbl">
+        <thead><tr><th>No.</th><th>Frecuencia de pago</th><th>Nombre Obligación</th><th>Código Formulario</th></tr></thead>
+        <tbody>
+          <tr><td class="tc">1</td><td class="tc">MENSUAL</td><td>IVA PERSONA JURÍDICA</td><td style="font-size:7.5px;color:#333">223 - DECLARACION Y RECIBO DE PAGO MENSUAL DEL IMPUESTO AL VALOR AGREGADO</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rtu-sub-hdr">Impuesto Sobre la Renta (ISR)</div>
+    <div class="rtu-grid">
+      <div class="rtu-field"><span class="rtu-lbl">Código de Impuesto</span><span class="rtu-val">10</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Nombre de Impuesto</span><span class="rtu-val">IMPUESTO SOBRE LA RENTA</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Tipo de contribuyente</span><span class="rtu-val">${tipoContrib}</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Tipo de Renta</span><span class="rtu-val">RENTAS DE ACTIVIDADES LUCRATIVAS</span></div>
+      <div class="rtu-field w2"><span class="rtu-lbl">Régimen por tipo de renta</span><span class="rtu-val">${REGIME_FULL[regimen]}</span></div>
+      <div class="rtu-field w2"><span class="rtu-lbl">Forma de Cálculo</span><span class="rtu-val">${regimen==='rut'?'UTILIDADES NETAS DEL PERÍODO. TASA: 25%':'% DEFINITIVO SOBRE LA BASE DE LA RENTA BRUTA OBTENIDA EN CADA MES MENOS LAS RENTAS EXENTAS'}</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Sistema de valuación de inventarios</span><span class="rtu-val">COSTO DE PRODUCCIÓN</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Sistema Contable</span><span class="rtu-val">DEVENGADO</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Estatus de la afiliación</span><span class="rtu-val">ACTIVO</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Fecha desde</span><span class="rtu-val">${fechaHoy}</span></div>
+    </div>
+    <div class="rtu-tbl-wrap">
+      <table class="rtu-tbl">
+        <thead><tr><th>No.</th><th>Frecuencia de pago</th><th>Nombre Obligación</th><th>Código Formulario</th></tr></thead>
+        <tbody>${oblRows}</tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- CARACTERÍSTICAS ESPECIALES -->
+  <div class="rtu-sec">
+    <div class="rtu-sec-hdr">Características Especiales</div>
+    <div class="rtu-tbl-wrap">
+      <table class="rtu-feat-tbl">
+        <thead><tr><th>Característica</th><th>Estado</th><th>Fecha Desde</th><th>Fecha Hasta</th></tr></thead>
+        <tbody>
+          <tr><td>EMISOR DE FACTURA ELECTRÓNICA (FEL)</td><td>ACTIVO</td><td>${fechaHoy}</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- NOTA IMPORTANTE -->
+  <div class="rtu-nota">
+    <strong>INFORMACIÓN IMPORTANTE — Según lo establecido en el Código Tributario, Decreto 6-91:</strong>
+    <ul>
+      <li>A. Cualquier modificación a los datos de inscripción debe informarse a la SAT dentro del plazo de treinta (30) días contados desde que se produjo la modificación.</li>
+      <li>B. Los contribuyentes con obligaciones al IVA deben actualizar o ratificar sus datos de inscripción anualmente.</li>
+      <li>C. Para verificar si el contribuyente ha incumplido con sus Obligaciones Tributarias, consulte la opción "Incumplimientos" en Portal SAT.</li>
+    </ul>
+    <div style="margin-top:4px;font-size:7px;color:#777">El registro de la información contenida en la presente constancia no prejuzga sobre la validez de esta y no convalida hechos o actos nulos o ilícitos.</div>
+  </div>
+
+  <!-- CARNÉ DE IDENTIFICACIÓN TRIBUTARIA -->
+  <div class="rtu-carne">
+    <div class="rtu-carne-body">
+      <div class="rtu-carne-t">Carné de Identificación Tributaria</div>
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center">
         <div>
-          <div class="sat-regime-name">${REGIME_LABELS[regimen]}</div>
-          <div class="sat-regime-desc">${REGIME_DESC[regimen]}</div>
+          <div class="rtu-nit-lbl" style="color:rgba(255,255,255,.6)">NIT</div>
+          <div class="rtu-carne-nit">${nit}</div>
         </div>
+        <div class="rtu-carne-name">${empresa}${sfxDoc}</div>
       </div>
     </div>
-    <div class="sat-section">
-      <div class="sat-row">
-        <div class="sat-f">
-          <span class="sat-lbl">Fecha de Inscripción</span>
-          <span class="sat-val">${fechaDoc.toUpperCase()}</span>
-        </div>
-        <div class="sat-f">
-          <span class="sat-lbl">Obligación de Declaración</span>
-          <span class="sat-val">${regimen==='rut'?'TRIMESTRAL':'MENSUAL'}</span>
-        </div>
-      </div>
-    </div>
+    <div class="rtu-carne-side"><div class="rtu-carne-sat">SAT</div></div>
   </div>
-  <div class="sat-foot">
-    <span>Documento emitido por la Superintendencia de Administración Tributaria — Guatemala, C. A.</span>
-    <span>Folio: ${Math.floor(Math.random()*900000)+100000}</span>
-  </div>
-  <div class="sat-nota">Este documento certifica la inscripción en el RTU. Deberá presentarse ante la Administración Tributaria cuando sea requerido.</div>
+  <div class="rtu-print-date">Fecha y hora de Impresión: ${fechaHoyLong} · Superintendencia de Administración Tributaria — Guatemala, C. A.</div>
+
 </div>`;
 
-  document.getElementById('ptb-t').textContent=`${empresa}`;
+  document.getElementById('ptb-t').textContent=empresa;
   document.getElementById('ptb-s').textContent=`NIT: ${nit}`;
   document.getElementById('layout').style.display='none';
   document.getElementById('pv').style.display='block';
