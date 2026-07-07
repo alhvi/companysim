@@ -266,7 +266,8 @@ function generate(){
   const dpto=shared?.dpto||'Guatemala';
   const dir=(shared?.dir||'DIRECCIÓN DE LA EMPRESA').toUpperCase();
   const regimen=document.getElementById('regimen').value;
-  const nit=genNit();
+  const nitRepInput=document.getElementById('nitRep').value.trim()||genNit();
+  const nit=tipo==='ind'?nitRepInput:genNit();
   const sfxDoc=tipo==='sa'?', SOCIEDAD ANÓNIMA':'';
   const tipoPersoneria=tipo==='sa'?'SOCIEDAD ANÓNIMA':'PERSONA INDIVIDUAL';
   const tipoContrib=tipo==='sa'?'PERSONA JURÍDICA SERVICIOS':'PERSONA INDIVIDUAL';
@@ -279,7 +280,6 @@ function generate(){
   const fechaHoy=fmtDate(hoy);
   const fechaHoyLong=fmtDateLong(hoy);
   const nitNotario=Math.floor(Math.random()*90000000)+10000000;
-  const nitRepInput=document.getElementById('nitRep').value.trim()||genNit();
   const nitContador=document.getElementById('nitCont').value.trim()||genNit();
   const nomContador=document.getElementById('nomCont').value.trim().toUpperCase()||'KARLA MARINA GÓMEZ OCHOA';
   // Representante legal valid for 3 years
