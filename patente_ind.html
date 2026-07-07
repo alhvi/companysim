@@ -118,27 +118,14 @@
       </div>
     </div>
 
-    <span class="slbl" style="margin-top:.5rem">Datos del Registro Mercantil</span>
     <div class="card">
-      <div class="ctitle">Inscripción en el Registro</div>
-      <div class="r3">
-        <div class="f"><label>Número de Registro</label><input type="number" id="numReg" min="1"></div>
-        <div class="f"><label>Folio</label><input type="number" id="folio" min="1"></div>
-        <div class="f"><label>Libro</label><input type="number" id="libro" min="1"></div>
-      </div>
-      <div class="f">
-        <label>Fecha de inscripción</label>
-        <div class="r3">
-          <select id="ins_dia"></select>
-          <select id="ins_mes">
-            <option value="0">Enero</option><option value="1">Febrero</option><option value="2">Marzo</option>
-            <option value="3">Abril</option><option value="4">Mayo</option><option value="5">Junio</option>
-            <option value="6">Julio</option><option value="7">Agosto</option><option value="8">Septiembre</option>
-            <option value="9">Octubre</option><option value="10">Noviembre</option><option value="11">Diciembre</option>
-          </select>
-          <select id="ins_anno"></select>
-        </div>
-      </div>
+      <div class="ctitle">¿Qué hace el Registro Mercantil?</div>
+      <p style="font-size:.85rem;color:var(--ui-muted);line-height:1.65;margin:.4rem 0 0">
+        El RM recibe la solicitud, verifica que se cumplan los requisitos del
+        <strong style="color:var(--ui-text)">Código de Comercio</strong> y asigna automáticamente
+        el número de registro, folio, libro y fecha de inscripción. Al presionar el botón
+        se generan estos valores y se emite la patente.
+      </p>
     </div>
     <div class="nav">
       <button class="btn-g" onclick="generate()">Generar Patente de Empresa →</button>
@@ -166,20 +153,7 @@ const MESES_UP=['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO
 const MESES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
 
 function rnd(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
-
-/* ── DATE SELECTS ── */
-function fillDias(id){const s=document.getElementById(id);for(let i=1;i<=31;i++){const o=document.createElement('option');o.value=i;o.textContent=i;s.appendChild(o);}}
-function fillAnnos(id){const s=document.getElementById(id);const y=new Date().getFullYear();for(let i=y;i>=y-5;i--){const o=document.createElement('option');o.value=i;o.textContent=i;s.appendChild(o);}}
-fillDias('ins_dia');fillAnnos('ins_anno');
 const hoy=new Date();
-document.getElementById('ins_dia').value=hoy.getDate();
-document.getElementById('ins_mes').value=hoy.getMonth();
-document.getElementById('ins_anno').value=hoy.getFullYear();
-
-/* Número de Registro para Empresa: range similar to Selva's empresa (712898) */
-document.getElementById('numReg').value=rnd(680000,750000);
-document.getElementById('folio').value=rnd(100,200);
-document.getElementById('libro').value=rnd(600,700);
 
 /* ── EMPRESA BANNER ── */
 if(shared){
@@ -199,12 +173,12 @@ function generate(){
   const cui=document.getElementById('cui').value.trim()||'* * * * * * * * * * * *';
   const profesion=document.getElementById('profesion').value.trim().toUpperCase()||'COMERCIANTE';
   const municipio=document.getElementById('municipio').value.trim().toUpperCase()||dpto.toUpperCase();
-  const ins_d=parseInt(document.getElementById('ins_dia').value);
-  const ins_m=parseInt(document.getElementById('ins_mes').value);
-  const ins_a=document.getElementById('ins_anno').value;
-  const numReg=document.getElementById('numReg').value;
-  const folio=document.getElementById('folio').value;
-  const libro=document.getElementById('libro').value;
+  const ins_d=hoy.getDate();
+  const ins_m=hoy.getMonth();
+  const ins_a=String(hoy.getFullYear());
+  const numReg=rnd(680000,750000);
+  const folio=rnd(100,200);
+  const libro=rnd(600,700);
   // Patente number for empresa: different range than sociedad (300000-400000)
   const numPat=rnd(300000,400000);
   const titular=`E-${rnd(400000,500000)}`;
