@@ -260,9 +260,8 @@ function generate(){
   <div class="pce-nota">NOTA: Esta patente deberá ser colocada en lugar visible.</div>
 </div>`;
 
-  // Save propietario name for rtu.html
-  const saveData=shared||{tipo:'ind'};
-  saveData.propietario=propietario;
+  // Save propietario name for rtu.html, always marking tipo as 'ind'
+  const saveData=Object.assign({},shared||{},{tipo:'ind',propietario});
   localStorage.setItem(KEY,JSON.stringify(saveData));
 
   document.getElementById('ptb-t').textContent=`${empresa}`;

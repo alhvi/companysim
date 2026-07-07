@@ -274,7 +274,7 @@ function generate(){
   const numEsc=esc?.numEsc||'—';
   const fechaEsc=esc?`${String(esc.dia).padStart(2,'0')}/${String((esc.mesIdx||0)+1).padStart(2,'0')}/${esc.anno}`:'—';
   const adminNombre=tipo==='ind'
-    ?(shared?.propietario||document.getElementById('nomRep').value||'[PROPIETARIO]').toUpperCase()
+    ?(shared?.propietario||document.getElementById('nomRep').value.trim()||'[PROPIETARIO]').toUpperCase()
     :(esc?.admin?.nombre||'[ADMINISTRADOR ÚNICO]').toUpperCase();
   const fechaHoy=fmtDate(hoy);
   const fechaHoyLong=fmtDateLong(hoy);
