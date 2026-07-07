@@ -261,7 +261,9 @@ function generate(){
 </div>`;
 
   // Save propietario name for rtu.html
-  if(shared){shared.propietario=propietario;localStorage.setItem(KEY,JSON.stringify(shared));}
+  const saveData=shared||{tipo:'ind'};
+  saveData.propietario=propietario;
+  localStorage.setItem(KEY,JSON.stringify(saveData));
 
   document.getElementById('ptb-t').textContent=`${empresa}`;
   document.getElementById('ptb-s').textContent=`Patente de Empresa · No. ${numPat}`;

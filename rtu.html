@@ -201,9 +201,11 @@ if(tipo==='sa'){
 /* ── Nombre representante ── */
 const nomRepEl=document.getElementById('nomRep');
 if(tipo==='ind'){
-  const propNombre=(shared?.propietario||'').toUpperCase();
-  nomRepEl.value=propNombre;
+  nomRepEl.readOnly=false;
+  nomRepEl.removeAttribute('style');
   nomRepEl.placeholder='NOMBRE COMPLETO DEL PROPIETARIO';
+  const propNombre=(shared?.propietario||'').toUpperCase();
+  if(propNombre) nomRepEl.value=propNombre;
 }else{
   const adminNombrePre=(esc?.admin?.nombre||'').toUpperCase();
   nomRepEl.value=adminNombrePre;
