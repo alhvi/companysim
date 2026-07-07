@@ -266,6 +266,9 @@ function generate(){
   <div class="pce-nota">NOTA: Esta patente deberá ser colocada en lugar visible.</div>
 </div>`;
 
+  // Save propietario name for rtu.html
+  if(shared){shared.propietario=propietario;localStorage.setItem(KEY,JSON.stringify(shared));}
+
   document.getElementById('ptb-t').textContent=`${empresa}`;
   document.getElementById('ptb-s').textContent=`Patente de Empresa · No. ${numPat}`;
   document.getElementById('layout').style.display='none';

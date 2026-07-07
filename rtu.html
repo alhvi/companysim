@@ -114,13 +114,13 @@
         <select id="regimen">
           <option value="ios">Régimen Opcional Simplificado Sobre Ingresos de Actividades Lucrativas</option>
           <option value="rut">Régimen Sobre las Utilidades de Actividades Lucrativas</option>
-          <option value="peq">Régimen del Pequeño Contribuyente (solo E.I. con ingresos bajos)</option>
+          <option value="peq" class="opt-peq">Régimen del Pequeño Contribuyente (solo E.I. con ingresos bajos)</option>
         </select>
         <div class="hint" id="reg-hint"></div>
       </div>
     </div>
 
-    <span class="slbl" style="margin-top:.75rem">Representante legal y contador</span>
+    <span class="slbl" style="margin-top:.75rem" id="rep-slbl">Representante legal y contador</span>
     <div class="card">
       <div class="ctitle">Representante legal</div>
       <div class="r2">
@@ -134,7 +134,7 @@
         </div>
       </div>
     </div>
-    <div class="card">
+    <div class="card" id="cont-section">
       <div class="ctitle">Contador / Perito Contador</div>
       <div class="r2">
         <div class="f">
@@ -193,6 +193,28 @@ if(tipo==='sa'){
   document.getElementById('btn-next').textContent='Ver Dashboard ✓';
 }
 
+/* ── S.A.: quitar opción pequeño contribuyente ── */
+if(tipo==='sa'){
+  document.querySelector('.opt-peq')?.remove();
+}
+
+/* ── E.I.: nombre representante = propietario ── */
+if(tipo==='ind'){
+  const propNombre=(shared?.propietario||'').toUpperCase();
+  if(propNombre) document.getElementById('nomRep').value=propNombre;
+}else{
+  const adminNombrePre=(esc?.admin?.nombre||'').toUpperCase();
+  if(adminNombrePre) document.getElementById('nomRep').value=adminNombrePre;
+}
+
+/* ── Toggle contador según régimen (solo E.I.) ── */
+function updateContadorVisibility(){
+  if(tipo!=='ind') return;
+  const esPeq=document.getElementById('regimen').value==='peq';
+  document.getElementById('cont-section').style.display=esPeq?'none':'';
+  document.getElementById('rep-slbl').textContent=esPeq?'Representante legal':'Representante legal y contador';
+}
+
 /* Régimen hints */
 const hints={
   ios:'Pago mensual. Tasa del 5% sobre ingresos hasta Q30,000/mes; 7% sobre el excedente. El más usado por S.A. y personas individuales activas.',
@@ -201,14 +223,12 @@ const hints={
 };
 document.getElementById('regimen').addEventListener('change',()=>{
   document.getElementById('reg-hint').textContent=hints[document.getElementById('regimen').value]||'';
+  updateContadorVisibility();
 });
 document.getElementById('reg-hint').textContent=hints['ios'];
+updateContadorVisibility();
 
 const hoy=new Date();
-
-/* ── NOMBRE REPRESENTANTE ── */
-const adminNombrePre=(esc?.admin?.nombre||'').toUpperCase();
-if(adminNombrePre) document.getElementById('nomRep').value=adminNombrePre;
 
 /* ── EMPRESA BANNER ── */
 const sfxBanner=tipo==='sa'?', SOCIEDAD ANÓNIMA':'';
@@ -247,7 +267,9 @@ function generate(){
   const notario=(esc?.notario||'CLAUDE ELIÉ RIVERA').toUpperCase();
   const numEsc=esc?.numEsc||'—';
   const fechaEsc=esc?`${String(esc.dia).padStart(2,'0')}/${String((esc.mesIdx||0)+1).padStart(2,'0')}/${esc.anno}`:'—';
-  const adminNombre=(esc?.admin?.nombre||'[ADMINISTRADOR ÚNICO]').toUpperCase();
+  const adminNombre=tipo==='ind'
+    ?(shared?.propietario||document.getElementById('nomRep').value||'[PROPIETARIO]').toUpperCase()
+    :(esc?.admin?.nombre||'[ADMINISTRADOR ÚNICO]').toUpperCase();
   const fechaHoy=fmtDate(hoy);
   const fechaHoyLong=fmtDateLong(hoy);
   const nitNotario=Math.floor(Math.random()*90000000)+10000000;
@@ -367,7 +389,7 @@ function generate(){
   </div>
 
   <!-- DATOS DEL CONTADOR -->
-  <div class="rtu-sec">
+  ${regimen!=='peq'?`<div class="rtu-sec">
     <div class="rtu-sec-hdr">Datos del Contador</div>
     <div class="rtu-grid">
       <div class="rtu-field"><span class="rtu-lbl">NIT del perito contador o CPA</span><span class="rtu-val">${nitContador}</span></div>
@@ -376,7 +398,9 @@ function generate(){
       <div class="rtu-field"><span class="rtu-lbl">Tipo de prestación de servicio</span><span class="rtu-val">DEPENDIENTE</span></div>
       <div class="rtu-field"><span class="rtu-lbl">Estado</span><span class="rtu-val">ACTIVO</span></div>
     </div>
-  </div>
+  </div>`:''}
+
+
 
   <!-- DATOS DEL REPRESENTANTE -->
   <div class="rtu-sec">
