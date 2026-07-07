@@ -98,19 +98,6 @@
         </select>
         <div class="hint" id="reg-hint"></div>
       </div>
-      <div class="f">
-        <label>Fecha de inicio de actividades</label>
-        <div class="r3">
-          <select id="ini_dia"></select>
-          <select id="ini_mes">
-            <option value="0">Enero</option><option value="1">Febrero</option><option value="2">Marzo</option>
-            <option value="3">Abril</option><option value="4">Mayo</option><option value="5">Junio</option>
-            <option value="6">Julio</option><option value="7">Agosto</option><option value="8">Septiembre</option>
-            <option value="9">Octubre</option><option value="10">Noviembre</option><option value="11">Diciembre</option>
-          </select>
-          <select id="ini_anno"></select>
-        </div>
-      </div>
     </div>
     <div class="nav">
       <button class="btn-g" onclick="generate()">Generar Inscripción RTU →</button>
@@ -169,14 +156,7 @@ document.getElementById('regimen').addEventListener('change',()=>{
 });
 document.getElementById('reg-hint').textContent=hints['ios'];
 
-/* ── DATE SELECTS ── */
-function fillDias(id){const s=document.getElementById(id);for(let i=1;i<=31;i++){const o=document.createElement('option');o.value=i;o.textContent=i;s.appendChild(o);}}
-function fillAnnos(id){const s=document.getElementById(id);const y=new Date().getFullYear();for(let i=y;i>=y-5;i--){const o=document.createElement('option');o.value=i;o.textContent=i;s.appendChild(o);}}
-fillDias('ini_dia');fillAnnos('ini_anno');
 const hoy=new Date();
-document.getElementById('ini_dia').value=hoy.getDate();
-document.getElementById('ini_mes').value=hoy.getMonth();
-document.getElementById('ini_anno').value=hoy.getFullYear();
 
 /* ── EMPRESA BANNER ── */
 const sfx=tipo==='sa'?', SOCIEDAD ANÓNIMA':'';
@@ -218,9 +198,9 @@ function generate(){
   const dpto=shared?.dpto||'Guatemala';
   const dir=(shared?.dir||'[DIRECCIÓN]').toUpperCase();
   const regimen=document.getElementById('regimen').value;
-  const ini_d=parseInt(document.getElementById('ini_dia').value);
-  const ini_m=parseInt(document.getElementById('ini_mes').value);
-  const ini_a=document.getElementById('ini_anno').value;
+  const ini_d=hoy.getDate();
+  const ini_m=hoy.getMonth();
+  const ini_a=String(hoy.getFullYear());
   const nit=genNit();
   const now=new Date();
   const fechaDoc=`${now.getDate()} de ${MESES[now.getMonth()]} de ${now.getFullYear()}`;
