@@ -37,92 +37,27 @@
 </style>
 
 <div id="layout">
-  <nav class="sb">
+  <nav class="sb" id="sb">
     <a class="sb-brand" href="index.html" style="text-decoration:none;display:block">Company<br>Sim</a>
-    <div class="sb-section">Fases S.A.</div>
-    <div class="sb-item done"><span class="sb-dot"></span>Escritura</div>
-    <div class="sb-item done"><span class="sb-dot"></span>Registro RM</div>
-    <div class="sb-item done"><span class="sb-dot"></span>Acciones</div>
-    <div class="sb-item done"><span class="sb-dot"></span>RTU / SAT</div>
-    <div class="sb-item done"><span class="sb-dot"></span>Libros</div>
   </nav>
   <div id="fv">
     <div class="fh">
       <div class="ey">CC3115 · Producción y Negocios de Videojuegos</div>
       <h1>Proceso completado</h1>
-      <p>Resumen de la constitución simulada de tu Sociedad Anónima</p>
+      <p id="fh-sub"></p>
     </div>
 
     <div class="fel-hero">
       <div class="fel-icon">🎉</div>
       <div class="fel-title">¡Felicidades!</div>
       <div class="fel-empresa" id="empresa-name">tu empresa</div>
-      <div class="fel-sub">
-        Completaste exitosamente la simulación del proceso de constitución
-        de una Sociedad Anónima en Guatemala. Estos son todos los documentos
-        que generaste:
-      </div>
+      <div class="fel-sub" id="hero-sub"></div>
     </div>
 
     <span class="slbl">Documentos generados</span>
-    <div class="fel-steps">
-      <div class="fel-step">
-        <div class="fel-check"></div>
-        <div>
-          <div class="fel-step-name">Escritura Pública de Constitución</div>
-          <div class="fel-step-desc">Documento fundacional ante notario — papel protocolo con datos de socios, capital y objeto social</div>
-        </div>
-      </div>
-      <div class="fel-step">
-        <div class="fel-check"></div>
-        <div>
-          <div class="fel-step-name">Patente de Comercio de Sociedad</div>
-          <div class="fel-step-desc">Inscripción de la persona jurídica ante el Registro Mercantil de la República</div>
-        </div>
-      </div>
-      <div class="fel-step">
-        <div class="fel-check"></div>
-        <div>
-          <div class="fel-step-name">Patente de Comercio de Empresa</div>
-          <div class="fel-step-desc">Inscripción del establecimiento comercial ante el Registro Mercantil</div>
-        </div>
-      </div>
-      <div class="fel-step">
-        <div class="fel-check"></div>
-        <div>
-          <div class="fel-step-name">Nombramiento de Representante Legal</div>
-          <div class="fel-step-desc">Inscripción del Administrador Único ante el Registro Mercantil — vigencia 3 años</div>
-        </div>
-      </div>
-      <div class="fel-step">
-        <div class="fel-check"></div>
-        <div>
-          <div class="fel-step-name">Títulos de Acciones</div>
-          <div class="fel-step-desc">Certificados de propiedad accionaria emitidos a cada socio</div>
-        </div>
-      </div>
-      <div class="fel-step">
-        <div class="fel-check"></div>
-        <div>
-          <div class="fel-step-name">Constancia de RTU / SAT</div>
-          <div class="fel-step-desc">Inscripción tributaria con NIT propio, afiliación a IVA e ISR</div>
-        </div>
-      </div>
-      <div class="fel-step">
-        <div class="fel-check"></div>
-        <div>
-          <div class="fel-step-name">Autorización de Libros Contables</div>
-          <div class="fel-step-desc">Habilitación de libros ante la SAT y el Registro Mercantil</div>
-        </div>
-      </div>
-    </div>
+    <div class="fel-steps" id="steps"></div>
 
-    <div class="fel-nota">
-      <strong>Nota sobre el proceso real:</strong> En la práctica, este proceso toma entre 2 y 6 semanas,
-      involucra honorarios notariales, timbres fiscales, aranceles del RM y la SAT, y requiere
-      gestiones presenciales o digitales ante cada institución. La simulación refleja los documentos
-      reales pero omite costos y tiempos de espera.
-    </div>
+    <div class="fel-nota" id="nota"></div>
 
     <div class="fel-actions">
       <a class="btn-g" href="index.html" style="text-decoration:none">← Ver Dashboard</a>
@@ -133,7 +68,54 @@
 
 <script>
 const shared=JSON.parse(localStorage.getItem('companysim')||'null');
-if(shared?.nombre){
-  document.getElementById('empresa-name').textContent=shared.nombre.toUpperCase()+', SOCIEDAD ANÓNIMA';
+const tipo=shared?.tipo||'sa';
+const nombre=(shared?.nombre||'tu empresa').toUpperCase();
+
+const STEPS_SA=[
+  ['Escritura Pública de Constitución','Documento fundacional ante notario — papel protocolo con datos de socios, capital y objeto social'],
+  ['Patente de Comercio de Sociedad','Inscripción de la persona jurídica ante el Registro Mercantil de la República'],
+  ['Patente de Comercio de Empresa','Inscripción del establecimiento comercial ante el Registro Mercantil'],
+  ['Nombramiento de Representante Legal','Inscripción del Administrador Único ante el Registro Mercantil — vigencia 3 años'],
+  ['Títulos de Acciones','Certificados de propiedad accionaria emitidos a cada socio'],
+  ['Constancia de RTU / SAT','Inscripción tributaria con NIT propio, afiliación a IVA e ISR'],
+  ['Autorización de Libros Contables','Habilitación de libros ante la SAT y el Registro Mercantil'],
+];
+const STEPS_IND=[
+  ['Patente de Comercio de Empresa','Inscripción del propietario y el establecimiento ante el Registro Mercantil'],
+  ['Constancia de RTU / SAT','Inscripción tributaria — el NIT del propietario es también el NIT de la empresa'],
+];
+
+const isSA=tipo==='sa';
+const steps=isSA?STEPS_SA:STEPS_IND;
+const sfx=isSA?', SOCIEDAD ANÓNIMA':'';
+const notaText=isSA
+  ?'En la práctica, este proceso toma entre 2 y 6 semanas, involucra honorarios notariales, timbres fiscales, aranceles del RM y la SAT, y requiere gestiones presenciales o digitales ante cada institución.'
+  :'En la práctica, este proceso puede completarse en 1 a 2 semanas. Implica aranceles del Registro Mercantil y la inscripción ante la SAT para obtener el NIT.';
+
+document.getElementById('empresa-name').textContent=nombre+sfx;
+document.getElementById('fh-sub').textContent=`Resumen de la constitución simulada de tu ${isSA?'Sociedad Anónima':'Empresa Individual de Comercio'}`;
+document.getElementById('hero-sub').textContent=`Completaste exitosamente la simulación del proceso de constitución de una ${isSA?'Sociedad Anónima':'Empresa Individual de Comercio'} en Guatemala. Estos son todos los documentos que generaste:`;
+document.getElementById('nota').innerHTML=`<strong>Nota sobre el proceso real:</strong> ${notaText} La simulación refleja los documentos reales pero omite costos y tiempos de espera.`;
+document.getElementById('steps').innerHTML=steps.map(([name,desc])=>`
+  <div class="fel-step">
+    <div class="fel-check"></div>
+    <div>
+      <div class="fel-step-name">${name}</div>
+      <div class="fel-step-desc">${desc}</div>
+    </div>
+  </div>`).join('');
+
+const sb=document.getElementById('sb');
+if(isSA){
+  sb.innerHTML+=`<div class="sb-section">Fases S.A.</div>
+    <div class="sb-item done"><span class="sb-dot"></span>Escritura</div>
+    <div class="sb-item done"><span class="sb-dot"></span>Registro RM</div>
+    <div class="sb-item done"><span class="sb-dot"></span>Acciones</div>
+    <div class="sb-item done"><span class="sb-dot"></span>RTU / SAT</div>
+    <div class="sb-item done"><span class="sb-dot"></span>Libros</div>`;
+}else{
+  sb.innerHTML+=`<div class="sb-section">Fases E.I.</div>
+    <div class="sb-item done"><span class="sb-dot"></span>Patente Ind.</div>
+    <div class="sb-item done"><span class="sb-dot"></span>RTU / SAT</div>`;
 }
 </script>
