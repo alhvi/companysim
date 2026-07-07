@@ -432,10 +432,10 @@ function generate(){
       <div class="rtu-field"><span class="rtu-lbl">Nombre de Impuesto</span><span class="rtu-val">IMPUESTO AL VALOR AGREGADO</span></div>
       <div class="rtu-field"><span class="rtu-lbl">Tipo de contribuyente</span><span class="rtu-val">${tipoContrib}</span></div>
       <div class="rtu-field"><span class="rtu-lbl">Clasificación del establecimiento</span><span class="rtu-val">AFECTO</span></div>
-      <div class="rtu-field"><span class="rtu-lbl">Régimen</span><span class="rtu-val">GENERAL</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Régimen</span><span class="rtu-val">${regimen==='peq'?'PEQUEÑO CONTRIBUYENTE':'GENERAL'}</span></div>
       <div class="rtu-field"><span class="rtu-lbl">Período impositivo</span><span class="rtu-val">MENSUAL</span></div>
-      <div class="rtu-field"><span class="rtu-lbl">Forma de cálculo del IVA</span><span class="rtu-val">12% DIFERENCIA CRÉDITOS / DÉBITOS</span></div>
-      <div class="rtu-field"><span class="rtu-lbl">Estimado de ingresos anuales</span><span class="rtu-val">Q.2,000,000.00</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Forma de cálculo del IVA</span><span class="rtu-val">${regimen==='peq'?'5% SOBRE EL TOTAL DE LAS VENTAS DEL MES':'12% DIFERENCIA CRÉDITOS / DÉBITOS'}</span></div>
+      <div class="rtu-field"><span class="rtu-lbl">Estimado de ingresos anuales</span><span class="rtu-val">${regimen==='peq'?'Q.145,000.00':'Q.2,000,000.00'}</span></div>
       <div class="rtu-field"><span class="rtu-lbl">Estatus de la afiliación</span><span class="rtu-val">ACTIVO</span></div>
       <div class="rtu-field"><span class="rtu-lbl">Fecha desde</span><span class="rtu-val">${fechaHoy}</span></div>
     </div>
@@ -443,7 +443,9 @@ function generate(){
       <table class="rtu-tbl">
         <thead><tr><th>No.</th><th>Frecuencia de pago</th><th>Nombre Obligación</th><th>Código Formulario</th></tr></thead>
         <tbody>
-          <tr><td class="tc">1</td><td class="tc">MENSUAL</td><td>IVA PERSONA JURÍDICA</td><td style="font-size:9px;color:#111">223 - DECLARACION Y RECIBO DE PAGO MENSUAL DEL IMPUESTO AL VALOR AGREGADO</td></tr>
+          ${regimen==='peq'
+            ?`<tr><td class="tc">1</td><td class="tc">MENSUAL</td><td>IVA PEQUEÑO CONTRIBUYENTE</td><td style="font-size:9px;color:#111">204 - REGIMEN SIMPLIFICADO PEQUEÑO CONTRIBUYENTE</td></tr>`
+            :`<tr><td class="tc">1</td><td class="tc">MENSUAL</td><td>IVA PERSONA JURÍDICA</td><td style="font-size:9px;color:#111">223 - DECLARACION Y RECIBO DE PAGO MENSUAL DEL IMPUESTO AL VALOR AGREGADO</td></tr>`}
         </tbody>
       </table>
     </div>
